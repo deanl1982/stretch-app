@@ -5,6 +5,8 @@ import {
   type Profile,
   type SessionRecord,
 } from './types.ts';
+import { loadFavourites, mergeFavourites } from './favourites.ts';
+import { loadRoutines, mergeRoutines } from './routines.ts';
 
 /**
  * Device-local persistence.
@@ -82,6 +84,8 @@ export function buildBackup(): Backup {
     exportedAt: new Date().toISOString(),
     profile: loadProfile(),
     history: loadHistory(),
+    favourites: loadFavourites(),
+    routines: loadRoutines(),
   };
 }
 
@@ -131,9 +135,11 @@ export function restoreBackup(raw: string): RestoreResult {
     saveProfile({ ...loadProfile(), ...backup.profile });
   }
 
+  if (Array.isArray(backup.favourites)) mergeFavourites(backup.favourites);
+  const routinesAdded = Array.isArray(backup.routines) ? mergeRoutines(backup.routines) : 0;
+
   const added = merged.length - existing.length;
-  return {
-    ok: true,
-    message: `Restored. ${added} session${added === 1 ? '' : 's'} added.`,
-  };
+  const parts = [`${added} session${added === 1 ? '' : 's'}`];
+  if (routinesAdded > 0) parts.push(`${routinesAdded} workout${routinesAdded === 1 ? '' : 's'}`);
+  return { ok: true, message: `Restored. ${parts.join(' and ')} added.` };
 }

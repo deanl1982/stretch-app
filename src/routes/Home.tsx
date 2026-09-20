@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState, type JSX } from 'react';
-import { useNavigate } from 'react-router';
+import { useMemo, useState, type JSX } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { randomSeed } from '../session/rng.ts';
 import { loadActive } from '../session/active.ts';
+import { loadRoutines } from '../storage/routines.ts';
+import { useFavourites } from '../storage/favourites.ts';
+import { routineSeconds, startRoutine } from './Routines.tsx';
 import { loadHistory, loadProfile, saveProfile } from '../storage/store.ts';
 import { formatDuration, streaks, totals } from '../storage/stats.ts';
 import { primeAudio } from '../hooks/audio.ts';
@@ -14,13 +17,11 @@ export function Home(): JSX.Element {
   const [profile, setProfile] = useState(loadProfile);
   const history = useMemo(loadHistory, []);
   const resumable = useMemo(loadActive, []);
+  const routines = useMemo(loadRoutines, []);
+  const favourites = useFavourites();
 
   const { current, longest } = useMemo(() => streaks(history), [history]);
   const summary = useMemo(() => totals(history), [history]);
-
-  useEffect(() => {
-    if (!profile.onboarded) navigate('/welcome', { replace: true });
-  }, [profile.onboarded, navigate]);
 
   const setMinutes = (minutes: number): void => {
     const next = { ...profile, defaultMinutes: minutes };
@@ -98,11 +99,79 @@ export function Home(): JSX.Element {
         </p>
       </Card>
 
+      <section className="mt-8">
+        <div className="mb-3 flex items-baseline justify-between">
+          <h2 className="text-sm uppercase tracking-wider text-bone-dim">Your workouts</h2>
+          <Link to="/routines" className="text-sm text-bone-dim hover:text-bone">
+            {routines.length > 0 ? 'See all' : ''}
+          </Link>
+        </div>
+
+        {routines.length === 0 ? (
+          <Card>
+            <p className="text-bone-dim">
+              Build one from the positions you actually use — pick the areas you want, then
+              choose the exercises yourself.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Button to="/build" variant="primary">
+                Build a workout
+              </Button>
+              {favourites.length > 0 && (
+                <Button to="/build?from=favourites">From my favourites</Button>
+              )}
+            </div>
+          </Card>
+        ) : (
+          <>
+            <ul className="space-y-2">
+              {routines.slice(0, 3).map((routine) => (
+                <li key={routine.id}>
+                  <Card className="flex items-center gap-3 py-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-medium">{routine.name}</p>
+                      <p className="text-sm text-bone-dim">
+                        {routine.exerciseIds.length} positions ·{' '}
+                        {Math.max(1, Math.round(routineSeconds(routine) / 60))} min
+                      </p>
+                    </div>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        primeAudio();
+                        startRoutine(routine);
+                        navigate('/session/play');
+                      }}
+                    >
+                      Start
+                    </Button>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <Button to="/build">Build another</Button>
+              {favourites.length > 0 && (
+                <Button to="/favourites" variant="ghost">
+                  {favourites.length} favourite{favourites.length === 1 ? '' : 's'}
+                </Button>
+              )}
+            </div>
+          </>
+        )}
+      </section>
+
       {summary.sessions > 0 && (
-        <p className="mt-6 text-center text-sm text-bone-dim">
+        <p className="mt-8 text-center text-sm text-bone-dim">
           {summary.sessions} session{summary.sessions === 1 ? '' : 's'} so far.
         </p>
       )}
+
+      <p className="mt-6 text-center text-xs text-bone-dim">
+        <Link to="/settings" className="underline underline-offset-4 hover:text-bone">
+          Anything you need to work around?
+        </Link>
+      </p>
     </Screen>
   );
 }

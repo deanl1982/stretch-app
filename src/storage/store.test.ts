@@ -33,8 +33,8 @@ const session = (id: string, dateISO: string) => ({
 
 describe('profile', () => {
   it('returns defaults when nothing is stored', () => {
-    expect(store.loadProfile().onboarded).toBe(false);
     expect(store.loadProfile().defaultMinutes).toBe(20);
+    expect(store.loadProfile().exclusions).toEqual([]);
   });
 
   it('gains new fields when an older profile is loaded', () => {
@@ -55,7 +55,7 @@ describe('profile', () => {
 
 describe('backup and restore', () => {
   it('round-trips history and profile', () => {
-    store.saveProfile({ ...store.loadProfile(), defaultMinutes: 10, onboarded: true });
+    store.saveProfile({ ...store.loadProfile(), defaultMinutes: 10, officeOnly: true });
     store.saveHistory([session('a', '2026-09-01T10:00:00.000Z')]);
 
     const exported = JSON.stringify(store.buildBackup());
@@ -67,7 +67,7 @@ describe('backup and restore', () => {
     expect(result.ok).toBe(true);
     expect(store.loadHistory()).toHaveLength(1);
     expect(store.loadProfile().defaultMinutes).toBe(10);
-    expect(store.loadProfile().onboarded).toBe(true);
+    expect(store.loadProfile().officeOnly).toBe(true);
   });
 
   it('merges without creating duplicates', () => {

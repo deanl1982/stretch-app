@@ -198,6 +198,15 @@ export const POSES: Record<string, Pose> = {
     highlight: ['shin', 'thigh'],
   },
 
+  'big-toe-extension': {
+    head: [90, 50], neck: [90, 70], pelvis: [90, 102],
+    elbow: [106, 78], hand: [92, 80],
+    knee: [124, 94], ankle: [102, 86], toe: [90, 74],
+    farKnee: [118, 104], farAnkle: [120, 130], farToe: [132, 132],
+    props: [{ kind: 'chair', at: [60, 106], width: 46, height: 32 }],
+    highlight: ['foot'],
+  },
+
   'plantar-fascia-stretch': {
     head: [88, 52], neck: [88, 72], pelvis: [88, 104],
     elbow: [102, 80], hand: [90, 88],

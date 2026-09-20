@@ -9,11 +9,14 @@ import { ExerciseDetail } from './routes/ExerciseDetail.tsx';
 import { Progress } from './routes/Progress.tsx';
 import { Settings } from './routes/Settings.tsx';
 import { Figures } from './routes/Figures.tsx';
-import { Onboarding } from './routes/Onboarding.tsx';
+import { Build } from './routes/Build.tsx';
+import { Routines } from './routes/Routines.tsx';
+import { Favourites } from './routes/Favourites.tsx';
 import { NotFound } from './routes/NotFound.tsx';
 
 const TABS = [
   { to: '/', label: 'Today' },
+  { to: '/routines', label: 'Mine' },
   { to: '/library', label: 'Library' },
   { to: '/progress', label: 'Progress' },
   { to: '/settings', label: 'Settings' },
@@ -57,10 +60,12 @@ export function App(): JSX.Element {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/welcome" element={<Onboarding />} />
         <Route path="/session" element={<Preview />} />
         <Route path="/session/play" element={<Player />} />
         <Route path="/session/done" element={<Complete />} />
+        <Route path="/build" element={<Build />} />
+        <Route path="/routines" element={<Routines />} />
+        <Route path="/favourites" element={<Favourites />} />
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<ExerciseDetail />} />
         <Route path="/progress" element={<Progress />} />

@@ -14,8 +14,6 @@ export interface Profile {
   /** Drop the opener/closer structure and draw sessions completely unconstrained. */
   pureChaos: boolean;
   officeOnly: boolean;
-  /** Set once the safety screen has been seen, so we stop showing it. */
-  onboarded: boolean;
 }
 
 export interface SessionRecord {
@@ -29,12 +27,27 @@ export interface SessionRecord {
   totalSeconds: number;
 }
 
+/**
+ * A workout the user assembled themselves, saved to be run again.
+ *
+ * Order is the user's own — we do not silently reshuffle what they built.
+ */
+export interface Routine {
+  id: string;
+  name: string;
+  exerciseIds: string[];
+  createdAt: string;
+  lastUsedAt?: string;
+}
+
 export interface Backup {
   app: 'groundwork';
   version: number;
   exportedAt: string;
   profile: Profile;
   history: SessionRecord[];
+  favourites?: string[];
+  routines?: Routine[];
 }
 
 export const DEFAULT_PROFILE: Profile = {
@@ -46,5 +59,4 @@ export const DEFAULT_PROFILE: Profile = {
   voice: false,
   pureChaos: false,
   officeOnly: false,
-  onboarded: false,
 };

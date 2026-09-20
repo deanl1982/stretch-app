@@ -25,6 +25,9 @@ bundle.
 
 ## How it works
 
+**There are three ways to start.** A random draw capped at a time budget, a workout you
+built yourself, or a one-off assembled on the spot from your favourites.
+
 **Sessions are genuinely random.** Every draw shuffles the eligible pool and packs it
 until the time budget is spent. The one exception: by default a gentle `opener` is
 pinned first and a `rest` position last, because deep knee-flexion positions are where
@@ -34,8 +37,9 @@ that removes even that.
 Sessions are seeded, so the same seed always produces the same session. That is what
 makes them shareable by URL, replayable from history, and testable.
 
-**Safety is subtractive, not advisory.** Anything you tick in onboarding is removed from
-the pool entirely rather than shown with a warning. Seven of the hip positions combine
+**Safety is subtractive, not advisory.** Anything you tick in Settings is removed from
+the pool entirely — from random draws *and* from the builder — rather than shown with a
+warning. Seven of the hip positions combine
 flexion, adduction and rotation — the dislocation position after a posterior-approach
 hip replacement — so ticking that box has to actually remove them.
 
@@ -43,6 +47,17 @@ There is also one *inverse* flag: `requiresFlag`. The sciatic nerve slider is wi
 from everyone until you say you have nerve symptoms, because handing end-range
 stretching to someone with an irritated nerve makes them worse, and handing a nerve
 glide to someone with plain tight hamstrings is pointless.
+
+**You can build your own.** `/build` asks which areas you want, then lets you pick the
+exercises. Selection order is the running order — the app does not silently reshuffle
+what you built, though there is a one-tap "Order it sensibly" that sorts warm-up first
+and something restful last. Workouts can be saved, renamed, edited and re-run from
+`/routines`.
+
+**Favourites are a first-class way in.** Star anything in the library and it shows up in
+`/favourites`, with a one-tap "Build a workout from these" that pre-loads them all. This
+exists because most people have three or four positions they actually keep using, and
+making those two taps away matters more than any amount of programming cleverness.
 
 **Timing is one model.** `src/session/phases.ts` splits an exercise into the blocks the
 clock actually counts — one per set, per side — so "60s each side" counts down from 60
@@ -61,9 +76,10 @@ src/
   content/     exercise library and its types — the substance of the app
   session/     seeded RNG, the random generator, phase splitting
   figures/     posable SVG figure system
-  storage/     localStorage persistence, streaks, backup/restore
+  storage/     localStorage persistence, streaks, favourites, routines, backup/restore
   routes/      screens
   safety.ts    disclaimer and red-flag copy, kept in one reviewable place
+
 ```
 
 ## Content honesty
@@ -82,9 +98,11 @@ in that field is designed to undo.
 ## Your data
 
 Everything lives in this browser and nowhere else. That means clearing site data wipes
-your history, and your phone keeps a separate streak from your laptop. Settings has
-**Download backup** and **Restore from backup** — the exported JSON is also the shape a
-backend would store, so adding sync later would be additive rather than a rewrite.
+your history, favourites and saved workouts, and your phone keeps a separate streak from
+your laptop. Settings has **Download backup** and **Restore from backup**, which covers
+all four. Restores merge rather than overwrite, so importing an old backup will not
+destroy newer work. The exported JSON is also the shape a backend would store, so adding
+sync later would be additive rather than a rewrite.
 
 ## Deploying
 

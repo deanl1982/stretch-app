@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { Link } from 'react-router';
+import { toggleFavourite, useFavourites } from './storage/favourites.ts';
 
 /** Shared presentational bits. Kept in one file — there are not enough to warrant more. */
 
@@ -125,5 +126,48 @@ export function Empty({ children }: { children: ReactNode }): JSX.Element {
     <div className="rounded-2xl border border-dashed border-edge px-6 py-12 text-center text-bone-dim">
       {children}
     </div>
+  );
+}
+
+/**
+ * Star toggle for favouriting an exercise.
+ *
+ * Stops propagation because these sit inside link cards in the library — tapping the
+ * star should favourite, not navigate.
+ */
+export function FavouriteButton({
+  id,
+  className = '',
+}: {
+  id: string;
+  className?: string;
+}): JSX.Element {
+  const favourites = useFavourites();
+  const on = favourites.includes(id);
+
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      aria-label={on ? 'Remove from favourites' : 'Add to favourites'}
+      className={`-m-2 shrink-0 rounded-full p-2 transition-colors ${
+        on ? 'text-amber' : 'text-bone-dim hover:text-bone'
+      } ${className}`}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleFavourite(id);
+      }}
+    >
+      <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+        <path
+          d="M12 3.6l2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85z"
+          fill={on ? 'currentColor' : 'none'}
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
   );
 }

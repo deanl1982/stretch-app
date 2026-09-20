@@ -4,7 +4,7 @@ import { getExercise } from '../content/exercises.ts';
 import { PROP_LABELS, REGION_LABELS, describeDose } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
-import { Button, Card, EvidenceNote, PageTitle, Pill, Screen } from '../ui.tsx';
+import { Button, Card, EvidenceNote, FavouriteButton, PageTitle, Pill, Screen } from '../ui.tsx';
 
 function Section({ title, children }: { title: string; children: ReactNode }): JSX.Element {
   return (
@@ -32,7 +32,12 @@ export function ExerciseDetail(): JSX.Element {
 
   return (
     <Screen>
-      <PageTitle sub={exercise.summary}>{exercise.name}</PageTitle>
+      <div className="flex items-start justify-between gap-3">
+        <PageTitle sub={exercise.summary}>{exercise.name}</PageTitle>
+        <div className="pt-10">
+          <FavouriteButton id={exercise.id} />
+        </div>
+      </div>
 
       {pose !== undefined && (
         <Card className="mb-4">

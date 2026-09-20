@@ -884,6 +884,45 @@ export const EXERCISES: Exercise[] = [
   },
 
   {
+    id: 'big-toe-extension',
+    name: 'Big Toe Extension',
+    aka: ['First ray mobilisation'],
+    regions: ['ankles'],
+    role: 'main',
+    intensity: 1,
+    summary:
+      'Sitting, hold the foot still in one hand and ease the big toe back towards your shin, then try to lift it on its own.',
+    why: 'Your big toe has to extend about 45 to 60 degrees just to walk properly, and when it does it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
+    targets: ['big toe extension', 'first ray', 'plantar fascia'],
+    dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: 'Hold the last one for 30 seconds.' },
+    cues: [
+      'Hold the foot still — you are moving the toe, not the whole foot.',
+      'Firm pressure, not a wrench.',
+      'Now try to lift just the big toe while the others stay down.',
+      'Badly is fine at first. It comes back.',
+    ],
+    shouldFeel: 'A stretch under the big toe and across the ball of the foot.',
+    shouldNotFeel: 'A hard, bony stop with pain on top of the joint.',
+    regressions: [
+      { label: 'Smaller range', detail: 'Ease it back only as far as it goes freely.', props: ['none'] },
+      { label: 'Rest the foot on your thigh', detail: 'Takes the effort out of holding it up.', props: ['chair'] },
+      { label: 'Passive only', detail: 'Skip the active lift — most people cannot do it at first.', props: ['none'] },
+    ],
+    progressions: [
+      { label: 'Loaded', detail: 'Big toe up against a wall or a book, heel down, lean forward.' },
+      { label: 'Hold longer', detail: 'Build the passive hold towards 60 seconds.' },
+    ],
+    props: ['chair'],
+    officeFriendly: true,
+    barefootOnly: true,
+    contraindications: ['bigToe'],
+    dailySafe: true,
+    source: ['Give me 5 minutes, I\u2019ll Fix your Hips', 'Kadour Ziani'],
+    evidenceNote:
+      'A hard bony stop with pain on top of the joint is not something to push through — that pattern suggests the joint itself is restricted rather than the tissue, and it is worth getting looked at. Kadour Ziani is a dunker and former footballer rather than a pro basketball player, and his book is Unlock Mobility \u2013 7 Postures.',
+  },
+
+  {
     id: 'plantar-fascia-stretch',
     name: 'Plantar Fascia Stretch',
     regions: ['ankles'],

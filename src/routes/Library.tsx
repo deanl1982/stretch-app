@@ -4,12 +4,14 @@ import { EXERCISES } from '../content/exercises.ts';
 import { REGION_LABELS, describeDose, type Region } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
-import { Card, PageTitle, Pill, Screen } from '../ui.tsx';
+import { useFavourites } from '../storage/favourites.ts';
+import { Card, FavouriteButton, PageTitle, Pill, Screen } from '../ui.tsx';
 
-type Filter = Region | 'all' | 'office';
+type Filter = Region | 'all' | 'office' | 'favourites';
 
 const FILTERS: { key: Filter; label: string }[] = [
   { key: 'all', label: 'All' },
+  { key: 'favourites', label: 'Favourites' },
   { key: 'hips', label: REGION_LABELS.hips },
   { key: 'hamstrings', label: REGION_LABELS.hamstrings },
   { key: 'ankles', label: REGION_LABELS.ankles },
@@ -19,12 +21,14 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 export function Library(): JSX.Element {
   const [filter, setFilter] = useState<Filter>('all');
+  const favourites = useFavourites();
 
   const shown = useMemo(() => {
     if (filter === 'all') return EXERCISES;
     if (filter === 'office') return EXERCISES.filter((e) => e.officeFriendly);
+    if (filter === 'favourites') return EXERCISES.filter((e) => favourites.includes(e.id));
     return EXERCISES.filter((e) => e.regions.includes(filter));
-  }, [filter]);
+  }, [filter, favourites]);
 
   return (
     <Screen>
@@ -66,6 +70,7 @@ export function Library(): JSX.Element {
                     <p className="mt-1 text-xs text-bone-dim">{describeDose(exercise)}</p>
                   </div>
                   {exercise.officeFriendly && <Pill>desk</Pill>}
+                  <FavouriteButton id={exercise.id} />
                 </Card>
               </Link>
             </li>
