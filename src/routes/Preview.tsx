@@ -1,0 +1,130 @@
+import { useMemo, type JSX } from 'react';
+import { useNavigate, useSearchParams } from 'react-router';
+import { generateSession } from '../session/generator.ts';
+import { randomSeed } from '../session/rng.ts';
+import { saveActive } from '../session/active.ts';
+import { loadHistory, loadProfile } from '../storage/store.ts';
+import { dayKey } from '../storage/stats.ts';
+import { describeDose } from '../content/types.ts';
+import { getPose } from '../figures/poses.ts';
+import { Figure } from '../figures/Figure.tsx';
+import { Button, Card, Empty, PageTitle, Pill, Screen } from '../ui.tsx';
+
+/** How many times each exercise has been done in the last seven days. */
+function recentCounts(): Map<string, number> {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 7);
+  const counts = new Map<string, number>();
+
+  for (const session of loadHistory()) {
+    if (new Date(session.dateISO) < cutoff) continue;
+    for (const id of session.completedIds) {
+      counts.set(id, (counts.get(id) ?? 0) + 1);
+    }
+  }
+  return counts;
+}
+
+export function Preview(): JSX.Element {
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const profile = useMemo(loadProfile, []);
+
+  const seed = params.get('seed') ?? randomSeed();
+  const minutes = Number(params.get('minutes') ?? profile.defaultMinutes);
+  const budgetSeconds = minutes * 60;
+
+  const session = useMemo(
+    () =>
+      generateSession({
+        seed,
+        budgetSeconds,
+        exclusions: profile.exclusions,
+        availableProps: profile.availableProps ?? undefined,
+        officeOnly: profile.officeOnly,
+        pureChaos: profile.pureChaos,
+        recentCounts: recentCounts(),
+      }),
+    [seed, budgetSeconds, profile],
+  );
+
+  const reroll = (): void => {
+    navigate(`/session?seed=${randomSeed()}&minutes=${minutes}`, { replace: true });
+  };
+
+  const begin = (): void => {
+    saveActive({
+      seed,
+      budgetSeconds,
+      plannedIds: session.items.map((item) => item.exercise.id),
+      index: 0,
+      completedIds: [],
+      skippedIds: [],
+      startedAt: new Date().toISOString(),
+    });
+    navigate('/session/play');
+  };
+
+  if (session.items.length === 0) {
+    return (
+      <Screen>
+        <PageTitle>Nothing to draw</PageTitle>
+        <Empty>
+          Everything in the library is ruled out by your current settings. Loosen a
+          restriction and try again.
+        </Empty>
+        <Button to="/settings" className="mt-4">
+          Open settings
+        </Button>
+      </Screen>
+    );
+  }
+
+  return (
+    <Screen>
+      <PageTitle sub={`${session.items.length} positions · about ${Math.round(session.totalSeconds / 60)} minutes`}>
+        Today’s draw
+      </PageTitle>
+
+      <ol className="space-y-2">
+        {session.items.map((item, index) => {
+          const pose = getPose(item.exercise.id);
+          return (
+            <li key={item.exercise.id}>
+              <Card className="flex items-center gap-4 py-3">
+                <span className="w-5 shrink-0 text-sm tabular-nums text-bone-dim">
+                  {index + 1}
+                </span>
+                {pose !== undefined && (
+                  <Figure
+                    pose={pose}
+                    label=""
+                    className="h-12 w-16 shrink-0 text-bone-dim"
+                  />
+                )}
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium leading-tight">{item.exercise.name}</p>
+                  <p className="text-sm text-bone-dim">{describeDose(item.exercise)}</p>
+                </div>
+                <Pill>{item.exercise.role === 'load' ? 'strength' : item.exercise.role}</Pill>
+              </Card>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="mt-6 flex gap-3">
+        <Button variant="primary" onClick={begin} className="flex-1 py-4 text-lg">
+          Begin
+        </Button>
+        <Button onClick={reroll} ariaLabel="Draw a different session">
+          Reroll
+        </Button>
+      </div>
+
+      <p className="mt-4 text-center text-xs text-bone-dim">
+        Seed {seed} · {dayKey(new Date())}
+      </p>
+    </Screen>
+  );
+}

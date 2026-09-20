@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+/*
+  Groundwork's palette. Dark by default — this is an app you open on the floor at 6am,
+  and a white screen at that hour is hostile. Warm rather than clinical blue-grey,
+  because the whole premise is ground, not gym.
+*/
+@theme {
+  --color-ink: #12100e;
+  --color-surface: #1c1916;
+  --color-surface-2: #252119;
+  --color-edge: #322c25;
+  --color-bone: #e8e4de;
+  --color-bone-dim: #a39c92;
+  --color-amber: #c98a3a;
+  --color-amber-bright: #e0a250;
+  --color-sage: #7d9471;
+  --color-rust: #b5563f;
+
+  --font-sans: ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --figure-accent: var(--color-amber);
+  --figure-prop: var(--color-bone-dim);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  /* Respect notches on a phone propped against something on the floor. */
+  padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+}
+
+/* Stop iOS zooming when a number input is focused, and stop pull-to-refresh
+   interrupting a session mid-hold. */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
