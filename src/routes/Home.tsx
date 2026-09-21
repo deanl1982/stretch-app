@@ -9,6 +9,7 @@ import { loadHistory, loadProfile, saveProfile } from '../storage/store.ts';
 import { formatDuration, streaks, totals } from '../storage/stats.ts';
 import { primeAudio } from '../hooks/audio.ts';
 import { REGION_LABELS, REGION_ORDER, type Region } from '../content/types.ts';
+import { GroundworkMark } from '../brand/GroundworkMark.tsx';
 import { Button, Card, Screen } from '../ui.tsx';
 
 const DURATIONS = [5, 10, 15, 20];
@@ -51,7 +52,15 @@ export function Home(): JSX.Element {
   return (
     <Screen>
       <header className="pt-10 pb-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-bone-dim">Groundwork Flexibility</p>
+        <div className="flex items-center gap-3">
+          <GroundworkMark size={36} decorative className="shrink-0 text-accent" />
+          <span>
+            <span className="block text-lg font-semibold leading-none tracking-tight">
+              GROUNDWORK
+            </span>
+            <span className="label mt-1 block leading-none">Flexibility</span>
+          </span>
+        </div>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight">
           {current > 0 ? (
             <>
@@ -150,7 +159,7 @@ export function Home(): JSX.Element {
 
       <section className="mt-8">
         <div className="mb-3 flex items-baseline justify-between">
-          <h2 className="text-sm uppercase tracking-wider text-bone-dim">Your workouts</h2>
+          <h2 className="label">Your workouts</h2>
           {routines.length > 0 && (
             <Link
               to="/routines"

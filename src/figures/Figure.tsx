@@ -39,7 +39,7 @@ function renderProp(prop: PropShape, index: number): JSX.Element | null {
     strokeWidth: 2,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
-    opacity: 0.55,
+    opacity: 0.95,
   };
 
   switch (prop.kind) {
@@ -158,13 +158,20 @@ export function Figure({ pose, label, className }: FigureProps): JSX.Element {
       {farLeg !== null && <polyline points={farLeg} {...farLine} />}
       {farArm !== null && <polyline points={farArm} {...farLine} />}
 
-      {/* Spine, then near leg and near arm. */}
+      {/*
+        Limbs are drawn segment by segment rather than as one polyline, so a pose
+        can highlight a shin or a foot on its own. Shared endpoints and round caps
+        mean the joins are invisible. Ten ankle and foot poses highlight segments
+        that a single leg polyline could never match.
+      */}
       <polyline points={`${xy(pose.pelvis)} ${xy(pose.neck)}`} {...line('spine')} />
-      <polyline
-        points={`${xy(pose.pelvis)} ${xy(pose.knee)} ${xy(pose.ankle)} ${xy(pose.toe)}`}
-        {...line('thigh')}
-      />
-      <polyline points={`${xy(pose.neck)} ${xy(pose.elbow)} ${xy(pose.hand)}`} {...line('upperArm')} />
+
+      <polyline points={`${xy(pose.pelvis)} ${xy(pose.knee)}`} {...line('thigh')} />
+      <polyline points={`${xy(pose.knee)} ${xy(pose.ankle)}`} {...line('shin')} />
+      <polyline points={`${xy(pose.ankle)} ${xy(pose.toe)}`} {...line('foot')} />
+
+      <polyline points={`${xy(pose.neck)} ${xy(pose.elbow)}`} {...line('upperArm')} />
+      <polyline points={`${xy(pose.elbow)} ${xy(pose.hand)}`} {...line('forearm')} />
 
       {/* Neck. Without this the head floats free in any lying-down pose. */}
       <polyline points={`${xy(pose.neck)} ${xy(pose.head)}`} {...line('neck')} />

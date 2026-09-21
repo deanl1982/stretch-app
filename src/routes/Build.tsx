@@ -268,7 +268,7 @@ export function Build(): JSX.Element {
                       {on ? position + 1 : ''}
                     </span>
                     {pose !== undefined && (
-                      <Figure pose={pose} label="" className="h-12 w-16 shrink-0 text-bone-dim" />
+                      <Figure pose={pose} label="" className="h-12 w-16 shrink-0 text-label" />
                     )}
                     <span className="min-w-0 flex-1">
                       <span className="block font-medium leading-tight">{exercise.name}</span>

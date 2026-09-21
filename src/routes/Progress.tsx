@@ -31,22 +31,22 @@ export function Progress(): JSX.Element {
       <Card>
         <dl className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <dt className="text-xs uppercase tracking-wider text-bone-dim">Streak</dt>
+            <dt className="label">Streak</dt>
             <dd className="mt-1 text-2xl font-semibold text-accent">{current}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wider text-bone-dim">Longest</dt>
+            <dt className="label">Longest</dt>
             <dd className="mt-1 text-2xl font-semibold">{longest}</dd>
           </div>
           <div>
-            <dt className="text-xs uppercase tracking-wider text-bone-dim">On the floor</dt>
+            <dt className="label">On the floor</dt>
             <dd className="mt-1 text-2xl font-semibold">{formatDuration(summary.seconds)}</dd>
           </div>
         </dl>
       </Card>
 
       <section className="mt-6">
-        <h2 className="mb-3 text-sm uppercase tracking-wider text-bone-dim">
+        <h2 className="label mb-3">
           Last {WEEKS} weeks
         </h2>
         <Card>
@@ -69,7 +69,7 @@ export function Progress(): JSX.Element {
       </section>
 
       <section className="mt-6">
-        <h2 className="mb-3 text-sm uppercase tracking-wider text-bone-dim">Where the time went</h2>
+        <h2 className="label mb-3">Where the time went</h2>
         <Card className="space-y-3">
           {(Object.keys(summary.byRegion) as Region[])
             .filter((region) => summary.byRegion[region] > 0)

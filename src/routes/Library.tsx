@@ -106,7 +106,7 @@ export function Library(): JSX.Element {
               <Link to={`/library/${exercise.id}`} className="block">
                 <Card className="flex items-center gap-4 py-3 transition-colors hover:border-bone-dim">
                   {pose !== undefined && (
-                    <Figure pose={pose} label="" className="h-14 w-20 shrink-0 text-bone-dim" />
+                    <Figure pose={pose} label="" className="h-14 w-20 shrink-0 text-label" />
                   )}
                   <div className="min-w-0 flex-1">
                     <p className="font-medium">{exercise.name}</p>

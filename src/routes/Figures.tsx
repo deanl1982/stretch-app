@@ -27,7 +27,7 @@ export function Figures(): JSX.Element {
                     no pose
                   </div>
                 ) : (
-                  <Figure pose={pose} label={exercise.name} className="w-full text-bone-dim" />
+                  <Figure pose={pose} label={exercise.name} className="w-full text-label" />
                 )}
               </div>
               <figcaption className="px-1 py-2 text-xs text-bone-dim">

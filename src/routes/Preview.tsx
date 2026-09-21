@@ -119,7 +119,7 @@ export function Preview(): JSX.Element {
                   <Figure
                     pose={pose}
                     label=""
-                    className="h-12 w-16 shrink-0 text-bone-dim"
+                    className="h-12 w-16 shrink-0 text-label"
                   />
                 )}
                 <div className="min-w-0 flex-1">

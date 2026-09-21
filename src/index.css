@@ -1,38 +1,93 @@
 @import 'tailwindcss';
 
 /*
-  Groundwork's palette. Dark by default — this is an app you open on the floor at 6am,
-  and a white screen at that hour is hostile. Warm rather than clinical blue-grey,
-  because the whole premise is ground, not gym.
+  Brand typefaces, self-hosted so the app still works offline.
+
+  Declared by hand rather than importing the package stylesheets: those pull in
+  Cyrillic, Greek and Vietnamese subsets plus .woff fallbacks — roughly 360KB for
+  a UK English app. Latin, woff2, nothing else.
 */
+@font-face {
+  font-family: 'Archivo Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2')
+    format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2')
+    format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2')
+    format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme {
   /*
-    Palette: three navy depths plus a warm cream.
-    #010736 · #0D1C42 · #22396F · #FCF1D0
-    surface-2 and bone-dim are derived mid-steps, needed for readable secondary
-    text and raised surfaces that four stops alone cannot cover.
+    Groundwork Flexibility brand tokens. Values come from brand.css / tokens.json;
+    the names here are semantic so components never reference a raw hex.
+
+      bg       #010736  near-black navy   page
+      surface  #0D1C42  dark navy         cards, sheets, inputs
+      border   #22396F  mid navy          hairlines
+      ink      #FCF1D0  warm cream        text, primary actions, the mark
+      inkMuted #D9D3BC  body copy on navy
+      inkDim   #7C8CB8  labels, metadata
   */
   --color-ink: #010736;
   --color-surface: #0d1c42;
+  /* Derived, not in the brand sheet: raised chips need a step between surface and
+     border, and four stops cannot cover it. */
   --color-surface-2: #16274e;
   --color-edge: #22396f;
-  /* Borders that IDENTIFY a control — inputs, unselected chips, secondary buttons.
-     WCAG 1.4.11 wants 3:1 for those, and --color-edge only manages 1.5:1 against a
-     card. --color-edge stays for decorative outlines, where no minimum applies. */
-  --color-control: #6c86c7;
-  --color-bone: #fcf1d0;
-  --color-bone-dim: #9ba5c4;
 
-  /* Cream is the call to action — the lightest stop carries the emphasis. */
+  --color-bone: #fcf1d0;
+  --color-bone-dim: #d9d3bc;
+  --color-label: #7c8cb8;
+
+  /*
+    Borders that IDENTIFY a control - inputs, unselected chips, secondary buttons.
+    WCAG 1.4.11 wants 3:1 and the brand border only manages 1.5:1 against a card,
+    so those use inkDim, which is in-palette and clears it at 4.99:1.
+  */
+  --color-control: #7c8cb8;
+
+  /* Cream is emphasis. Never inverted. */
   --color-accent: #fcf1d0;
   --color-accent-bright: #fffbf0;
 
-  /* Kept outside the four stops: "should feel" / "should not feel" and delete
-     confirmations need to mean something, which navy-on-navy cannot do. */
-  --color-positive: #7fc8a9;
+  /*
+    The brand says no third colour. Honoured everywhere except a destructive
+    confirmation, where losing the warning signal costs more than the rule gains.
+  */
   --color-negative: #e8836b;
 
-  --font-sans: ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --font-sans: 'Archivo Variable', Archivo, Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Constructed, not soft: square corners and hairlines, no shadows. */
+  --radius-brand: 0px;
 }
 
 :root {
@@ -92,4 +147,27 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/*
+  Eyebrow / section labels. Mono, tracked, uppercase — the brand's .gw-label.
+*/
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-label);
+}
+
+/*
+  Square corners, brand-wide. Declared here rather than stripping every rounded-*
+  class so the geometry is one decision in one place, and reversible.
+*/
+.rounded-xl,
+.rounded-2xl,
+.rounded-lg,
+.rounded-\[3px\],
+.rounded-full {
+  border-radius: var(--radius-brand);
 }

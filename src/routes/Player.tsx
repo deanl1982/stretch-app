@@ -252,7 +252,7 @@ export function Player(): JSX.Element {
           <Figure
             pose={pose}
             label={`${exercise.name}: ${exercise.summary}`}
-            className="h-44 w-full max-w-sm text-bone-dim"
+            className="h-44 w-full max-w-sm text-label"
           />
         )}
 

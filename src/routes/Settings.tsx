@@ -58,7 +58,7 @@ function Toggle({
 function Section({ title, children }: { title: string; children: ReactNode }): JSX.Element {
   return (
     <section className="mt-6">
-      <h2 className="mb-2 text-sm uppercase tracking-wider text-bone-dim">{title}</h2>
+      <h2 className="label mb-2">{title}</h2>
       {children}
     </section>
   );

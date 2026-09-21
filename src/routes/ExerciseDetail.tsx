@@ -11,7 +11,7 @@ import { loadProfile } from '../storage/store.ts';
 function Section({ title, children }: { title: string; children: ReactNode }): JSX.Element {
   return (
     <section className="mt-6">
-      <h2 className="mb-2 text-sm uppercase tracking-wider text-bone-dim">{title}</h2>
+      <h2 className="label mb-2">{title}</h2>
       {children}
     </section>
   );
@@ -47,7 +47,7 @@ export function ExerciseDetail(): JSX.Element {
           <Figure
             pose={pose}
             label={`${exercise.name}: ${exercise.summary}`}
-            className="mx-auto h-48 w-full max-w-sm text-bone-dim"
+            className="mx-auto h-48 w-full max-w-sm text-label"
           />
         </Card>
       )}
@@ -76,12 +76,12 @@ export function ExerciseDetail(): JSX.Element {
 
       <Section title="What it should feel like">
         <div className="space-y-3">
-          <p className="rounded-xl border border-positive/30 bg-positive/5 px-4 py-3 text-bone-dim">
-            <span className="mr-2 font-medium text-positive">Yes</span>
+          <p className="border border-accent/40 bg-accent/5 px-4 py-3 text-bone-dim">
+            <span className="label mr-2 text-accent">Yes</span>
             {exercise.shouldFeel}
           </p>
-          <p className="rounded-xl border border-negative/40 bg-negative/5 px-4 py-3 text-bone-dim">
-            <span className="mr-2 font-medium text-negative">No</span>
+          <p className="border border-control bg-surface-2/60 px-4 py-3 text-bone-dim">
+            <span className="label mr-2 text-bone">No</span>
             {exercise.shouldNotFeel}
           </p>
         </div>
