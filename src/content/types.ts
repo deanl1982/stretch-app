@@ -29,7 +29,10 @@ export type Prop =
   | 'roller'
   | 'band'
   | 'step'
-  | 'weight';
+  | 'weight'
+  | 'bench'
+  | 'anchor'
+  | 'ball';
 
 export const PROP_LABELS: Record<Prop, string> = {
   none: 'Nothing',
@@ -45,6 +48,9 @@ export const PROP_LABELS: Record<Prop, string> = {
   band: 'Resistance band',
   step: 'Step or stair',
   weight: 'Dumbbell or kettlebell',
+  bench: 'Bed, bench or box',
+  anchor: 'Partner, or something heavy to hook the heels under',
+  ball: 'Tennis, lacrosse or golf ball',
 };
 
 /**

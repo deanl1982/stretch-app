@@ -86,7 +86,7 @@ export const ANKLES: Exercise[] = [
       "Accelerate Physical Therapy (toe-to-wall stretch)",
       "Runners Connect"
     ],
-    "evidenceNote": "Nobody has tested whether stretching a healthy big toe changes how you walk or run, so treat this as range you are re-owning, not a fix. The numbers you see quoted are also inconsistent: hallux limitus texts say 65 to 75 degrees of extension is normal, while the windlass literature says walking itself needs about 45 to 55. A hard block with a pinch on top of the joint usually means the joint surface has changed (early hallux limitus or a bone spur) and more stretching will not shift it - see a physio or podiatrist."
+    "evidenceNote": "Nobody has tested whether stretching a healthy big toe changes how you walk or run, so treat this as range you are re-owning, not a fix. The numbers you see quoted are also inconsistent: some clinical texts give 65 to 75 degrees of extension as normal, and a widely quoted textbook figure says walking needs about 45 to 55, while gait-lab studies of people walking find the toe often bends less than that. A hard block with a pinch on top of the joint usually means the joint surface has changed (early hallux limitus or a bone spur) and more stretching will not shift it - see a physio or podiatrist."
   },
   {
     "id": "rear-foot-big-toe-lunge",
@@ -195,8 +195,8 @@ export const ANKLES: Exercise[] = [
     },
     "cues": [
       "Sit with your knee bent to about ninety degrees, foot flat.",
-      "Loop a light band or strap round the big toe and hold the ends, so it pulls the toe down.",
-      "Lift the toe against the band and hold. Then press it down into the band and hold.",
+      "Loop a light band or strap over the big toe and hold the ends so it pulls the toe down towards the floor.",
+      "Lift the toe against the band and hold. Then let it down slowly, still resisting the band.",
       "Keep the other four toes and the heel still."
     ],
     "shouldFeel": "The toe working at the end of its range, and probably some cramping in the arch on the first few goes.",
@@ -240,7 +240,7 @@ export const ANKLES: Exercise[] = [
     "source": [
       "Z-Health Performance (toe extension with band)"
     ],
-    "evidenceNote": "Z-Health say a poor big toe drives knee pain, balance problems and falls. That is an association argument, not something trials have shown by training the toe. What is fair to say is that this is loaded, controlled end-range work, which is the kind of change that tends to hold."
+    "evidenceNote": "Z-Health say a poor big toe drives knee pain, balance problems and falls. That is an association argument, not something trials have shown by training the toe. What is fair to say is that this is controlled work at the end of the toe's range, which is a sensible way to practise a range you have just gained."
   },
   {
     "id": "sesamoid-mobilisation",
@@ -295,8 +295,8 @@ export const ANKLES: Exercise[] = [
     ],
     "progressions": [
       {
-        "label": "Add the towel scrunch",
-        "detail": "Pair it with towel scrunches, the way the trial did."
+        "label": "Add flexor strengthening",
+        "detail": "Pair it with big toe presses or towel scrunches, as toe-strengthening programmes for a stiff big toe usually do."
       }
     ],
     "props": [
@@ -311,7 +311,7 @@ export const ANKLES: Exercise[] = [
       "Shamus et al., JOSPT 2004 (sesamoid mobilisation, flexor hallucis strengthening and gait training)",
       "Runners Connect"
     ],
-    "evidenceNote": "The only decent trial (20 people, aged 26 to 43) combined this with flexor strengthening and gait training, so nobody can say what the mobilisation did by itself. A review that grades non-operative hallux rigidus care as weak found just that one good trial, and a 2012 review on the topic that gets cited a lot was later retracted. Offer this only when the toe is stiff. If a sesamoid is sore rather than the joint stiff, that is a different problem and needs assessing."
+    "evidenceNote": "The only controlled trial (20 people, average age about 33, over 4 weeks) combined this with flexor strengthening and gait training, and its comparison group also had other treatment, so nobody can say what the mobilisation did by itself. A 2017 review grades the evidence for manual therapy and physio for a stiff big toe as poor, and a 2012 review that had claimed otherwise was later retracted. Offer this only when the toe is stiff. If a sesamoid is sore rather than the joint stiff, that is a different problem and needs assessing."
   },
   {
     "id": "first-ray-glide",
@@ -446,7 +446,7 @@ export const ANKLES: Exercise[] = [
       "B3 Physical Therapy",
       "Katy Bowman (Foot Gym)"
     ],
-    "evidenceNote": "Reviews of foot-muscle training show small gains in foot strength, balance and function but rate the evidence low to very low, and it did not beat other options for pain. One line you will see repeated, that the big toe is 85 percent of your foot's stability when running, is a marketing figure with no source. Do this as skill practice. No trial has shown that toe control prevents injuries."
+    "evidenceNote": "Reviews of foot-muscle training report gains in foot strength, balance and function in small trials, but no better result for pain. One line you will see repeated, that the big toe provides about 85 percent of your foot's stability when running, has no study behind it that we could find. Do this as skill practice. No trial has shown that toe control prevents injuries."
   },
   {
     "id": "toe-splay",
@@ -582,7 +582,7 @@ export const ANKLES: Exercise[] = [
       "Katy Bowman / Correct Toes",
       "Tehraninasr et al., Prosthetics and Orthotics International 2008"
     ],
-    "evidenceNote": "The evidence is thinner than the marketing. A network meta-analysis found exercise plus a toe separator was likely among the better ways to reduce bunion angle, and a systematic review of 10 studies (9 to 90 people each) found small, low-quality trials. A 2026 trial of 25 healthy adults found spacers added nothing to foot exercises, and exercise alone improved passive big toe range more. Spacers do not reverse a bunion or rebuild an arch. They are a tool for comfort and awareness, and only as good as the shoes you wear afterwards."
+    "evidenceNote": "The evidence is thinner than the marketing. A network meta-analysis found exercise plus a toe separator was among the most likely of the conservative options to reduce bunion angle, and a systematic review of 10 studies (9 to 90 people each) found small trials of mixed quality. A 2026 trial of 25 healthy young adults found spacers added nothing to foot exercises, and exercise alone improved passive big toe range more. Spacers do not reverse a bunion or rebuild an arch. They are a tool for comfort and awareness, and only as good as the shoes you wear afterwards."
   },
   {
     "id": "short-foot",
@@ -660,7 +660,7 @@ export const ANKLES: Exercise[] = [
       "Patrick Ward",
       "Podiapaedia"
     ],
-    "evidenceNote": "This is the best-studied foot exercise here, and it still has thin support. A review and meta-analysis found intrinsic foot training modestly lowered navicular drop and improved balance, strength and disability scores, but the certainty was low to very low and it was no better for pain. Research tying arch height to muscle strength is weak, so the popular claim that it fixes flat feet is not supported. Short foot works the intrinsic muscles more than toe curling does (an EMG study), which is the good reason to prefer it."
+    "evidenceNote": "A systematic review of 13 trials of intrinsic foot muscle training found lower navicular drop and better balance, strength and disability scores, but no better result for pain. The trials were small and varied. Studies tying arch height to muscle strength are weak, so the popular claim that it fixes flat feet is not supported. Short foot works the arch muscle (abductor hallucis) more than toe curling does (a 20-person EMG study), which is the good reason to prefer it."
   },
   {
     "id": "towel-scrunch",
@@ -727,7 +727,7 @@ export const ANKLES: Exercise[] = [
       "Upstep",
       "Shamus et al., JOSPT 2004"
     ],
-    "evidenceNote": "It is the flexor strengthening half of the only decent trial for a stiff big toe (20 people, combined with sesamoid mobilisation and gait training), so nobody can isolate what it does. An EMG study found short foot works the arch muscles more than toe curling, which mainly recruits the longer muscles from the calf. Fine as toe flexor work. Not a good way to strengthen the arch."
+    "evidenceNote": "Towel scrunches appear in toe-strengthening programmes for a stiff big toe, including alongside sesamoid mobilisation in one small trial (20 people), but that trial's other group also did a toe-curl exercise, so nobody can say what the scrunch adds. Small EMG studies find the short-foot exercise works the arch muscle (abductor hallucis) more than toe curling does. Fine as toe flexor work. Not a good way to strengthen the arch."
   },
   {
     "id": "big-toe-press",
@@ -1319,7 +1319,8 @@ export const ANKLES: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "achilles"
+      "achilles",
+      "balance"
     ],
     "dailySafe": false,
     "source": [
@@ -1327,7 +1328,7 @@ export const ANKLES: Exercise[] = [
       "Beyer et al., Am J Sports Med 2015",
       "JOSPT Achilles tendinopathy guidelines (2018, 2024)"
     ],
-    "evidenceNote": "Alfredson's original ran 180 heel drops a day (3 sets of 15 straight knee and 3 of 15 bent knee, twice daily) for 12 weeks in people with chronic mid-portion Achilles tendinopathy. You do not need that volume. A 6-week trial of 28 people found do-as-tolerated equal to the full dose, and a 58-person trial found slow heavy calf raises three times a week gave the same results at 12 and 52 weeks with better satisfaction. The guidelines back progressive tendon loading generally, and no version of this is validated for preventing Achilles trouble in healthy people. Cap it at twice a week."
+    "evidenceNote": "Alfredson's original ran 180 heel drops a day (3 sets of 15 straight knee and 3 of 15 bent knee, twice daily) for 12 weeks in people with chronic mid-portion Achilles tendinopathy. You do not need that volume. A 6-week trial of 28 people found a do-as-tolerated version did no worse than the full dose, and a 58-person trial found slow heavy calf raises three times a week gave equally good results to the eccentric programme at 12 and 52 weeks, with greater satisfaction at 12 weeks but not at 52. The guidelines back progressive tendon loading generally, and no version of this is validated for preventing Achilles trouble in healthy people. Cap it at twice a week."
   },
   {
     "id": "bent-knee-heel-drop",
@@ -1388,7 +1389,8 @@ export const ANKLES: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "achilles"
+      "achilles",
+      "balance"
     ],
     "dailySafe": false,
     "source": [
@@ -1460,7 +1462,7 @@ export const ANKLES: Exercise[] = [
     "source": [
       "Hamilton, Hamilton and Zderic, iScience 2022"
     ],
-    "evidenceNote": "The headlines that this burns fat while you sit come from small studies. Hamilton's lab study of 25 volunteers found a 52 percent smaller glucose rise after a meal. A pilot in 10 people with prediabetes found about a 32 percent smaller rise, without a control group. Both are short-term, lab-based and looked at blood sugar in the hours after eating. Glucose rose higher once the exercise stopped. Nobody has shown long-term benefit or any effect on weight. As an easy calf and circulation exercise, it is fine. It is not a replacement for walking or for real exercise."
+    "evidenceNote": "The headlines that this burns fat while you sit come from small studies. In Hamilton's lab study, 15 volunteers at some risk of type 2 diabetes had a 52 percent smaller blood sugar rise over three hours after a glucose drink while they did soleus push-ups continuously, compared with sitting still. A pilot in 10 people with prediabetes found about a 32 percent smaller rise, comparing each person with their own resting test. Both are short lab studies of blood sugar in the hours after a glucose drink, with the push-ups kept going for the whole test. Nobody has shown a long-term benefit or any effect on weight, and what happens once you stop was not tested. As an easy calf and circulation exercise it is fine. It is not a replacement for walking or for real exercise."
   },
   {
     "id": "banded-eversion",
@@ -1495,7 +1497,7 @@ export const ANKLES: Exercise[] = [
       "secondsPerRep": 4
     },
     "cues": [
-      "Sit with the band looped around the forefoot and held down under the other foot or pulled by a hand.",
+      "Sit with the band looped around the front of the foot and anchored on the inside, under the other foot or held by the opposite hand, so it pulls the foot inwards.",
       "Turn the sole outwards, keeping the heel still.",
       "Come back slowly, using the muscle, not letting the band whip it.",
       "Leg and knee stay still."
@@ -1613,7 +1615,7 @@ export const ANKLES: Exercise[] = [
     "source": [
       "Rathleff et al., Scand J Med Sci Sports 2015"
     ],
-    "evidenceNote": "The trial had 48 people. The strength group did better on the Foot Function Index at 3 months, by 29 points. By 6 and 12 months the groups were no different, and both groups also wore shoe inserts. So strength got people better sooner, not better in the end. It is a sound option next to stretching. It is not proven to be superior. Guidance around it says not to start until the initial symptoms have settled and not to use it alone."
+    "evidenceNote": "The trial had 48 people. At 3 months the strength group scored better on the Foot Function Index (29 points lower, but with a wide margin of error). At 1, 6 and 12 months the groups were no different, and both groups also wore shoe inserts. So strength did better at one time point and no better in the end. It is a sound option next to stretching, not proven superior. Guidance around it says not to start until the initial symptoms have settled and not to use it alone."
   },
   {
     "id": "arch-roll",
@@ -1664,7 +1666,8 @@ export const ANKLES: Exercise[] = [
       }
     ],
     "props": [
-      "chair"
+      "chair",
+      "ball"
     ],
     "officeFriendly": true,
     "barefootOnly": false,
@@ -1758,7 +1761,7 @@ export const ANKLES: Exercise[] = [
       "Runners Connect",
       "Otago Exercise Programme"
     ],
-    "evidenceNote": "In a Cochrane review of 108 trials, balance and functional exercises cut the rate of falls by 24 percent in older adults, with high-certainty evidence. Balance training also helps people with chronic ankle instability. For a healthy middle-aged man the benefit is unstudied, so the honest reason to do it is that it is cheap, quick and tells you something."
+    "evidenceNote": "A Cochrane review of 108 trials found exercise cut falls in older people living at home by about 23 percent. Balance and functional exercise programmes, 39 of those trials, cut the rate of falls by 24 percent, with high-certainty evidence. Balance training also helps people with chronic ankle instability. For a healthy middle-aged man the benefit is unstudied, so the honest reason to do it is that it is cheap, quick and tells you something."
   },
   {
     "id": "heel-to-toe-walk",
@@ -1819,12 +1822,14 @@ export const ANKLES: Exercise[] = [
     ],
     "officeFriendly": true,
     "barefootOnly": false,
-    "contraindications": [],
+    "contraindications": [
+      "balance"
+    ],
     "dailySafe": true,
     "source": [
       "Otago Exercise Programme"
     ],
-    "evidenceNote": "Tandem walking is part of the Otago programme, which reduced falls in older adults, with a 24 percent lower fall rate for balance and functional exercise in a Cochrane review. The trials were in older adults, and nobody has tested this in fit middle-aged men."
+    "evidenceNote": "Tandem walking is part of the Otago programme. A Cochrane review found balance and functional exercise programmes (39 trials) cut the rate of falls in older people living at home by 24 percent, with high-certainty evidence. The trials were in older adults, and nobody has tested this in fit middle-aged men."
   },
   {
     "id": "star-excursion-reach",
@@ -1884,8 +1889,8 @@ export const ANKLES: Exercise[] = [
         "detail": "As far as you can with control."
       },
       {
-        "label": "Add the fourth line",
-        "detail": "Include the full set of eight directions."
+        "label": "Add the other directions",
+        "detail": "Reach out to the side and forward-across as well, working towards all eight directions of the full test."
       }
     ],
     "props": [
@@ -1960,13 +1965,13 @@ export const ANKLES: Exercise[] = [
       "wall"
     ],
     "officeFriendly": true,
-    "barefootOnly": false,
+    "barefootOnly": true,
     "contraindications": [],
     "dailySafe": true,
     "source": [
       "Physiopedia (Knee to Wall Test)",
       "Manual Therapy 2011 (normative asymmetry)"
     ],
-    "evidenceNote": "The test is highly repeatable, and in young healthy adults the average is about 11 cm from the wall or roughly 41 degrees, with anything over about 9 to 10 cm treated as normal. Differences between sides up to about 1.5 cm are within normal variation. Those figures come from healthy college-age people and are not a pass mark for a squat. A bony block from a spur at the front of the ankle also feels like a hard end and a pinch at the front, and it will not ease when you bend the knee, unlike a tight calf muscle. That is the case to get looked at rather than stretched."
+    "evidenceNote": "The test is reliable, and in young healthy adults the average is roughly 10 to 12 cm from the wall. Most healthy people differ between sides by up to a couple of centimetres, so a small gap between left and right is normal. Those figures come from young people and are not a pass mark for a squat, and the distance falls with age. A bony block from a spur at the front of the ankle also feels like a hard end and a pinch at the front, and it will not ease when you bend the knee, unlike a tight calf muscle. That is the case to get looked at rather than stretched."
   }
 ];

@@ -91,7 +91,7 @@ export const BACK: Exercise[] = [
     "source": [
       "Stuart McGill (Back Mechanic / Ultimate Back Fitness)"
     ],
-    "evidenceNote": "McGill picked this exercise because it trains the abdominals with almost no lumbar movement, which is a biomechanics argument, not a trial result. Studies of exercise for chronic low back pain have not shown any one exercise, including this one, to be clearly better than another. The case against ordinary sit-ups rests mainly on lab and animal-tissue studies, not on trials where sit-ups caused back pain. Do this one because you want front-of-trunk endurance, not because a sit-up is dangerous."
+    "evidenceNote": "McGill picked this exercise because it trains the abdominals with almost no lumbar movement, which is a biomechanics argument, not a trial result. No trial has shown this exercise to be better than others for back pain. The case against ordinary sit-ups rests mainly on lab and animal-tissue studies, not on trials where sit-ups caused back pain. Do this one because you want front-of-trunk endurance, not because a sit-up is dangerous."
   },
   {
     "id": "dead-bug",
@@ -190,7 +190,7 @@ export const BACK: Exercise[] = [
     "role": "main",
     "intensity": 1,
     "summary": "On your back with knees bent and feet flat, squeeze your glutes and lift your hips until your body is a straight line from shoulders to knees.",
-    "why": "If your glutes do not finish a hip extension, your lower back tends to. The bridge is the easiest way to practise ending the movement with the glutes, lying down, with no load on the spine. It is also a standard early step in NHS back-pain exercise sheets.",
+    "why": "The bridge is the easiest way to practise finishing a hip lift with the glutes, lying down, with no load on the spine. It is also a standard early step in NHS back-pain exercise sheets.",
     "targets": [
       "glute max",
       "hip extension",
@@ -222,8 +222,8 @@ export const BACK: Exercise[] = [
         ]
       },
       {
-        "label": "Feet further from the bum",
-        "detail": "More hamstring, less glute. Use it if your hamstrings cramp.",
+        "label": "Feet a little closer to the bum",
+        "detail": "Less hamstring, more glute. Use it if your hamstrings cramp.",
         "props": [
           "none"
         ]
@@ -492,8 +492,7 @@ export const BACK: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "shoulder",
-      "wrist"
+      "shoulder"
     ],
     "dailySafe": true,
     "maxHoldSeconds": 60,
@@ -581,7 +580,7 @@ export const BACK: Exercise[] = [
       "Pinnacle Hill Chiropractic",
       "Healthline"
     ],
-    "evidenceNote": "Popular sources call this 'one of the best core exercises' but I did not find research on it. It is a reasonable low-cost trunk endurance drill and no more."
+    "evidenceNote": "Popular sources call this 'one of the best core exercises', but no trial has tested it. It is a reasonable low-cost trunk endurance drill and no more."
   },
   {
     "id": "prone-press-up",
@@ -623,7 +622,7 @@ export const BACK: Exercise[] = [
       "Breathe out at the top."
     ],
     "shouldFeel": "A stretch across the front of the belly and hips, and a gentle pressure or arch in the lower back that eases as you go.",
-    "shouldNotFeel": "Pain that spreads down the leg or gets further from the spine as you repeat it, sharp pinching in the lower back, or wrist pain. If pain moves further down the leg, stop and see a clinician.",
+    "shouldNotFeel": "Pain that spreads down the leg or gets further from the spine as you repeat it, numbness or tingling in the leg, sharp pinching in the lower back, or wrist pain. If pain moves further down the leg, stop and do not repeat it; see a clinician if it does not settle.",
     "regressions": [
       {
         "label": "Prone on elbows",
@@ -672,7 +671,7 @@ export const BACK: Exercise[] = [
       "Robin McKenzie, Treat Your Own Back",
       "Physiopedia: McKenzie Method"
     ],
-    "evidenceNote": "The evidence for the McKenzie method is real but has limits. Network meta-analyses of exercise for chronic low back pain found it among the better-performing types, but the certainty is low to moderate and the differences from other exercise are small. What the method actually claims is about direction: if repeating this movement moves your pain from your leg into your back, that is a good sign ('centralisation'). Centralisation is a marker of a better outlook, found in roughly 60 to 70 percent of people with leg-referred pain in the reviews I found. It does not tell you which tissue hurts, does not prove a disc problem, and pain that gets worse further down the leg means stop. Nothing about this position is 'putting a disc back in'. Extension is not always the right direction either: some people feel better bending forward, and some conditions like spinal stenosis prefer flexion. Any pain that moves down the leg, new numbness or weakness, or bladder or bowel changes needs a clinician, not more press-ups."
+    "evidenceNote": "The evidence for the McKenzie method is mixed. A large network meta-analysis of exercise for chronic low back pain (217 trials) found it among the three best types, but the certainty is low to moderate. A 2023 Cochrane review of recent low back pain (under 12 weeks) found only a slight short-term pain benefit that was not clinically important. What the method claims is about direction: if repeating this movement moves your pain out of your leg and towards your back, that is a good sign ('centralisation'). Centralisation is seen in roughly 4 in 10 people with back or neck pain overall, more often when the pain is recent, and it is a marker of a better outlook. It does not tell you which tissue hurts and does not prove a disc problem. Nothing about this position is 'putting a disc back in'. Extension is not always the right direction: some people feel better bending forward, and conditions like spinal stenosis often prefer it. Stop if pain spreads further down the leg. See a clinician promptly, rather than doing more press-ups, for numbness or weakness in a leg, numbness around the saddle area, new bladder or bowel changes, pain at night that will not settle, fever, unexplained weight loss, or back pain after a fall or injury."
   },
   {
     "id": "standing-back-extension",
@@ -703,7 +702,7 @@ export const BACK: Exercise[] = [
       "Feet hip-width, knees straight but not locked. Hands on the back of your pelvis, fingers pointing down.",
       "Lean back as far as is comfortable. Do not force it.",
       "Return to standing slowly.",
-      "Stop if your legs feel odd or it hurts."
+      "Stop if pain, numbness or tingling travels into your leg."
     ],
     "shouldFeel": "An easy stretch across the front of the trunk and a mild arch in the lower back.",
     "shouldNotFeel": "Pinching in the lower back, pain into the leg, or dizziness.",
@@ -891,12 +890,12 @@ export const BACK: Exercise[] = [
     ],
     "progressions": [
       {
-        "label": "Feet further from the bum",
-        "detail": "Moving the feet changes where the rotation happens."
-      },
-      {
         "label": "Hold each side",
         "detail": "Pause for 5 seconds at the end of each roll."
+      },
+      {
+        "label": "Feet flat, knees apart",
+        "detail": "Let the knees fall a little wider than the hips, and roll only as far as is comfortable."
       }
     ],
     "props": [
@@ -912,7 +911,7 @@ export const BACK: Exercise[] = [
       "NHS Wrightington, Wigan and Leigh (Low Back Pain Exercises Level 1)",
       "East Lancashire Hospitals NHS Trust back mobility"
     ],
-    "evidenceNote": "A gentle mobility exercise, not a treatment. No research shows it 'releases' anything. Its value is that it is a way to move a stiff, sore back comfortably, which is what current guidance for back pain encourages. Note that Hip Swivels (already in the app) is a seated hip drill, not this lumbar position."
+    "evidenceNote": "A gentle mobility exercise, not a treatment. No research shows it 'releases' anything. Its value is that it is a comfortable way to move a stiff, sore back, which is what current guidance for back pain encourages."
   },
   {
     "id": "pelvic-tilt",
@@ -1035,7 +1034,7 @@ export const BACK: Exercise[] = [
       },
       {
         "label": "Forearm on cushion",
-        "detail": "Support the standing forearm on a cushion if your wrist objects.",
+        "detail": "Rest the supporting forearm on a cushion if your wrist objects.",
         "props": [
           "cushion"
         ]
@@ -1057,7 +1056,8 @@ export const BACK: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "wrist"
+      "wrist",
+      "knee"
     ],
     "dailySafe": true,
     "source": [
@@ -1305,7 +1305,7 @@ export const BACK: Exercise[] = [
       "JOSPT serratus anterior wall slide EMG study",
       "Peak Physio and practitioner sources"
     ],
-    "evidenceNote": "What is measured is that wall slides activate the serratus anterior at and above shoulder height, which is why physios use them for shoulders. The claim that they 'fix kyphosis' or 'correct rounded posture' is unproven; I found a trial comparing them with other exercises for hunched posture that is registered but I found no published result. Treat it as a test of overhead reach and a decent shoulder warm-up rather than a spine corrector."
+    "evidenceNote": "What has been measured is that wall slides activate the serratus anterior at and above shoulder height, which is why physios use them for shoulders. The claim that they 'fix kyphosis' or 'correct rounded posture' is unproven. Treat this as a test of overhead reach and a decent shoulder warm-up, not a spine corrector."
   },
   {
     "id": "prone-ytw",
@@ -1462,7 +1462,8 @@ export const BACK: Exercise[] = [
     "barefootOnly": false,
     "contraindications": [
       "knee",
-      "wrist"
+      "wrist",
+      "hipReplacement"
     ],
     "dailySafe": true,
     "source": [
@@ -1470,7 +1471,7 @@ export const BACK: Exercise[] = [
       "Shirley Sahrmann (rocking backward test)",
       "Duke R2P"
     ],
-    "evidenceNote": "This is a drill, not a rule. Rounding your lower back is not dangerous. It is useful to know your hip range, because if your hips stop early your lower back tends to make up the difference under load. The 'neutral spine at all times' message that comes with hinge cues has no backing: a review of lifting studies found no link between lumbar flexion while lifting and disabling low back pain."
+    "evidenceNote": "This is a drill, not a rule. Rounding your lower back is not dangerous. It is useful to know how far your hips go, because if they stop early some people make up the difference at the lower back. The 'neutral spine at all times' message that comes with hinge cues has weak backing: a 2020 systematic review of lifting studies found low-quality evidence that bending more through the lower back while lifting does not predict who gets back pain."
   },
   {
     "id": "standing-roll-down",
@@ -1552,7 +1553,8 @@ export const BACK: Exercise[] = [
       "backPain",
       "osteoporosis",
       "sciatica",
-      "balance"
+      "balance",
+      "bloodPressure"
     ],
     "dailySafe": true,
     "source": [

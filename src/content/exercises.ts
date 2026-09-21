@@ -328,7 +328,7 @@ const CORE: Exercise[] = [
       { label: 'Overhead reach with side bend', detail: 'Raise the arm on the back-leg side and lean the ribcage a little away from the stretched hip. Stay tall; do not arch the lower back.' },
     ],
     props: ['cushion', 'chair'],
-    officeFriendly: true,
+    officeFriendly: false,
     barefootOnly: false,
     contraindications: ['knee', 'hipReplacement'],
     dailySafe: true,
@@ -824,7 +824,7 @@ const CORE: Exercise[] = [
     role: 'main',
     intensity: 3,
     summary: 'Kneel with your toes tucked under and sit back towards your heels. Far harder than it looks.',
-    why: 'A healthy big toe bends up around 65 to 75 degrees, and it tensions the whole sole of your foot when it does — that is what turns your foot into a rigid lever to push off. A life in cushioned shoes loses it. This is the blunt instrument for getting it back.',
+    why: 'Textbooks put a healthy big toe at around 65 to 75 degrees of upward bend, though walking needs less. It tensions the whole sole of your foot when it bends — that is what turns your foot into a rigid lever to push off. A life in cushioned shoes loses it. This is the blunt instrument for getting it back.',
     targets: ['big toe extension', 'plantar fascia', 'toe flexors'],
     dose: { kind: 'hold', seconds: 15, sets: 3, perSide: false },
     maxHoldSeconds: 20,
@@ -842,7 +842,7 @@ const CORE: Exercise[] = [
     ],
     progressions: [
       { label: 'Remove the towel', detail: 'Toes straight onto the floor.' },
-      { label: 'Sit back further', detail: 'And hold longer — build to 45 seconds over weeks.' },
+      { label: 'Sit back further', detail: 'Sit back a little further each week. Keep each hold to 20 seconds at most; add sets rather than time.' },
     ],
     props: ['towel'],
     officeFriendly: false,
@@ -850,8 +850,7 @@ const CORE: Exercise[] = [
     contraindications: ['knee', 'plantarFascia', 'bigToe'],
     dailySafe: true,
     source: ['Give me 5 minutes, I’ll Fix your Hips'],
-    evidenceNote:
-      'The source says this improves ankle dorsiflexion. It does not — mechanically, this is the opposite ankle position. It is an excellent toe, forefoot and sole exercise, which is reason enough. Start at ten seconds.',
+    evidenceNote: 'The source says this improves ankle dorsiflexion. It does not: the ankle sits at about a right angle here, well short of the bend a squat needs. It is an excellent toe, forefoot and sole exercise, which is reason enough. Start at ten seconds.',
   },
 
   {
@@ -863,7 +862,7 @@ const CORE: Exercise[] = [
     intensity: 3,
     summary:
       'Kneel in seiza and tuck just the big toe of one foot under, so all the pressure lands on that one joint.',
-    why: 'A healthy big toe bends up around 65 to 75 degrees, and when it does the whole sole tightens and your foot becomes a stiff lever to push off. Toes-tucked kneeling spreads that job across all five toes. This puts it through one \u2014 the toe that does most of the work when you run, and the one a lifetime of stiff-soled shoes has let you avoid using.',
+    why: 'Textbooks put a healthy big toe at around 65 to 75 degrees of upward bend, though walking needs less. When it bends, the whole sole tightens and your foot becomes a stiff lever to push off. Toes-tucked kneeling spreads that job across all five toes. This puts it through one \u2014 the toe that does most of the work when you run, and the one a lifetime of stiff-soled shoes has let you avoid using.',
     targets: ['big toe extension', 'first ray', 'plantar aponeurosis', 'knee flexion'],
     dose: { kind: 'hold', seconds: 15, sets: 2, perSide: true },
     maxHoldSeconds: 20,
@@ -968,7 +967,7 @@ const CORE: Exercise[] = [
     intensity: 1,
     summary:
       'Sitting, hold the foot still in one hand and ease the big toe back towards your shin, then try to lift it on its own.',
-    why: 'A healthy big toe bends up around 65 to 75 degrees, and when it does it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
+    why: 'Textbooks put a healthy big toe at around 65 to 75 degrees of upward bend, though walking needs less. When it bends, it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
     targets: ['big toe extension', 'first ray', 'plantar fascia'],
     dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: 'Hold the last one for 30 seconds.', secondsPerRep: 3 },
     cues: [
@@ -994,8 +993,7 @@ const CORE: Exercise[] = [
     contraindications: ['bigToe'],
     dailySafe: true,
     source: ['Give me 5 minutes, I\u2019ll Fix your Hips', 'Kadour Ziani'],
-    evidenceNote:
-      'A hard bony stop with pain on top of the joint is not something to push through — that pattern suggests the joint itself is restricted rather than the tissue, and it is worth getting looked at. Kadour Ziani is a dunker and former footballer rather than a pro basketball player, and his book is Unlock Mobility \u2013 7 Postures.',
+    evidenceNote: 'A hard bony stop with pain on top of the joint is not something to push through. That pattern suggests the joint itself is restricted rather than the soft tissue, and it is worth getting looked at. Nobody has tested whether stretching a healthy big toe changes how you walk or run, so treat this as range you are re-owning, not a fix.',
   },
 
   {
@@ -1006,7 +1004,7 @@ const CORE: Exercise[] = [
     intensity: 1,
     summary:
       'Sitting, cross one ankle over the opposite knee and pull your toes back until the cord in your arch stands out.',
-    why: 'The one foot item with a proper trial behind it — it beat calf stretching for stubborn heel pain, and most people were still better two years later. It is also the safe substitute for toes-tucked kneeling if your heel is sore.',
+    why: 'The one foot item with a proper trial behind it. For heel pain that had lasted months, it did better than calf stretching at 8 weeks. Two years on the groups were no different, because everyone had switched to this stretch after week 8, and nine in ten of those who replied were satisfied. It is also the safe substitute for toes-tucked kneeling if your heel is sore.',
     targets: ['plantar aponeurosis'],
     dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: '10 seconds each.', secondsPerRep: 10 },
     cues: [
@@ -1030,8 +1028,7 @@ const CORE: Exercise[] = [
     contraindications: [],
     dailySafe: true,
     source: ['Added — the evidence-backed plantar item'],
-    evidenceNote:
-      'If you have heel pain, do one set before your first steps of the morning. That timing is part of the protocol and part of why it worked in the trial.',
+    evidenceNote: 'If you have heel pain, do one set before your first steps of the morning. That timing is part of the protocol. In the 2003 trial (82 people with heel pain for about ten months or more) the stretch beat calf stretching at 8 weeks, but both groups also wore soft insoles and took a short course of an anti-inflammatory. At two years the groups were no different, because the calf-stretch group had switched to this stretch, so the follow-up shows people did well, not that this stretch is better.',
   },
 
   // ─────────────────────────────────────────────────────── BACK/SPINE ──

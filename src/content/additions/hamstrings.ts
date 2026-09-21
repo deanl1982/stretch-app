@@ -122,7 +122,7 @@ export const HAMSTRINGS: Exercise[] = [
       "Physiotherapy patient guides (UMass Memorial Health, VA Veterans Health Library)",
       "Hatha yoga: Supta Padangusthasana"
     ],
-    "evidenceNote": "The popular story is that this physically lengthens the muscle. It mostly does not. In a 4-week daily hamstring stretching trial (Halbertsma and Goeken 1994) the leg went higher but the muscle was no longer and no less stiff; people simply tolerated a bigger pull. A 2025 meta-analysis of 65 trials found the same: stretch tolerance up substantially, muscle fibre length essentially unchanged. That is still useful, because range you are comfortable using is range you can use, but do not expect the tissue to change shape. On duration, Bandy and Irion (1997) found 30 seconds worked and 60 seconds was no better; a recent dose-response meta-analysis found one 1.5-minute session did not beat measurement noise, whereas repeated stretching over a week or more, around 70 minutes in total, more often did. So: 30-second holds, done regularly, for weeks."
+    "evidenceNote": "The popular story is that this physically lengthens the muscle. It mostly does not. In a small 4-week daily hamstring stretching trial (14 people; Halbertsma and Goeken 1994) the leg went higher but the muscle was no longer and no less stiff; people simply tolerated a bigger pull. A 2025 meta-analysis of 65 trials found a similar pattern: after weeks of stretching, tolerance to stretch went up and muscle fibre length did not change, although overall stiffness fell slightly. That is still useful, because range you are comfortable using is range you can use, but do not expect the tissue to change shape. On duration, Bandy, Irion and Briggler (1997, 93 adults) found 30 seconds worked and 60 seconds was no better; a recent dose-response meta-analysis of 84 trials found one 1.5-minute session did not beat measurement noise, whereas repeated stretching over a week or more, around 70 minutes in total, more often did. So: 30-second holds, done regularly, for weeks."
   },
   {
     "id": "seated-chair-hamstring-stretch",
@@ -633,10 +633,9 @@ export const HAMSTRINGS: Exercise[] = [
     "id": "active-knee-extension",
     "name": "Active Knee Extension",
     "aka": [
-      "90/90 hamstring stretch",
-      "90-90 straight leg raise",
-      "90/90 hamstring test",
-      "AKE"
+      "AKE",
+      "Active knee extension test",
+      "Supine hamstring knee extension"
     ],
     "regions": [
       "hamstrings"
@@ -704,7 +703,7 @@ export const HAMSTRINGS: Exercise[] = [
       "Physiotutors",
       "Physical therapy assessment literature"
     ],
-    "evidenceNote": "The active knee extension test (also called the 90/90 test) is the field test physiotherapists most often use for hamstring length because the hip is held at a fixed angle. Many clinics treat about 20 degrees short of straight as normal for an active adult. It is still a measure of how far you tolerate the stretch, not of muscle length, so it moves with tolerance, warm-up and even mood. Use it as an approximate monthly check, alongside the straight-leg raise."
+    "evidenceNote": "The active knee extension test (also called the 90/90 test) is a widely used clinical test of hamstring length because the hip is held at a fixed angle. Many clinics treat about 20 degrees short of straight as normal for an active adult. It is still a measure of how far you tolerate the stretch, not of muscle length, so it moves with tolerance, warm-up and even mood. Use it as an approximate monthly check, alongside the straight-leg raise."
   },
   {
     "id": "front-back-leg-swings",
@@ -781,7 +780,7 @@ export const HAMSTRINGS: Exercise[] = [
       "Niel Asher Education",
       "Strength and conditioning warm-up practice"
     ],
-    "evidenceNote": "Dynamic stretching like this gives about the same acute range gains as a static hold, but the effect fades faster: a meta-analysis of dynamic versus static hamstring stretching found similar short-term effects, with more lasting gain from repeated static work. It also does not prevent hamstring strains on its own. The claim that swings 'lubricate the hip joint' or 'wake up' the nervous system is a sales pitch, not a finding. Their real job is to warm you up and let you rehearse the movement. They are a warm-up, not a way to build range."
+    "evidenceNote": "Dynamic stretching like this gives about the same short-term range gains as a static hold: a 2023 meta-analysis of 27 trials found similar acute effects, with larger longer-term gains from repeated static stretching. It also does not prevent hamstring strains on its own. The claim that swings 'lubricate the hip joint' or 'wake up' the nervous system is a sales pitch, not a finding. Their real job is to warm you up and let you rehearse the movement. They are a warm-up, not a way to build range."
   },
   {
     "id": "straight-leg-march",
@@ -927,7 +926,9 @@ export const HAMSTRINGS: Exercise[] = [
     "contraindications": [
       "wrist",
       "shoulder",
-      "backPain"
+      "backPain",
+      "hipReplacement",
+      "osteoporosis"
     ],
     "dailySafe": true,
     "source": [
@@ -1098,7 +1099,7 @@ export const HAMSTRINGS: Exercise[] = [
       "Nordbelt",
       "EMG comparison of deadlift variations"
     ],
-    "evidenceNote": "A common claim is that stretching makes you more flexible and lifting makes you tighter. That is not true. A 2021 meta-analysis (Afonso) found strength training through a full range and stretching did not differ in improving range of motion. There is also evidence that heavy hip-extension work lengthens the hamstring's fibre bundles, unlike stretching: 45-degree hip-extension training lengthened the biceps femoris long head in Bourne's 2017 trials. The Romanian deadlift itself was not the exercise studied for that, so treat it as a close cousin, not proof. It is not daily-safe because loaded eccentric hamstring work causes soreness; twice a week is enough."
+    "evidenceNote": "A common claim is that stretching makes you more flexible and lifting makes you tighter. That is not true. A 2021 meta-analysis (Afonso) found strength training through a full range and stretching did not differ in improving range of motion. One small 2017 trial (Bourne, 30 active young men) found that 10 weeks of loaded 45-degree hip-extension training lengthened the fibre bundles of the biceps femoris long head, as Nordics did; a 2025 meta-analysis found static stretching does not change fibre length. The Romanian deadlift itself was not the exercise studied for that, so treat it as a close cousin, not proof. It is not daily-safe because loaded eccentric hamstring work causes soreness; twice a week is enough."
   },
   {
     "id": "single-leg-romanian-deadlift",
@@ -1210,7 +1211,7 @@ export const HAMSTRINGS: Exercise[] = [
     ],
     "dose": {
       "kind": "reps",
-      "reps": 4,
+      "reps": 3,
       "sets": 2,
       "perSide": false,
       "tempoNote": "5s lowering, 3s catching and pushing back up.",
@@ -1257,6 +1258,7 @@ export const HAMSTRINGS: Exercise[] = [
       }
     ],
     "props": [
+      "anchor",
       "cushion"
     ],
     "officeFriendly": false,
@@ -1269,7 +1271,7 @@ export const HAMSTRINGS: Exercise[] = [
       "Nordic hamstring exercise (Petersen 2011; van der Horst 2015; van Dyk 2019)",
       "VALD Health"
     ],
-    "evidenceNote": "You will read that Nordics halve your risk of hamstring injury. The evidence is real but more limited than that suggests. A 2011 randomised trial in Danish football (Petersen) found roughly 60 percent fewer new injuries; a 2015 randomised trial in Dutch amateur footballers (van der Horst) also found fewer; and a 2019 meta-analysis of 8,459 athletes (van Dyk) put the reduction at about half. A 2021 reappraisal (Impellizzeri) argued that with more careful statistics the effect is inconclusive, with signs of publication bias and almost all data from soccer. I found no trials in middle-aged recreational lifters. What is more solid is that it builds hamstring eccentric strength and fascicle length. The first sessions cause heavy soreness (typically peaking around day 2), so start with 2 sets of 3 to 5 and never more than twice a week. Anchoring your ankles: hook them under a heavy sofa, or use a partner."
+    "evidenceNote": "You will read that Nordics halve your risk of hamstring injury. The evidence is real but more limited than that suggests. A 2011 randomised trial in Danish football (Petersen) found roughly 60 percent fewer new injuries; a 2015 randomised trial in Dutch amateur footballers (van der Horst) also found fewer; and a 2019 meta-analysis of 8,459 athletes (van Dyk) put the reduction at about half. A 2021 reappraisal (Impellizzeri) argued that when only properly randomised trials are counted the effect is inconclusive (only five of the fifteen studies were), and that at best a conditional recommendation can be made for soccer. I found no trials in middle-aged recreational lifters. What is more solid is that it builds hamstring eccentric strength and fascicle length. The first sessions cause heavy soreness (typically worst on days 2 to 3), so start with 2 sets of 3 to 5 and never more than twice a week. Anchoring your ankles: hook them under a heavy sofa, or use a partner."
   },
   {
     "id": "bridge-slider-leg-curl",
@@ -1431,7 +1433,7 @@ export const HAMSTRINGS: Exercise[] = [
     "role": "opener",
     "intensity": 1,
     "summary": "Sit with a foam roller under one thigh, hands behind you, and roll slowly from just above the knee to just below the sit bone.",
-    "why": "It gives a short-lived increase in how far you can stretch, without the drop in strength a long hold can cause, so it suits a warm-up. It is also a handy way to find the tender spots.",
+    "why": "It gives a short-lived increase in how far you can stretch, and it does not cost you strength beforehand, so it suits a warm-up. It is no better than a stretch for range. It is also a handy way to find the tender spots.",
     "targets": [
       "hamstrings"
     ],
@@ -1486,7 +1488,7 @@ export const HAMSTRINGS: Exercise[] = [
     "source": [
       "Foam rolling research (Wiewelhove 2019; Wilke 2020; Sports Medicine meta-analysis 2022)"
     ],
-    "evidenceNote": "Rolling does not 'break up fascia' or 'release adhesions': a roller cannot apply enough force to reshape connective tissue, and there is no evidence that it does. What the research supports is a small, short-lived rise in joint range (meta-analyses of acute effects, including the hamstrings) with no loss in strength, lasting minutes not hours. A 2022 meta-analysis of foam-rolling training found a small range gain over weeks. The most likely reason is a change in how the stretch feels, the same as with stretching. It is a warm-up aid, not a treatment."
+    "evidenceNote": "Rolling does not 'break up fascia' or 'release adhesions': a roller cannot apply enough force to reshape connective tissue, and there is no evidence that it does. What the research supports is a small, short-lived rise in joint range (meta-analyses of acute effects, including the hamstrings) with no loss in strength, lasting minutes not hours. Rolling for more than two weeks did not show a clear benefit in a 2022 meta-analysis of foam-rolling training, and rolling was no better than stretching for range in an acute-effect meta-analysis. The most likely reason is a change in how the stretch feels, the same as with stretching. It is a warm-up aid, not a treatment."
   },
   {
     "id": "pedalling-downward-dog",
@@ -1636,7 +1638,10 @@ export const HAMSTRINGS: Exercise[] = [
     "contraindications": [
       "balance",
       "backPain",
-      "sciatica"
+      "sciatica",
+      "osteoporosis",
+      "hipReplacement",
+      "bloodPressure"
     ],
     "dailySafe": true,
     "source": [
@@ -1801,7 +1806,8 @@ export const HAMSTRINGS: Exercise[] = [
       "bloodPressure",
       "osteoporosis",
       "sciatica",
-      "balance"
+      "balance",
+      "hipReplacement"
     ],
     "dailySafe": true,
     "source": [

@@ -76,13 +76,6 @@ export const BACK_POSES: Record<string, Pose> = {
     highlight: ['spine'],
   }),
 
-  // Propped on the forearms, elbows under the shoulders, pelvis and legs relaxed.
-  'prone-on-elbows': pose({
-    torso: 118, head: 110,
-    thigh: 270, shin: 270, foot: 270,
-    upperArm: 0, forearm: 90,
-    highlight: ['spine'],
-  }),
 
   // Standing tall, hands on the back of the pelvis, leaning gently back.
   'standing-back-extension': pose({

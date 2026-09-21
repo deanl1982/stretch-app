@@ -123,7 +123,7 @@ export const HIPS: Exercise[] = [
     "props": [
       "cushion"
     ],
-    "officeFriendly": true,
+    "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
       "knee",
@@ -136,7 +136,7 @@ export const HIPS: Exercise[] = [
       "Dani Winks Flexibility",
       "HSS physical therapist"
     ],
-    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. The pelvic tuck has real evidence behind it: a 2024 crossover trial (26 healthy, active adults, 30 seconds by 2) found that adding a tuck cut hip-flexor resistance more than the standard half-kneeling stretch. That measures how tense the tissue feels to stretch straight afterwards, not how you sit or stand. Two related claims are not supported. A tight psoas is not proven to cause back pain (a small 2024 study of 70 students found no link between iliopsoas length and low back pain, and 96% tested normal length). And releasing it will not fix your posture."
+    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. The pelvic tuck has some evidence behind it: a 2024 crossover trial (26 healthy, active adults averaging 22 years old, 2 holds of 30 seconds) found that adding a tuck lowered hip-flexor resistance more than the standard half-kneeling stretch. That measures how tense the tissue feels to stretch straight afterwards, not how you sit or stand. Two related claims are not supported. A tight psoas is not proven to cause back pain (a small 2024 study of 70 undergraduates found no significant link between iliopsoas length and low back pain, and 96% tested normal length). And releasing it will not fix your posture."
   },
   {
     "id": "psoas-stride",
@@ -152,7 +152,7 @@ export const HIPS: Exercise[] = [
     ],
     "role": "main",
     "intensity": 2,
-    "summary": "Step into a lunge, raise the back-leg-side arm overhead, lean away from the back leg, hold two seconds, then stride through to the other side.",
+    "summary": "Step into a lunge, raise the back-leg-side arm overhead, lean away from the back leg, hold about three seconds, then stride through to the other side.",
     "why": "Stuart McGill, the spine researcher, uses this as his psoas stretch because it combines hip extension with a side bend, not a deep static hold. It also works as a dynamic warm-up for a man who does not want to sit in a deep lunge cold.",
     "targets": [
       "psoas",
@@ -391,7 +391,8 @@ export const HIPS: Exercise[] = [
     "officeFriendly": true,
     "barefootOnly": false,
     "contraindications": [
-      "balance"
+      "balance",
+      "hipReplacement"
     ],
     "dailySafe": true,
     "source": [
@@ -485,7 +486,7 @@ export const HIPS: Exercise[] = [
       }
     ],
     "props": [
-      "none"
+      "bench"
     ],
     "officeFriendly": false,
     "barefootOnly": false,
@@ -572,7 +573,8 @@ export const HIPS: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "knee"
+      "knee",
+      "hipReplacement"
     ],
     "dailySafe": true,
     "source": [
@@ -655,13 +657,14 @@ export const HIPS: Exercise[] = [
     "officeFriendly": false,
     "barefootOnly": false,
     "contraindications": [
-      "knee"
+      "knee",
+      "hipReplacement"
     ],
     "dailySafe": true,
     "source": [
       "The Prehab Guys"
     ],
-    "evidenceNote": "A quad stretch, not a psoas stretch. The rectus femoris is a two-joint muscle, so it needs both the hip extended and the knee bent to be stretched. That is why a bent-knee kneeling lunge feels mostly like a quad stretch, and why the Thomas stretch keeps the hanging knee loose when the aim is the deeper hip flexors."
+    "evidenceNote": "A quad stretch, not a psoas stretch. The rectus femoris is a two-joint muscle, so it needs both the hip extended and the knee bent to be stretched. That is why a bent-knee kneeling lunge feels mostly like a quad stretch, and why a straight back leg, as in the standing split stance, puts more of the stretch on the deeper hip flexors."
   },
   {
     "id": "seated-hip-flexor-lift-off",
@@ -729,14 +732,15 @@ export const HIPS: Exercise[] = [
     "officeFriendly": true,
     "barefootOnly": false,
     "contraindications": [
-      "hipReplacement"
+      "hipReplacement",
+      "groin"
     ],
     "dailySafe": true,
     "source": [
       "Rehab Hero",
       "Coast Performance Rehab"
     ],
-    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. Two things people repeat here need correcting. First, that a tight psoas causes back pain: the small study I found (70 students) found no link between iliopsoas length and low back pain, and most participants tested as normal length. Second, that a psoas can be released with the right stretch and your posture will then be fixed: not supported. The fair reason to train the hip flexors is that they are a strength weak point at the top of the range, and that is what this does. Isometric holds at different effort levels appear on rehab sites, but there is no trial showing this specific drill changes back pain."
+    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. Two things people repeat here need correcting. First, that a tight psoas causes back pain: the small study I found (70 undergraduates) found no significant link between iliopsoas length and low back pain, and most participants tested as normal length. Second, that a psoas can be released with the right stretch and your posture will then be fixed: not supported. The fair reason to train the hip flexors is that they are a strength weak point at the top of the range, and that is what this does. Isometric holds at different effort levels appear on rehab sites, but there is no trial showing this specific drill changes back pain."
   },
   {
     "id": "classic-pigeon",
@@ -775,7 +779,7 @@ export const HIPS: Exercise[] = [
     },
     "cues": [
       "Cushion under the front hip until the pelvis sits level.",
-      "Point the front toes but flex them back to keep the ankle straight.",
+      "Flex the front foot, toes pulled back, so the ankle stays straight and the knee is not twisted.",
       "Slide the back leg straight behind, kneecap facing the floor.",
       "Sit tall on your hands. If your hips tilt to one side, prop more."
     ],
@@ -942,7 +946,7 @@ export const HIPS: Exercise[] = [
       "Physitrack",
       "Hinge Health"
     ],
-    "evidenceNote": "Yoga teachers recommend reclined pigeon for people with knee issues because it stretches the outer hip without loading the knee, and it is the recommended version after hip or knee replacement once about 70 percent of range has returned, with surgeon approval. For piriformis and sciatica claims: many sites say this stretch relieves sciatica. The evidence for that is limited. If the stretch sends tingling or shooting pain down your leg, it is the wrong stretch for you. It still stretches the deep outer hip and glutes, as a stretch, and it moves the hip through flexion and outward rotation."
+    "evidenceNote": "Yoga teachers recommend reclined pigeon for people with knee issues because it stretches the outer hip without loading the knee. One yoga teacher (YogaUOnline) also names it as the gentlest pigeon variation after hip or knee surgery, but hip replacement precautions usually rule out bending the hip past 90 degrees and crossing the operated leg over the other, which this pose does, so it is off the list here unless your surgeon has cleared it. For piriformis and sciatica claims: many sites say this stretch relieves sciatica. The evidence for that is limited. If the stretch sends tingling or shooting pain down your leg, it is the wrong stretch for you. It still stretches the deep outer hip and glutes, as a stretch, and it moves the hip through flexion and outward rotation."
   },
   {
     "id": "seated-figure-4",

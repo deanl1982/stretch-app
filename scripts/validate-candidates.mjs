@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const REGIONS = ['hips', 'hamstrings', 'ankles', 'back', 'fullBody'];
 const ROLES = ['opener', 'main', 'load', 'rest'];
-const PROPS = ['none','cushion','block','chair','wall','doorframe','towel','wedge','dowel','roller','band','step'];
+const PROPS = ['none','cushion','block','chair','wall','doorframe','towel','wedge','dowel','roller','band','step','weight','bench','anchor','ball'];
 const FLAGS = ['knee','hipReplacement','backPain','sciatica','balance','groin','bloodPressure','shoulder','osteoporosis','achilles','plantarFascia','bigToe','wrist'];
 const REQUIRED = ['id','name','regions','role','intensity','summary','why','targets','dose','cues','shouldFeel',
   'shouldNotFeel','regressions','progressions','props','officeFriendly','barefootOnly','contraindications','dailySafe','source'];

@@ -30,17 +30,6 @@ export const COSSACK_POSES: Record<string, Pose> = {
     farHighlight: ['thigh'],
   }),
 
-  // The midpoint of the crossing: low and central in a horse stance, arms out in front.
-  'horse-stance-transition': pose({
-    view: 'front',
-    torso: 180,
-    thigh: 290, shin: 0, foot: 270,
-    farThigh: 70, farShin: 0, farFoot: 90,
-    upperArm: 345, forearm: 135,
-    farUpperArm: 15, farForearm: 225,
-    highlight: ['thigh'],
-    farHighlight: ['thigh'],
-  }),
 
   // Standing tall on the right leg, left leg lifted out to the side, hand on a wall for balance.
   'standing-side-leg-lift': pose({
