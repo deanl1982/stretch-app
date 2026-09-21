@@ -4,6 +4,12 @@ import { downloadBackup, loadProfile, restoreBackup, saveProfile } from '../stor
 import type { Profile } from '../storage/types.ts';
 import { DISCLAIMER } from '../safety.ts';
 import { GATE_ENABLED, signOut } from '../auth/gate.ts';
+import {
+  HOLD_LEVELS,
+  HOLD_LEVEL_HINTS,
+  HOLD_LEVEL_LABELS,
+  type HoldLevel,
+} from '../session/phases.ts';
 import { Button, Card, PageTitle, Screen } from '../ui.tsx';
 
 const ASKABLE: Flag[] = [
@@ -106,6 +112,35 @@ export function Settings(): JSX.Element {
         </Card>
         <p className="mt-2 text-xs text-bone-dim">
           Anything ticked is removed from your draws completely, not just flagged.
+        </p>
+      </Section>
+
+      <Section title="How long you hold">
+        <Card className="py-2">
+          {HOLD_LEVELS.map((level) => (
+            <label
+              key={level}
+              className="flex min-h-11 cursor-pointer items-start gap-3 py-3"
+            >
+              <input
+                type="radio"
+                name="holdLevel"
+                checked={profile.holdLevel === level}
+                onChange={() => update({ holdLevel: level as HoldLevel })}
+                className="mt-0.5 size-6 shrink-0 accent-[var(--color-accent)]"
+              />
+              <span>
+                <span className="block">{HOLD_LEVEL_LABELS[level]}</span>
+                <span className="block text-sm text-bone-dim">{HOLD_LEVEL_HINTS[level]}</span>
+              </span>
+            </label>
+          ))}
+        </Card>
+        <p className="mt-2 text-xs leading-relaxed text-bone-dim">
+          This scales every hold, and the session length adjusts with it. A few
+          positions have a ceiling they will not go past however you set this —
+          toes-tucked kneeling is punishing enough without extra time on it.
+          Rep-based work is unaffected: you set the pace there and tap when done.
         </p>
       </Section>
 

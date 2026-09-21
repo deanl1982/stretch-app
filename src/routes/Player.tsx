@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useState, type JSX } from 'react';
 import { useNavigate } from 'react-router';
 import { getExercise } from '../content/exercises.ts';
-import { describeDose } from '../content/types.ts';
-import { buildPhases, estimateSeconds } from '../session/phases.ts';
+import { buildPhases, describeDose, estimateSeconds } from '../session/phases.ts';
 import { clearActive, loadActive, saveActive, type ActiveSession } from '../session/active.ts';
 import { appendSession } from '../storage/store.ts';
 import { loadProfile } from '../storage/store.ts';
@@ -54,7 +53,10 @@ export function Player(): JSX.Element {
     return id === undefined ? undefined : getExercise(id);
   }, [session]);
 
-  const phases = useMemo(() => (exercise === undefined ? [] : buildPhases(exercise)), [exercise]);
+  const phases = useMemo(
+    () => (exercise === undefined ? [] : buildPhases(exercise, profile.holdLevel)),
+    [exercise, profile.holdLevel],
+  );
   const phase = phases[phaseIndex];
   const total = phase?.seconds ?? 0;
 
@@ -72,11 +74,18 @@ export function Player(): JSX.Element {
     if (profile.voice) speak(`${exercise.name}. ${exercise.cues[0] ?? ''}`);
   }, [exercise, profile.voice]);
 
-  // New phase: reset the clock.
+  // New phase: reset the clock. Untimed phases count up from zero instead.
   useEffect(() => {
     if (phase === undefined) return;
-    setRemaining(phase.seconds);
+    setRemaining(phase.timed ? phase.seconds : 0);
   }, [phase]);
+
+  // Rep work: a stopwatch, not a deadline.
+  useEffect(() => {
+    if (paused || phase === undefined || phase.timed) return;
+    const tick = window.setInterval(() => setRemaining((value) => value + 1), 1000);
+    return () => window.clearInterval(tick);
+  }, [paused, phase]);
 
   const finish = useCallback(
     (final: ActiveSession) => {
@@ -146,9 +155,26 @@ export function Player(): JSX.Element {
     });
   }, []);
 
-  // The clock.
+  /** Finish the current phase: next phase, or on to the next exercise. */
+  const completePhase = useCallback(() => {
+    const isLast = phaseIndex >= phases.length - 1;
+    if (isLast) {
+      advance('done');
+      return;
+    }
+    const upcoming = phases[phaseIndex + 1];
+    if (profile.sound) {
+      if (upcoming?.side === 'second') switchSidesChime();
+      else advanceChime();
+    }
+    if (profile.voice && upcoming?.side === 'second') speak('Switch sides');
+    setPhaseIndex((current) => current + 1);
+  }, [phaseIndex, phases, advance, profile.sound, profile.voice]);
+
+  // The clock. Rep work is self-paced, so it runs no clock at all — see below.
   useEffect(() => {
     if (paused || exercise === undefined) return;
+    if (phase === undefined || !phase.timed) return;
 
     const tick = window.setInterval(() => {
       setRemaining((value) => {
@@ -156,18 +182,7 @@ export function Player(): JSX.Element {
 
         if (next <= 0) {
           window.clearInterval(tick);
-          const isLastPhase = phaseIndex >= phases.length - 1;
-          if (isLastPhase) {
-            advance('done');
-          } else {
-            const upcoming = phases[phaseIndex + 1];
-            if (profile.sound) {
-              if (upcoming?.side === 'second') switchSidesChime();
-              else advanceChime();
-            }
-            if (profile.voice && upcoming?.side === 'second') speak('Switch sides');
-            setPhaseIndex((current) => current + 1);
-          }
+          completePhase();
           return 0;
         }
 
@@ -177,7 +192,7 @@ export function Player(): JSX.Element {
     }, 1000);
 
     return () => window.clearInterval(tick);
-  }, [paused, exercise, phaseIndex, phases, advance, profile.sound, profile.voice]);
+  }, [paused, exercise, phase, completePhase, profile.sound]);
 
   const quit = (): void => {
     if (session !== null) finish(session);
@@ -231,7 +246,7 @@ export function Player(): JSX.Element {
         aria-atomic="false"
       >
         <h1 className="text-3xl font-semibold tracking-tight">{exercise.name}</h1>
-        <p className="text-bone-dim">{describeDose(exercise)}</p>
+        <p className="text-bone-dim">{describeDose(exercise, profile.holdLevel)}</p>
 
         {pose !== undefined && (
           <Figure
@@ -241,14 +256,32 @@ export function Player(): JSX.Element {
           />
         )}
 
-        <div className="relative h-32 w-32">
-          <Ring progress={progress} />
-          <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-            <span className="text-4xl font-semibold tabular-nums">
-              {minutes > 0 ? `${minutes}:${String(seconds).padStart(2, '0')}` : seconds}
+        {phase?.timed === false ? (
+          // Rep work is self-paced: you cannot do ten controlled reps against a
+          // clock, so show how long you have taken and wait for a tap.
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-4xl font-semibold tabular-nums text-bone-dim" aria-hidden="true">
+              {minutes > 0 ? `${minutes}:${String(seconds).padStart(2, '0')}` : `${seconds}s`}
             </span>
+            <Button
+              variant="primary"
+              onClick={completePhase}
+              className="px-10 py-4 text-lg"
+            >
+              Done
+            </Button>
+            <span className="text-xs text-bone-dim">Take as long as you need.</span>
           </div>
-        </div>
+        ) : (
+          <div className="relative h-32 w-32">
+            <Ring progress={progress} />
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <span className="text-4xl font-semibold tabular-nums">
+                {minutes > 0 ? `${minutes}:${String(seconds).padStart(2, '0')}` : seconds}
+              </span>
+            </div>
+          </div>
+        )}
 
         {phase !== undefined && phase.label !== '' && (
           <p className="text-sm font-medium text-accent">{phase.label}</p>
@@ -266,7 +299,7 @@ export function Player(): JSX.Element {
           Back
         </Button>
         <Button
-          variant="primary"
+          variant={phase?.timed === false ? 'secondary' : 'primary'}
           onClick={() => setPaused((value) => !value)}
           className="flex-1 py-4 text-lg"
         >

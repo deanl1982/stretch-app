@@ -2,10 +2,11 @@ import { useMemo, type JSX } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { generateSession } from '../session/generator.ts';
 import { randomSeed } from '../session/rng.ts';
+import { describeDose } from '../session/phases.ts';
 import { saveActive } from '../session/active.ts';
 import { loadHistory, loadProfile } from '../storage/store.ts';
 import { dayKey } from '../storage/stats.ts';
-import { describeDose, describeRegions, parseRegions } from '../content/types.ts';
+import { describeRegions, parseRegions } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
 import { Button, Card, Empty, PageTitle, Pill, Screen } from '../ui.tsx';
@@ -46,6 +47,7 @@ export function Preview(): JSX.Element {
         officeOnly: profile.officeOnly,
         pureChaos: profile.pureChaos,
         regions: focus,
+        holdLevel: profile.holdLevel,
         recentCounts: recentCounts(),
       }),
     [seed, budgetSeconds, profile, focus],
@@ -122,7 +124,7 @@ export function Preview(): JSX.Element {
                 )}
                 <div className="min-w-0 flex-1">
                   <p className="font-medium leading-tight">{item.exercise.name}</p>
-                  <p className="text-sm text-bone-dim">{describeDose(item.exercise)}</p>
+                  <p className="text-sm text-bone-dim">{describeDose(item.exercise, profile.holdLevel)}</p>
                 </div>
                 <Pill>{item.exercise.role === 'load' ? 'strength' : item.exercise.role}</Pill>
               </Card>

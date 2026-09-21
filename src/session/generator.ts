@@ -1,6 +1,6 @@
 import { EXERCISES } from '../content/exercises.ts';
 import type { Exercise, Flag, Prop, Region } from '../content/types.ts';
-import { buildPhases, estimateSeconds } from './phases.ts';
+import { buildPhases, estimateSeconds, type HoldLevel } from './phases.ts';
 import { createRng, shuffle } from './rng.ts';
 
 /**
@@ -32,6 +32,8 @@ export interface GenerateOptions {
   regions?: readonly Region[];
   /** Drop the opener/rest structure and draw the whole session unconstrained. */
   pureChaos?: boolean;
+  /** Scales every hold, so a 20-minute budget stays honest at any level. */
+  holdLevel?: HoldLevel;
   /** How many times each exercise has been done in the last 7 days. */
   recentCounts?: ReadonlyMap<string, number>;
   /** Override the library, for tests. */
@@ -53,13 +55,13 @@ export interface Session {
   totalSeconds: number;
 }
 
-function toItem(exercise: Exercise): SessionItem {
-  // The first phase's length is the prescribed hold, already capped.
-  const first = buildPhases(exercise)[0];
+function toItem(exercise: Exercise, level: HoldLevel): SessionItem {
+  // The first phase's length is the prescribed hold, already scaled and capped.
+  const first = buildPhases(exercise, level)[0];
   return {
     exercise,
     holdSeconds: exercise.dose.kind === 'hold' ? first?.seconds : undefined,
-    estimatedSeconds: estimateSeconds(exercise),
+    estimatedSeconds: estimateSeconds(exercise, level),
   };
 }
 
@@ -110,13 +112,14 @@ function pack(
   candidates: readonly Exercise[],
   remaining: number,
   used: Set<string>,
+  level: HoldLevel,
 ): SessionItem[] {
   const chosen: SessionItem[] = [];
   let left = remaining;
 
   for (const exercise of candidates) {
     if (used.has(exercise.id)) continue;
-    const item = toItem(exercise);
+    const item = toItem(exercise, level);
     if (item.estimatedSeconds > left) continue;
     chosen.push(item);
     used.add(exercise.id);
@@ -130,14 +133,14 @@ const sumSeconds = (items: readonly SessionItem[]): number =>
   items.reduce((total, item) => total + item.estimatedSeconds, 0);
 
 export function generateSession(options: GenerateOptions): Session {
-  const { seed, budgetSeconds, pureChaos = false } = options;
+  const { seed, budgetSeconds, pureChaos = false, holdLevel = 'standard' } = options;
   const rng = createRng(seed);
   const pool = shuffle(eligiblePool(options), rng);
 
   const used = new Set<string>();
 
   if (pureChaos) {
-    const items = pack(pool, budgetSeconds, used);
+    const items = pack(pool, budgetSeconds, used, holdLevel);
     return { seed, budgetSeconds, items, totalSeconds: sumSeconds(items) };
   }
 
@@ -146,7 +149,7 @@ export function generateSession(options: GenerateOptions): Session {
 
   const head: SessionItem[] = [];
   if (opener !== undefined) {
-    const item = toItem(opener);
+    const item = toItem(opener, holdLevel);
     if (item.estimatedSeconds <= budgetSeconds) {
       head.push(item);
       used.add(opener.id);
@@ -155,7 +158,7 @@ export function generateSession(options: GenerateOptions): Session {
 
   // Reserve the closing rest position up front, so the session always ends somewhere
   // calm rather than on whatever happened to fit last.
-  const restItem = rest === undefined ? undefined : toItem(rest);
+  const restItem = rest === undefined ? undefined : toItem(rest, holdLevel);
   const budgetAfterHead = budgetSeconds - sumSeconds(head);
   const reserved =
     restItem !== undefined && restItem.estimatedSeconds <= budgetAfterHead
@@ -165,13 +168,13 @@ export function generateSession(options: GenerateOptions): Session {
   const middlePool = pool.filter(
     (exercise) => exercise.role === 'main' || exercise.role === 'load',
   );
-  const middle = pack(middlePool, budgetAfterHead - reserved, used);
+  const middle = pack(middlePool, budgetAfterHead - reserved, used, holdLevel);
 
   // Spend anything still left over on whatever else fits, before the closing item.
   // Rest positions are excluded so the session does not end up with two of them.
   const spare = budgetAfterHead - reserved - sumSeconds(middle);
   const fillerPool = pool.filter((exercise) => exercise.role !== 'rest');
-  middle.push(...pack(fillerPool, spare, used));
+  middle.push(...pack(fillerPool, spare, used, holdLevel));
 
   const tail: SessionItem[] = [];
   if (reserved > 0 && restItem !== undefined && rest !== undefined) {

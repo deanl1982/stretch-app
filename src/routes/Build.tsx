@@ -1,9 +1,9 @@
 import { useMemo, useState, type JSX } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
-import { REGION_LABELS, describeDose, type Region } from '../content/types.ts';
+import { REGION_LABELS, type Region } from '../content/types.ts';
 import { eligiblePool } from '../session/generator.ts';
 import { randomSeed } from '../session/rng.ts';
-import { estimateSeconds } from '../session/phases.ts';
+import { describeDose, estimateSeconds } from '../session/phases.ts';
 import { saveActive } from '../session/active.ts';
 import { loadProfile } from '../storage/store.ts';
 import { loadFavourites, useFavourites } from '../storage/favourites.ts';
@@ -273,7 +273,8 @@ export function Build(): JSX.Element {
                     <span className="min-w-0 flex-1">
                       <span className="block font-medium leading-tight">{exercise.name}</span>
                       <span className="block text-sm text-bone-dim">
-                        {describeDose(exercise)} · {minutes(estimateSeconds(exercise))}
+                        {describeDose(exercise, profile.holdLevel)} ·{" "}
+                        {minutes(estimateSeconds(exercise, profile.holdLevel))}
                       </span>
                     </span>
                     <FavouriteButton id={exercise.id} />

@@ -1,10 +1,12 @@
-import type { JSX, ReactNode } from 'react';
+import { useMemo, type JSX, type ReactNode } from 'react';
 import { useParams } from 'react-router';
 import { getExercise } from '../content/exercises.ts';
-import { PROP_LABELS, REGION_LABELS, describeDose } from '../content/types.ts';
+import { PROP_LABELS, REGION_LABELS } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
 import { Button, Card, EvidenceNote, FavouriteButton, PageTitle, Pill, Screen } from '../ui.tsx';
+import { describeDose } from '../session/phases.ts';
+import { loadProfile } from '../storage/store.ts';
 
 function Section({ title, children }: { title: string; children: ReactNode }): JSX.Element {
   return (
@@ -16,6 +18,7 @@ function Section({ title, children }: { title: string; children: ReactNode }): J
 }
 
 export function ExerciseDetail(): JSX.Element {
+  const profile = useMemo(loadProfile, []);
   const { id } = useParams();
   const exercise = id === undefined ? undefined : getExercise(id);
 
@@ -53,7 +56,7 @@ export function ExerciseDetail(): JSX.Element {
         {exercise.regions.map((region) => (
           <Pill key={region}>{REGION_LABELS[region]}</Pill>
         ))}
-        <Pill>{describeDose(exercise)}</Pill>
+        <Pill>{describeDose(exercise, profile.holdLevel)}</Pill>
         {exercise.officeFriendly && <Pill>works at a desk</Pill>}
         {exercise.barefootOnly && <Pill>barefoot</Pill>}
         {!exercise.dailySafe && <Pill>once or twice a week</Pill>}

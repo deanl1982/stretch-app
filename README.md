@@ -86,6 +86,19 @@ and something restful last. Workouts can be saved, renamed, edited and re-run fr
 exists because most people have three or four positions they actually keep using, and
 making those two taps away matters more than any amount of programming cleverness.
 
+**Holds are adjustable; reps are not timed at all.** `src/session/phases.ts` owns
+both. A `HoldLevel` of shorter/standard/longer scales every hold (×0.6 / ×1 / ×1.5,
+rounded to 5s), clamped to a 10s floor and to each exercise's own `maxHoldSeconds`
+ceiling — "longer" must never push past a cap that exists for safety rather than
+for pacing. The session packer uses the same level, so a twenty-minute budget stays
+twenty minutes whichever way it is set.
+
+Rep work carries `timed: false`. You cannot do ten controlled good mornings against
+a clock, so the player runs a count-up stopwatch and waits for a tap instead of
+counting down and advancing on its own. Each set and each side is its own phase, so
+"5 reps each side, 2 sets" is four taps. The budget still estimates rep work at 4s
+per rep, because the packer needs a number — but it is an estimate, not a promise.
+
 **Timing is one model.** `src/session/phases.ts` splits an exercise into the blocks the
 clock actually counts — one per set, per side — so "60s each side" counts down from 60
 twice rather than from 2:00 once. The session packer and the player both derive their

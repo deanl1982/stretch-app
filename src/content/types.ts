@@ -176,19 +176,3 @@ export function describeRegions(regions: readonly Region[]): string {
   if (names.length === 1) return names[0] ?? 'everything';
   return `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
 }
-
-/** "45s each side, twice" — the dose rendered for a human. */
-export function describeDose(exercise: Exercise): string {
-  const { dose } = exercise;
-  const side = dose.perSide ? ' each side' : '';
-  const sets = dose.sets > 1 ? `, ${dose.sets} sets` : '';
-
-  if (dose.kind === 'hold') {
-    const seconds =
-      exercise.maxHoldSeconds === undefined
-        ? dose.seconds
-        : Math.min(dose.seconds, exercise.maxHoldSeconds);
-    return `${seconds}s${side}${sets}`;
-  }
-  return `${dose.reps} reps${side}${sets}`;
-}

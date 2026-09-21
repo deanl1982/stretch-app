@@ -1,4 +1,5 @@
 import type { Flag, Prop } from '../content/types.ts';
+import type { HoldLevel } from '../session/phases.ts';
 
 export const SCHEMA_VERSION = 1;
 
@@ -9,6 +10,8 @@ export interface Profile {
   /** Props the user has. `null` means "assume I have everything". */
   availableProps: Prop[] | null;
   defaultMinutes: number;
+  /** How long to hold each position, relative to the written dose. */
+  holdLevel: HoldLevel;
   sound: boolean;
   voice: boolean;
   /** Drop the opener/closer structure and draw sessions completely unconstrained. */
@@ -55,6 +58,7 @@ export const DEFAULT_PROFILE: Profile = {
   exclusions: [],
   availableProps: null,
   defaultMinutes: 20,
+  holdLevel: 'standard',
   sound: true,
   voice: false,
   pureChaos: false,

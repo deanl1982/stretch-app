@@ -1,13 +1,15 @@
 import { useMemo, type JSX } from 'react';
 import { Link } from 'react-router';
 import { getExercise } from '../content/exercises.ts';
-import { describeDose } from '../content/types.ts';
 import { useFavourites } from '../storage/favourites.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
 import { Button, Card, Empty, FavouriteButton, PageTitle, Screen } from '../ui.tsx';
+import { describeDose } from '../session/phases.ts';
+import { loadProfile } from '../storage/store.ts';
 
 export function Favourites(): JSX.Element {
+  const profile = useMemo(loadProfile, []);
   const favourites = useFavourites();
   const exercises = useMemo(
     () =>
@@ -44,7 +46,7 @@ export function Favourites(): JSX.Element {
                       )}
                       <div className="min-w-0 flex-1">
                         <p className="font-medium leading-tight">{exercise.name}</p>
-                        <p className="mt-0.5 text-sm text-bone-dim">{describeDose(exercise)}</p>
+                        <p className="mt-0.5 text-sm text-bone-dim">{describeDose(exercise, profile.holdLevel)}</p>
                       </div>
                       <FavouriteButton id={exercise.id} />
                     </Card>

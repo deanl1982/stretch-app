@@ -1,11 +1,13 @@
 import { useMemo, useState, type JSX } from 'react';
 import { Link } from 'react-router';
 import { EXERCISES } from '../content/exercises.ts';
-import { REGION_LABELS, describeDose, type Region } from '../content/types.ts';
+import { REGION_LABELS, type Region } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
 import { useFavourites } from '../storage/favourites.ts';
 import { Card, Empty, FavouriteButton, PageTitle, Pill, Screen } from '../ui.tsx';
+import { describeDose } from '../session/phases.ts';
+import { loadProfile } from '../storage/store.ts';
 
 type Filter = Region | 'all' | 'office' | 'favourites';
 
@@ -30,6 +32,7 @@ const SEARCH_INDEX = new Map(
 );
 
 export function Library(): JSX.Element {
+  const profile = useMemo(loadProfile, []);
   const [filter, setFilter] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const favourites = useFavourites();
@@ -108,7 +111,7 @@ export function Library(): JSX.Element {
                   <div className="min-w-0 flex-1">
                     <p className="font-medium">{exercise.name}</p>
                     <p className="truncate text-sm text-bone-dim">{exercise.summary}</p>
-                    <p className="mt-1 text-xs text-bone-dim">{describeDose(exercise)}</p>
+                    <p className="mt-1 text-xs text-bone-dim">{describeDose(exercise, profile.holdLevel)}</p>
                   </div>
                   {exercise.officeFriendly && <Pill>desk</Pill>}
                   <FavouriteButton id={exercise.id} />
