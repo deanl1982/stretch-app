@@ -6,9 +6,14 @@ name: App
 # .github/workflows/infra.yml and infra/README.md. This workflow only uploads
 # content into an app that already exists.
 #
-# Authentication: no long-lived deployment token is stored in GitHub. The job
-# logs in to Azure with OIDC federated credentials and fetches the SWA
-# deployment token at run time. See infra/README.md "The deployment token".
+# Authentication: the SWA deployment token, stored as the repository secret
+# AZURE_STATIC_WEB_APPS_API_TOKEN.
+#
+# infra/README.md describes a stricter OIDC setup that stores no credential at
+# all, fetching the token at run time instead. That needs an Entra app
+# registration, which a corporate tenant may not permit - so this repo uses the
+# token. To rotate it: reset the key in the portal (or `az staticwebapp secrets
+# reset-api-key`) and update the secret.
 
 on:
   push:
@@ -32,12 +37,9 @@ concurrency:
 
 permissions:
   contents: read
-  # Required for azure/login OIDC. NOTE: GitHub does not issue an id-token to
-  # workflows triggered by a pull_request from a FORK, so fork PRs cannot
-  # deploy a preview. That is the same restriction that already applies to
-  # secrets, so it is not a regression - but it does mean this pattern suits a
-  # single-owner repo, which this is.
-  id-token: write
+  # NOTE: GitHub does not pass secrets to workflows triggered by a pull_request
+  # from a FORK, so fork PRs cannot deploy a preview. Fine for a single-owner
+  # repo, which this is.
   pull-requests: write
 
 env:
@@ -97,28 +99,10 @@ jobs:
         # loudly here rather than discovering that in production.
         run: test -f dist/staticwebapp.config.json
 
-      - name: Azure login (OIDC)
-        uses: azure/login@v3
-        with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Fetch Static Web Apps deployment token
-        id: swa_token
-        run: |
-          token="$(az staticwebapp secrets list \
-            --name "${{ vars.SWA_NAME }}" \
-            --resource-group "${{ vars.SWA_RESOURCE_GROUP }}" \
-            --query properties.apiKey -o tsv)"
-          # Mask before it can reach any log line.
-          echo "::add-mask::$token"
-          echo "token=$token" >> "$GITHUB_OUTPUT"
-
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ steps.swa_token.outputs.token }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
 
@@ -152,27 +136,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'closed'
     steps:
-      - name: Azure login (OIDC)
-        uses: azure/login@v3
-        with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Fetch Static Web Apps deployment token
-        id: swa_token
-        run: |
-          token="$(az staticwebapp secrets list \
-            --name "${{ vars.SWA_NAME }}" \
-            --resource-group "${{ vars.SWA_RESOURCE_GROUP }}" \
-            --query properties.apiKey -o tsv)"
-          echo "::add-mask::$token"
-          echo "token=$token" >> "$GITHUB_OUTPUT"
-
       - name: Tear down the preview environment
         # Without this, closed PRs keep their preview environment and you hit
         # the Free tier's limit of 3 after three merges.
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ steps.swa_token.outputs.token }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: close
