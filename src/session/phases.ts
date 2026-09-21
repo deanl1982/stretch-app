@@ -9,10 +9,11 @@ import type { Exercise } from '../content/types.ts';
  *    years of practice wants 90. The prescription in the library is the standard
  *    dose; `HoldLevel` scales it, clamped so a safety ceiling is never exceeded.
  *
- * 2. **Reps are not timed.** You do not perform ten controlled good mornings
- *    against a clock — you do them at your own tempo and move on. Rep phases
- *    therefore carry `timed: false`, and the player waits for a tap rather than
- *    counting down and advancing on its own.
+ * 2. **Reps are counted, not run against one clock.** Ten good mornings is not a
+ *    forty-second block you sit through; it is ten separate efforts. A rep phase
+ *    therefore carries the rep count and the seconds one rep should take, and the
+ *    player counts reps down one at a time rather than running a single timer the
+ *    user cannot keep pace with.
  */
 
 export type HoldLevel = 'shorter' | 'standard' | 'longer';
@@ -42,23 +43,71 @@ export const MIN_HOLD_SECONDS = 10;
 /** Nothing sensible needs longer than this in a single block. */
 export const MAX_HOLD_SECONDS = 120;
 
-export interface Phase {
-  /** Countdown length for a timed phase; the expected duration for an untimed one. */
+type Side = 'first' | 'second' | null;
+
+interface PhaseBase {
+  /** Working seconds the phase is budgeted at. For reps, reps x secondsPerRep. */
   seconds: number;
   /** e.g. "Set 1 of 2 · First side". Empty when there is nothing worth saying. */
   label: string;
-  side: 'first' | 'second' | null;
-  /**
-   * False for rep work: the player shows the count and waits for the user to say
-   * they are done, rather than running a clock they cannot keep pace with.
-   */
-  timed: boolean;
+  side: Side;
 }
 
-/** Nominal seconds per controlled rep. Used for budgeting only, never as a clock. */
+export interface HoldPhase extends PhaseBase {
+  kind: 'hold';
+}
+
+export interface RepPhase extends PhaseBase {
+  kind: 'reps';
+  reps: number;
+  /** How long one rep should take. The player's per-rep countdown. */
+  secondsPerRep: number;
+}
+
+export type Phase = HoldPhase | RepPhase;
+
+/**
+ * Fallback pace for a rep dose that never declared one.
+ *
+ * Every exercise in the library does declare one - there is a test for it - so
+ * this exists only so the type system is not the sole thing standing between a
+ * new exercise and a divide-by-nothing in the player.
+ */
 export const SECONDS_PER_REP = 4;
 
-function label(setIndex: number, sets: number, side: Phase['side']): string {
+/**
+ * How rep work is driven in the player.
+ *
+ * `paced` counts each rep down against its own tempo and advances on its own -
+ * a metronome you follow. `manual` shows the same counter but waits for a tap,
+ * for anyone whose pace is their own business. Either way the count is visible,
+ * because "10 reps, 2 sets" on a screen with a single clock told you nothing
+ * about which rep you were on.
+ */
+export type RepPacing = 'paced' | 'manual';
+
+export const REP_PACINGS: RepPacing[] = ['paced', 'manual'];
+
+export const REP_PACING_LABELS: Record<RepPacing, string> = {
+  paced: 'Pace them for me',
+  manual: 'I will tap each rep',
+};
+
+export const REP_PACING_HINTS: Record<RepPacing, string> = {
+  paced: 'Each rep gets its own countdown and moves on by itself.',
+  manual: 'The counter waits for you. Nothing advances until you say so.',
+};
+
+/** Nobody can follow a pacer faster than this, and none of the doses need to. */
+export const MIN_SECONDS_PER_REP = 2;
+
+/** How long one rep of this exercise should take, clamped to something followable. */
+export function secondsPerRepFor(exercise: Exercise): number {
+  if (exercise.dose.kind !== 'reps') return 0;
+  return Math.max(MIN_SECONDS_PER_REP, exercise.dose.secondsPerRep || SECONDS_PER_REP);
+}
+
+function label(setIndex: number, sets: number, side: Side): string {
   const parts: string[] = [];
   if (sets > 1) parts.push(`Set ${setIndex + 1} of ${sets}`);
   if (side === 'first') parts.push('First side');
@@ -85,17 +134,24 @@ export function holdSecondsFor(exercise: Exercise, level: HoldLevel = 'standard'
 
 export function buildPhases(exercise: Exercise, level: HoldLevel = 'standard'): Phase[] {
   const { dose } = exercise;
-  const timed = dose.kind === 'hold';
-  const seconds = timed
-    ? holdSecondsFor(exercise, level)
-    : Math.max(dose.kind === 'reps' ? dose.reps * SECONDS_PER_REP : 0, MIN_HOLD_SECONDS);
-
-  const sides: Phase['side'][] = dose.perSide ? ['first', 'second'] : [null];
+  const sides: Side[] = dose.perSide ? ['first', 'second'] : [null];
 
   const phases: Phase[] = [];
   for (let set = 0; set < dose.sets; set += 1) {
     for (const side of sides) {
-      phases.push({ seconds, label: label(set, dose.sets, side), side, timed });
+      const common = { label: label(set, dose.sets, side), side };
+      if (dose.kind === 'hold') {
+        phases.push({ kind: 'hold', seconds: holdSecondsFor(exercise, level), ...common });
+      } else {
+        const secondsPerRep = secondsPerRepFor(exercise);
+        phases.push({
+          kind: 'reps',
+          reps: dose.reps,
+          secondsPerRep,
+          seconds: dose.reps * secondsPerRep,
+          ...common,
+        });
+      }
     }
   }
   return phases;
@@ -123,12 +179,23 @@ export function estimateSeconds(exercise: Exercise, level: HoldLevel = 'standard
   return working + rests + TRANSITION_SECONDS;
 }
 
-/** "45s each side, twice" — the dose as it will actually be performed. */
-export function describeDose(exercise: Exercise, level: HoldLevel = 'standard'): string {
+/**
+ * "45s each side, twice" — the dose as it will actually be performed.
+ *
+ * `pace` appends the per-rep tempo, which is worth showing in a list: it is why
+ * four reps of a chair hover cost a minute and twelve sciatic sliders cost half
+ * that. The player passes `false`, because its rep counter says so already.
+ */
+export function describeDose(
+  exercise: Exercise,
+  level: HoldLevel = 'standard',
+  { pace = true }: { pace?: boolean } = {},
+): string {
   const { dose } = exercise;
   const side = dose.perSide ? ' each side' : '';
   const sets = dose.sets > 1 ? `, ${dose.sets} sets` : '';
 
   if (dose.kind === 'hold') return `${holdSecondsFor(exercise, level)}s${side}${sets}`;
-  return `${dose.reps} reps${side}${sets}`;
+  const tempo = pace ? ` · ${secondsPerRepFor(exercise)}s a rep` : '';
+  return `${dose.reps} reps${side}${sets}${tempo}`;
 }

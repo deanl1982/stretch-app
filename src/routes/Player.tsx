@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type JSX } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { useNavigate } from 'react-router';
 import { getExercise } from '../content/exercises.ts';
 import { buildPhases, describeDose, estimateSeconds } from '../session/phases.ts';
@@ -46,6 +46,8 @@ export function Player(): JSX.Element {
   const [remaining, setRemaining] = useState(0);
   const [paused, setPaused] = useState(false);
   const [phaseIndex, setPhaseIndex] = useState(0);
+  /** Reps finished in the current phase. Always 0 on a hold. */
+  const [repsDone, setRepsDone] = useState(0);
 
   const exercise = useMemo(() => {
     if (session === null) return undefined;
@@ -74,18 +76,15 @@ export function Player(): JSX.Element {
     if (profile.voice) speak(`${exercise.name}. ${exercise.cues[0] ?? ''}`);
   }, [exercise, profile.voice]);
 
-  // New phase: reset the clock. Untimed phases count up from zero instead.
+  // New phase: reset the clock and the rep count. A paced rep phase starts on
+  // one rep's worth of seconds, not the whole block; a self-paced one starts at
+  // zero, because it is a stopwatch counting up rather than a deadline.
   useEffect(() => {
     if (phase === undefined) return;
-    setRemaining(phase.timed ? phase.seconds : 0);
-  }, [phase]);
-
-  // Rep work: a stopwatch, not a deadline.
-  useEffect(() => {
-    if (paused || phase === undefined || phase.timed) return;
-    const tick = window.setInterval(() => setRemaining((value) => value + 1), 1000);
-    return () => window.clearInterval(tick);
-  }, [paused, phase]);
+    setRepsDone(0);
+    if (phase.kind === 'hold') setRemaining(phase.seconds);
+    else setRemaining(profile.repPacing === 'manual' ? 0 : phase.secondsPerRep);
+  }, [phase, profile.repPacing]);
 
   const finish = useCallback(
     (final: ActiveSession) => {
@@ -168,31 +167,72 @@ export function Player(): JSX.Element {
       else advanceChime();
     }
     if (profile.voice && upcoming?.side === 'second') speak('Switch sides');
+    setRepsDone(0);
     setPhaseIndex((current) => current + 1);
   }, [phaseIndex, phases, advance, profile.sound, profile.voice]);
 
-  // The clock. Rep work is self-paced, so it runs no clock at all — see below.
+  /**
+   * Bank one rep. The last rep of the phase ends the phase instead.
+   */
+  const countRep = useCallback(() => {
+    if (phase === undefined || phase.kind !== 'reps') return;
+    const next = repsDone + 1;
+    if (next >= phase.reps) {
+      completePhase();
+      return;
+    }
+    setRepsDone(next);
+    // Paced: the next rep's countdown. Manual: a stopwatch restarting at zero.
+    setRemaining(profile.repPacing === 'manual' ? 0 : phase.secondsPerRep);
+    if (profile.sound) countdownTick();
+  }, [phase, repsDone, completePhase, profile.repPacing, profile.sound]);
+
+  // The interval below reads the clock a second after it is scheduled, by which
+  // time `remaining` may have moved. A ref keeps it reading the current value
+  // without making the effect restart on every tick.
+  const remainingRef = useRef(remaining);
   useEffect(() => {
-    if (paused || exercise === undefined) return;
-    if (phase === undefined || !phase.timed) return;
+    remainingRef.current = remaining;
+  }, [remaining]);
+
+  /**
+   * The clock.
+   *
+   * A hold counts its whole block down. A paced rep counts one rep down and
+   * banks it. A manual rep counts *up*, as a stopwatch, and nothing advances
+   * until the user taps.
+   *
+   * The expiry side effect deliberately sits outside the `setRemaining` updater:
+   * React double-invokes updaters under StrictMode, so calling `completePhase`
+   * from inside one skips a phase in development.
+   */
+  useEffect(() => {
+    if (paused || phase === undefined) return;
+    const selfPaced = phase.kind === 'reps' && profile.repPacing === 'manual';
 
     const tick = window.setInterval(() => {
-      setRemaining((value) => {
-        const next = value - 1;
+      if (selfPaced) {
+        setRemaining((value) => value + 1);
+        return;
+      }
 
-        if (next <= 0) {
-          window.clearInterval(tick);
-          completePhase();
-          return 0;
-        }
+      const next = remainingRef.current - 1;
+      if (next <= 0) {
+        window.clearInterval(tick);
+        setRemaining(0);
+        if (phase.kind === 'hold') completePhase();
+        else countRep();
+        return;
+      }
 
-        if (next <= 3 && profile.sound) countdownTick();
-        return next;
-      });
+      setRemaining(next);
+      // Count a hold in at the end. Rep work gets its tick per rep instead,
+      // which at three seconds a rep would otherwise be a constant beeping.
+      if (phase.kind === 'hold' && next <= 3 && profile.sound) countdownTick();
     }, 1000);
 
     return () => window.clearInterval(tick);
-  }, [paused, exercise, phase, completePhase, profile.sound]);
+  }, [paused, phase, profile.repPacing, profile.sound, completePhase, countRep]);
 
   const quit = (): void => {
     if (session !== null) finish(session);
@@ -246,7 +286,9 @@ export function Player(): JSX.Element {
         aria-atomic="false"
       >
         <h1 className="text-3xl font-semibold tracking-tight">{exercise.name}</h1>
-        <p className="text-bone-dim">{describeDose(exercise, profile.holdLevel)}</p>
+        <p className="text-bone-dim">
+          {describeDose(exercise, profile.holdLevel, { pace: false })}
+        </p>
 
         {pose !== undefined && (
           <Figure
@@ -256,21 +298,77 @@ export function Player(): JSX.Element {
           />
         )}
 
-        {phase?.timed === false ? (
-          // Rep work is self-paced: you cannot do ten controlled reps against a
-          // clock, so show how long you have taken and wait for a tap.
-          <div className="flex flex-col items-center gap-3">
-            <span className="text-4xl font-semibold tabular-nums text-bone-dim" aria-hidden="true">
-              {minutes > 0 ? `${minutes}:${String(seconds).padStart(2, '0')}` : `${seconds}s`}
-            </span>
-            <Button
-              variant="primary"
-              onClick={completePhase}
-              className="px-10 py-4 text-lg"
-            >
-              Done
-            </Button>
-            <span className="text-xs text-bone-dim">Take as long as you need.</span>
+        {phase?.kind === 'reps' ? (
+          <div className="flex w-full max-w-sm flex-col items-center gap-3">
+            <div className="relative h-32 w-32">
+              {/* Paced: the ring is this rep's countdown. Self-paced: it is
+                  progress through the set, since there is no deadline to show. */}
+              <Ring
+                progress={
+                  profile.repPacing === 'paced'
+                    ? phase.secondsPerRep === 0
+                      ? 0
+                      : 1 - remaining / phase.secondsPerRep
+                    : repsDone / phase.reps
+                }
+              />
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center"
+                aria-hidden="true"
+              >
+                <span className="text-4xl font-semibold tabular-nums leading-none">
+                  {repsDone + 1}
+                  <span className="text-xl text-bone-dim">/{phase.reps}</span>
+                </span>
+                <span className="label mt-1.5">reps</span>
+              </div>
+            </div>
+
+            {/* The count, spoken once per change rather than every tick. */}
+            <p className="sr-only" aria-live="polite">
+              Rep {repsDone + 1} of {phase.reps}
+            </p>
+
+            {/* One pip per rep, filled as they bank - the count at a glance from
+                arm's length, which the number alone is not. */}
+            <div className="flex flex-wrap justify-center gap-1.5" aria-hidden="true">
+              {Array.from({ length: phase.reps }).map((_, index) => (
+                <span
+                  key={index}
+                  className={`h-1.5 w-4 rounded-full ${
+                    index < repsDone ? 'bg-accent' : index === repsDone ? 'bg-bone' : 'bg-edge'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {exercise.dose.kind === 'reps' && exercise.dose.tempoNote !== undefined && (
+              <p className="text-sm text-bone-dim">{exercise.dose.tempoNote}</p>
+            )}
+
+            {profile.repPacing === 'manual' ? (
+              <>
+                <Button
+                  variant="primary"
+                  onClick={countRep}
+                  className="w-full py-4 text-lg"
+                >
+                  {repsDone + 1 >= phase.reps ? 'Last rep done' : 'Rep done'}
+                </Button>
+                <span className="text-xs text-bone-dim tabular-nums">
+                  {remaining}s on this rep
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="text-xs text-bone-dim">
+                  Pacing at {phase.secondsPerRep}s a rep. Pause to take one slower.
+                </span>
+                <Button variant="ghost" onClick={countRep} className="text-sm">
+                  Ahead of it? Count this rep
+                </Button>
+              </>
+            )}
           </div>
         ) : (
           <div className="relative h-32 w-32">
@@ -299,7 +397,7 @@ export function Player(): JSX.Element {
           Back
         </Button>
         <Button
-          variant={phase?.timed === false ? 'secondary' : 'primary'}
+          variant={phase?.kind === 'reps' ? 'secondary' : 'primary'}
           onClick={() => setPaused((value) => !value)}
           className="flex-1 py-4 text-lg"
         >

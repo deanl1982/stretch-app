@@ -95,7 +95,22 @@ export type Intensity = 1 | 2 | 3;
 
 export type Dose =
   | { kind: 'hold'; seconds: number; sets: number; perSide: boolean }
-  | { kind: 'reps'; reps: number; sets: number; perSide: boolean; tempoNote?: string };
+  | {
+      kind: 'reps';
+      reps: number;
+      sets: number;
+      perSide: boolean;
+      tempoNote?: string;
+      /**
+       * How long one rep should actually take, start to finish.
+       *
+       * This is the machine-readable half of `tempoNote` - "3s down, 2s up"
+       * means five. The player counts each rep down against it, and the session
+       * packer budgets against it, so a position whose reps are ten-second holds
+       * no longer gets costed as if it were a quick pulse.
+       */
+      secondsPerRep: number;
+    };
 
 export interface Variation {
   label: string;

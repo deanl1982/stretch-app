@@ -1,5 +1,5 @@
 import type { Flag, Prop } from '../content/types.ts';
-import type { HoldLevel } from '../session/phases.ts';
+import type { HoldLevel, RepPacing } from '../session/phases.ts';
 
 export const SCHEMA_VERSION = 1;
 
@@ -12,6 +12,8 @@ export interface Profile {
   defaultMinutes: number;
   /** How long to hold each position, relative to the written dose. */
   holdLevel: HoldLevel;
+  /** Whether rep work runs on a per-rep pacer or waits for a tap. */
+  repPacing: RepPacing;
   sound: boolean;
   voice: boolean;
   /** Drop the opener/closer structure and draw sessions completely unconstrained. */
@@ -59,6 +61,7 @@ export const DEFAULT_PROFILE: Profile = {
   availableProps: null,
   defaultMinutes: 20,
   holdLevel: 'standard',
+  repPacing: 'paced',
   sound: true,
   voice: false,
   pureChaos: false,

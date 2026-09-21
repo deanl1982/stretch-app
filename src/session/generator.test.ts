@@ -53,9 +53,17 @@ describe('estimateSeconds', () => {
     expect(estimateSeconds(e)).toBe(20 * 2 + REST_BETWEEN_PHASES + TRANSITION_SECONDS);
   });
 
-  it('times rep work from the nominal tempo', () => {
-    const e = fixture({ dose: { kind: 'reps', reps: 10, sets: 1, perSide: false } });
-    expect(estimateSeconds(e)).toBe(10 * 4 + TRANSITION_SECONDS);
+  it("budgets rep work from the exercise's own tempo, not a flat rate", () => {
+    const quick = fixture({
+      dose: { kind: 'reps', reps: 10, sets: 1, perSide: false, secondsPerRep: 3 },
+    });
+    expect(estimateSeconds(quick)).toBe(10 * 3 + TRANSITION_SECONDS);
+
+    // Same rep count, ten-second holds: over three times the block.
+    const slow = fixture({
+      dose: { kind: 'reps', reps: 10, sets: 1, perSide: false, secondsPerRep: 10 },
+    });
+    expect(estimateSeconds(slow)).toBe(10 * 10 + TRANSITION_SECONDS);
   });
 });
 

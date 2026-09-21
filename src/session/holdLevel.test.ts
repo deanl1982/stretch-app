@@ -9,6 +9,8 @@ import {
   HOLD_LEVELS,
   MAX_HOLD_SECONDS,
   MIN_HOLD_SECONDS,
+  MIN_SECONDS_PER_REP,
+  secondsPerRepFor,
 } from './phases.ts';
 import { generateSession } from './generator.ts';
 
@@ -67,7 +69,7 @@ describe('adjustable hold length', () => {
     expect(catCow).toBeDefined();
     if (catCow === undefined) return;
     for (const level of HOLD_LEVELS) {
-      expect(describeDose(catCow, level)).toBe('8 reps');
+      expect(describeDose(catCow, level)).toBe('8 reps · 8s a rep');
       expect(buildPhases(catCow, level)[0]?.seconds).toBe(buildPhases(catCow, 'standard')[0]?.seconds);
     }
   });
@@ -93,33 +95,67 @@ describe('adjustable hold length', () => {
   });
 });
 
-describe('rep work is self-paced, not timed', () => {
-  it('marks every rep phase untimed and every hold phase timed', () => {
+describe('rep work is counted, not run against one clock', () => {
+  it('builds a rep phase for every rep dose and a hold phase for every hold', () => {
     for (const exercise of EXERCISES) {
-      const phases = buildPhases(exercise);
-      const expected = exercise.dose.kind === 'hold';
-      for (const phase of phases) {
-        expect(phase.timed, `${exercise.id}`).toBe(expected);
+      const expected = exercise.dose.kind;
+      for (const phase of buildPhases(exercise)) {
+        expect(phase.kind, `${exercise.id}`).toBe(expected);
       }
     }
   });
 
-  it('still gives rep work a sane budget estimate', () => {
+  it('carries the rep count and the per-rep pace onto the phase', () => {
     for (const exercise of EXERCISES) {
       if (exercise.dose.kind !== 'reps') continue;
-      expect(estimateSeconds(exercise), exercise.id).toBeGreaterThan(0);
-      expect(estimateSeconds(exercise), exercise.id).toBeLessThanOrEqual(20 * 60);
+      for (const phase of buildPhases(exercise)) {
+        if (phase.kind !== 'reps') throw new Error('expected a rep phase');
+        expect(phase.reps, exercise.id).toBe(exercise.dose.reps);
+        expect(phase.secondsPerRep, exercise.id).toBe(secondsPerRepFor(exercise));
+        // The budget is the reps, not an unrelated block length.
+        expect(phase.seconds, exercise.id).toBe(phase.reps * phase.secondsPerRep);
+      }
     }
   });
 
-  it('gives one phase per set and side, so a tap is needed for each', () => {
+  it('gives every rep exercise a pace a human can actually follow', () => {
+    for (const exercise of EXERCISES) {
+      if (exercise.dose.kind !== 'reps') continue;
+      // Declared, not silently defaulted - a new exercise must say its tempo.
+      expect(exercise.dose.secondsPerRep, exercise.id).toBeGreaterThanOrEqual(
+        MIN_SECONDS_PER_REP,
+      );
+      expect(exercise.dose.secondsPerRep, exercise.id).toBeLessThanOrEqual(20);
+      expect(secondsPerRepFor(exercise), exercise.id).toBe(exercise.dose.secondsPerRep);
+    }
+  });
+
+  it('keeps a rep block short enough to fit the shortest session', () => {
+    for (const exercise of EXERCISES) {
+      if (exercise.dose.kind !== 'reps') continue;
+      expect(estimateSeconds(exercise), exercise.id).toBeGreaterThan(0);
+      // 5 minutes is the smallest budget offered; nothing may be undrawable.
+      expect(estimateSeconds(exercise), exercise.id).toBeLessThanOrEqual(5 * 60);
+    }
+  });
+
+  it('gives one phase per set and side, each with its own rep count', () => {
     const hands = getExercise('hands-on-thighs-straighten'); // 5 reps each side, 2 sets
     expect(hands).toBeDefined();
     if (hands === undefined) return;
     const phases = buildPhases(hands);
     expect(phases).toHaveLength(4);
-    expect(phases.every((p) => !p.timed)).toBe(true);
+    expect(phases.every((p) => p.kind === 'reps')).toBe(true);
     expect(phases[0]?.label).toBe('Set 1 of 2 · First side');
+  });
+
+  it('does not let the hold level stretch rep work', () => {
+    for (const exercise of EXERCISES) {
+      if (exercise.dose.kind !== 'reps') continue;
+      expect(estimateSeconds(exercise, 'longer'), exercise.id).toBe(
+        estimateSeconds(exercise, 'shorter'),
+      );
+    }
   });
 });
 

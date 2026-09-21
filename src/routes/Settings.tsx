@@ -8,7 +8,11 @@ import {
   HOLD_LEVELS,
   HOLD_LEVEL_HINTS,
   HOLD_LEVEL_LABELS,
+  REP_PACINGS,
+  REP_PACING_HINTS,
+  REP_PACING_LABELS,
   type HoldLevel,
+  type RepPacing,
 } from '../session/phases.ts';
 import { Button, Card, PageTitle, Screen } from '../ui.tsx';
 
@@ -141,6 +145,32 @@ export function Settings(): JSX.Element {
           positions have a ceiling they will not go past however you set this —
           toes-tucked kneeling is punishing enough without extra time on it.
           Rep-based work is unaffected: you set the pace there and tap when done.
+        </p>
+      </Section>
+
+      <Section title="How reps run">
+        <Card className="py-2">
+          {REP_PACINGS.map((pacing) => (
+            <label key={pacing} className="flex min-h-11 cursor-pointer items-start gap-3 py-3">
+              <input
+                type="radio"
+                name="repPacing"
+                checked={profile.repPacing === pacing}
+                onChange={() => update({ repPacing: pacing as RepPacing })}
+                className="mt-0.5 size-6 shrink-0 accent-[var(--color-accent)]"
+              />
+              <span>
+                <span className="block">{REP_PACING_LABELS[pacing]}</span>
+                <span className="block text-sm text-bone-dim">{REP_PACING_HINTS[pacing]}</span>
+              </span>
+            </label>
+          ))}
+        </Card>
+        <p className="mt-2 text-xs leading-relaxed text-bone-dim">
+          Either way you get a rep counter — the count and a pip per rep — so you
+          always know which one you are on. The pace comes from each position's own
+          tempo, so a ten-second bird dog rep is not hurried along at the same speed
+          as a two-second pulse.
         </p>
       </Section>
 

@@ -22,7 +22,7 @@ export const EXERCISES: Exercise[] = [
       'Stand on one leg and draw the biggest, slowest circle you can with the other knee.',
     why: "The best thirty seconds you can spend finding out what is actually stiff today. It moves the hip through every direction it owns — flexion, abduction, rotation, extension — under your own control, so it warms up and assesses at the same time.",
     targets: ['hip flexion', 'hip abduction', 'hip internal rotation', 'hip external rotation'],
-    dose: { kind: 'reps', reps: 4, sets: 1, perSide: true, tempoNote: 'Slow enough to be boring.' },
+    dose: { kind: 'reps', reps: 4, sets: 1, perSide: true, tempoNote: 'Slow enough to be boring.', secondsPerRep: 10 },
     cues: [
       'Only the hip moves — lock everything else.',
       'Go to the edge of your range, not past it.',
@@ -65,7 +65,7 @@ export const EXERCISES: Exercise[] = [
       'Sit with your knees bent and feet down, and let both knees drop side to side like wipers.',
     why: 'The highest-value entry drill there is. It rotates one hip in and the other out at almost no load, and within a single set the knees usually start dropping further. It is also the fastest way to find out which of your hips is the stiff one.',
     targets: ['hip internal rotation', 'hip external rotation'],
-    dose: { kind: 'reps', reps: 10, sets: 2, perSide: false },
+    dose: { kind: 'reps', reps: 10, sets: 2, perSide: false, secondsPerRep: 3 },
     cues: [
       'Let the knees fall. Do not throw them.',
       'Keep both sit bones heavy.',
@@ -189,7 +189,7 @@ export const EXERCISES: Exercise[] = [
       'Sitting in shin box, push the back knee up into your hand for four seconds, then press it down into the floor for four seconds.',
     why: 'This is the one "release" technique in the source material that the evidence actually supports. Contracting hard in both directions and then relaxing produces a noticeably deeper sit straight afterwards — and for a lifter it is the familiar idea of earning range with tension rather than waiting for it.',
     targets: ['hip internal rotation', 'deep hip rotators'],
-    dose: { kind: 'reps', reps: 2, sets: 1, perSide: true, tempoNote: '4s up, then 4s down.' },
+    dose: { kind: 'reps', reps: 2, sets: 1, perSide: true, tempoNote: '4s up, then 4s down.', secondsPerRep: 8 },
     cues: [
       'Push the knee into your hand like you are trying to stand it up.',
       'Now bury the knee in the floor.',
@@ -225,7 +225,7 @@ export const EXERCISES: Exercise[] = [
       'From shin box, press the back knee down and lift your hips off the floor, then lower slowly.',
     why: 'The item that turns a stretch into strength. The lowering is where the gains are — loaded work at long muscle lengths is the thing that makes range stick rather than evaporate. For anyone who squats or deadlifts, the back leg is usually the bigger limiter, and this is how you load it.',
     targets: ['hip internal rotation', 'hip extension', 'glute medius'],
-    dose: { kind: 'reps', reps: 6, sets: 1, perSide: true, tempoNote: 'Lower over 3–4 seconds.' },
+    dose: { kind: 'reps', reps: 6, sets: 1, perSide: true, tempoNote: 'Lower over 3–4 seconds.', secondsPerRep: 6 },
     cues: [
       'Drive the back knee into the floor.',
       'Squeeze the glute to lift — do not push with your hands.',
@@ -264,7 +264,7 @@ export const EXERCISES: Exercise[] = [
       'On hands and knees, take the knees wide with the inside of the feet down, then rock your hips backwards.',
     why: 'The adductors are the hole in most mobility routines. They are what actually stops you getting your knees to the floor cross-legged, they limit how wide you can squat, and they are a common strain site for anyone who runs and changes direction.',
     targets: ['adductors', 'hip abduction', 'medial hamstring'],
-    dose: { kind: 'reps', reps: 10, sets: 1, perSide: false, tempoNote: 'Slow, then hold at the end.' },
+    dose: { kind: 'reps', reps: 10, sets: 1, perSide: false, tempoNote: 'Slow, then hold at the end.', secondsPerRep: 4 },
     cues: [
       'Shins parallel to each other.',
       'Rock back until it is firm, not until it is sharp.',
@@ -337,7 +337,7 @@ export const EXERCISES: Exercise[] = [
     summary: 'Sitting at your desk, press through your feet and lift your backside a few inches off the seat.',
     why: 'The best-evidenced habit in the whole app — though not for the reason the video gives. Breaking up sitting every half hour with a minute or two of light activity has real measured benefit for blood sugar and circulation. This version adds a little hip and leg loading, and is invisible in an open-plan office.',
     targets: ['quadriceps', 'glutes', 'hip abduction'],
-    dose: { kind: 'reps', reps: 4, sets: 1, perSide: false, tempoNote: 'Hold 10–20 seconds each.' },
+    dose: { kind: 'reps', reps: 4, sets: 1, perSide: false, tempoNote: 'Hold 10–20 seconds each.', secondsPerRep: 15 },
     cues: [
       'Feet flat, drive through the whole foot.',
       'Let the knees spread.',
@@ -376,7 +376,7 @@ export const EXERCISES: Exercise[] = [
       'Hinge forward with a broomstick held along your spine, touching your head, mid-back and tailbone.',
     why: 'The cheapest honest feedback there is. Your brain already knows how to brace under a bar, but with no load and no feedback most people quietly round at 40 or 50 degrees and call it 90. The moment the stick lifts off your tailbone, your lower back has taken over — and that is your real range today.',
     targets: ['hip hinge', 'hamstrings', 'lumbar position awareness'],
-    dose: { kind: 'reps', reps: 8, sets: 1, perSide: false, tempoNote: 'Slow and deliberate.' },
+    dose: { kind: 'reps', reps: 8, sets: 1, perSide: false, tempoNote: 'Slow and deliberate.', secondsPerRep: 5 },
     cues: [
       'Push the hips back. Do not bend down.',
       'Keep all three contact points.',
@@ -411,7 +411,7 @@ export const EXERCISES: Exercise[] = [
       'Soft knees, lower back gently arched, push the hips back and hinge your torso towards horizontal.',
     why: 'This is the same movement as the test, so training it is training the score. It is the pattern that makes picking things off the floor a hip job rather than a spine job — and for a deadlifter it is the hinge stripped of the load that lets you cheat with range.',
     targets: ['hamstrings', 'adductor magnus', 'spinal erectors'],
-    dose: { kind: 'reps', reps: 8, sets: 2, perSide: false, tempoNote: '3s down, 2s up.' },
+    dose: { kind: 'reps', reps: 8, sets: 2, perSide: false, tempoNote: '3s down, 2s up.', secondsPerRep: 5 },
     cues: [
       'Hips back, not chest down.',
       'Belt buckle rotates towards the floor.',
@@ -447,7 +447,7 @@ export const EXERCISES: Exercise[] = [
       'At the bottom of a good morning, repeatedly straighten your knees a little further while keeping the back flat.',
     why: 'This reaches the exact gap a deadlifting history leaves. You have trained hip extension against a bent-ish knee for years; the knee-straight end range is the untrained territory. It is also self-scoring — how straight the knee gets is a number you can watch move.',
     targets: ['hamstrings at end range', 'knee extension'],
-    dose: { kind: 'reps', reps: 7, sets: 2, perSide: false, tempoNote: '2s out, 2s back. Never grind.' },
+    dose: { kind: 'reps', reps: 7, sets: 2, perSide: false, tempoNote: '2s out, 2s back. Never grind.', secondsPerRep: 4 },
     cues: [
       'Push the knee straight, do not drop the chest.',
       'Back flat first, knee straight second.',
@@ -485,7 +485,7 @@ export const EXERCISES: Exercise[] = [
       'Hinge forward with your hands braced on your thighs, then straighten one knee at a time.',
     why: 'The entry point for anyone who feels they have steel cables down the back of their legs. Two strong hamstrings pulling your pelvis backwards will beat your hip flexors every time — bracing on the thighs outsources that fight to your arms, so the muscle actually gets the stretch instead of your spine absorbing it.',
     targets: ['hamstrings', 'anterior pelvic tilt control'],
-    dose: { kind: 'reps', reps: 5, sets: 2, perSide: true, tempoNote: '3–5s hold on each straight leg.' },
+    dose: { kind: 'reps', reps: 5, sets: 2, perSide: true, tempoNote: '3–5s hold on each straight leg.', secondsPerRep: 6 },
     cues: [
       'Push hard through the hands to keep your back flat.',
       'Stick the tailbone out.',
@@ -520,7 +520,7 @@ export const EXERCISES: Exercise[] = [
       'Lie on your back, one leg flat on the floor, and lift the other straight leg as high as it goes under its own power.',
     why: 'The flexion-safe route, and the most objective one. The floor stops your lower back rounding entirely, so a sensitive back still gets hamstring work. It also trains your hip flexors to produce the range rather than having range imposed on you — which is what makes it usable.',
     targets: ['hamstrings', 'active hip flexion'],
-    dose: { kind: 'reps', reps: 8, sets: 2, perSide: true, tempoNote: '2s hold at the top.' },
+    dose: { kind: 'reps', reps: 8, sets: 2, perSide: true, tempoNote: '2s hold at the top.', secondsPerRep: 6 },
     cues: [
       'The down leg stays glued to the floor — that is the whole exercise.',
       'Lift with the front of the hip.',
@@ -557,7 +557,7 @@ export const EXERCISES: Exercise[] = [
       'Seated, straighten the knee as you lift your chin, then bend the knee as you tuck your chin. Rhythmic, never held.',
     why: 'When the sciatic nerve is irritated it feels exactly like tight hamstrings — and stretching harder makes it worse. This glides the nerve rather than stretching a muscle, adding tension at one end while releasing it at the other.',
     targets: ['sciatic nerve excursion'],
-    dose: { kind: 'reps', reps: 12, sets: 1, perSide: true, tempoNote: 'Smooth, like a pendulum. Do not hold.' },
+    dose: { kind: 'reps', reps: 12, sets: 1, perSide: true, tempoNote: 'Smooth, like a pendulum. Do not hold.', secondsPerRep: 3 },
     cues: [
       'Oscillate, do not hold.',
       'Chin up as the knee straightens, chin down as it bends.',
@@ -635,7 +635,7 @@ export const EXERCISES: Exercise[] = [
       'Facing a wall in a lunge stance, drive your knee forward past your toes with the heel glued down.',
     why: 'Same position as the assessment, so practising and testing are the same skill. It is weight-bearing with a bent knee, which is the specific form of ankle range a squat actually asks for — and it is the one most lifters never train, because they only ever do straight-leg calf stretches.',
     targets: ['ankle dorsiflexion', 'soleus', 'posterior talar glide'],
-    dose: { kind: 'reps', reps: 12, sets: 1, perSide: true, tempoNote: 'Slow.' },
+    dose: { kind: 'reps', reps: 12, sets: 1, perSide: true, tempoNote: 'Slow.', secondsPerRep: 4 },
     cues: [
       'Heel stays welded to the floor.',
       'Drive the knee straight over the second toe.',
@@ -739,7 +739,7 @@ export const EXERCISES: Exercise[] = [
       'Back against a wall, heels a stride out, pull your toes up towards your shins slowly.',
     why: 'The shin muscle is what pulls you down into a deep squat and holds you there. Loading it separately means you can hold end range actively instead of just hanging in it — and strength through a new range is what makes the range stick.',
     targets: ['tibialis anterior', 'active dorsiflexion'],
-    dose: { kind: 'reps', reps: 15, sets: 2, perSide: false, tempoNote: '2s hold at the top.' },
+    dose: { kind: 'reps', reps: 15, sets: 2, perSide: false, tempoNote: '2s hold at the top.', secondsPerRep: 4 },
     cues: [
       'Toes up as high as they will go, then higher.',
       'Slow on the way down — do not drop the foot.',
@@ -953,7 +953,7 @@ export const EXERCISES: Exercise[] = [
       'Sitting, hold the foot still in one hand and ease the big toe back towards your shin, then try to lift it on its own.',
     why: 'A healthy big toe bends up around 65 to 75 degrees, and when it does it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
     targets: ['big toe extension', 'first ray', 'plantar fascia'],
-    dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: 'Hold the last one for 30 seconds.' },
+    dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: 'Hold the last one for 30 seconds.', secondsPerRep: 3 },
     cues: [
       'Hold the foot still — you are moving the toe, not the whole foot.',
       'Firm pressure, not a wrench.',
@@ -991,7 +991,7 @@ export const EXERCISES: Exercise[] = [
       'Sitting, cross one ankle over the opposite knee and pull your toes back until the cord in your arch stands out.',
     why: 'The one foot item with a proper trial behind it — it beat calf stretching for stubborn heel pain, and most people were still better two years later. It is also the safe substitute for toes-tucked kneeling if your heel is sore.',
     targets: ['plantar aponeurosis'],
-    dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: '10 seconds each.' },
+    dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: '10 seconds each.', secondsPerRep: 10 },
     cues: [
       'Cross the ankle onto the opposite knee.',
       'Fingers across the base of all the toes, pull back.',
@@ -1028,7 +1028,7 @@ export const EXERCISES: Exercise[] = [
     summary: 'On hands and knees, alternately round and arch your spine, breathing with the movement.',
     why: 'The cheapest way to visit both ends of your spine’s range without any load. You spend your training sessions braced rigid and your working hours at one fixed angle — this is pure variety, which is the thing that actually helps.',
     targets: ['lumbar flexion', 'lumbar extension', 'thoracic extension'],
-    dose: { kind: 'reps', reps: 8, sets: 1, perSide: false, tempoNote: '4s per direction.' },
+    dose: { kind: 'reps', reps: 8, sets: 1, perSide: false, tempoNote: '4s per direction.', secondsPerRep: 8 },
     cues: [
       'Breathe out as you round, in as you arch.',
       'Move slowly enough to feel each segment.',
@@ -1066,7 +1066,7 @@ export const EXERCISES: Exercise[] = [
       'Side-lying with your knees stacked on a cushion, rotate your top arm and chest open towards the floor behind you.',
     why: 'Rotation is the range most completely absent from a desk worker’s day and from most lifters’ training — deadlift, squat and run are all straight ahead. Blocking the hips with a cushion is what stops your lower back stealing the movement.',
     targets: ['thoracic rotation', 'pectorals'],
-    dose: { kind: 'reps', reps: 7, sets: 1, perSide: true, tempoNote: '3s open, 3s back.' },
+    dose: { kind: 'reps', reps: 7, sets: 1, perSide: true, tempoNote: '3s open, 3s back.', secondsPerRep: 6 },
     cues: [
       'Keep the knees glued together and pinned down.',
       'Lead with your ribs and your eyes, not your arm.',
@@ -1100,7 +1100,7 @@ export const EXERCISES: Exercise[] = [
     summary: 'On hands and knees, extend the opposite arm and leg while your torso stays perfectly still.',
     why: 'Back endurance is one of the few things that actually predicts fewer bad back weeks. This trains your torso to stay quiet while your limbs work, which is exactly what carrying, rowing and running demand — at almost no load on the spine.',
     targets: ['core endurance', 'back extensor endurance', 'anti-rotation'],
-    dose: { kind: 'reps', reps: 5, sets: 1, perSide: true, tempoNote: '10s holds. Add reps, not longer holds.' },
+    dose: { kind: 'reps', reps: 5, sets: 1, perSide: true, tempoNote: '10s holds. Add reps, not longer holds.', secondsPerRep: 12 },
     cues: [
       'Kick the heel straight back, do not lift the foot high.',
       'Keep breathing. Do not hold your breath.',
@@ -1137,7 +1137,7 @@ export const EXERCISES: Exercise[] = [
     summary: 'On your side, propped on your elbow, lift your hips so your body is one straight line.',
     why: 'The most spine-sparing way to load the sides of your trunk. It trains the muscles that resist sideways collapse without the compression of side-bending exercises — and left-right differences are common in anyone with a one-sided desk or sport habit.',
     targets: ['lateral core endurance', 'quadratus lumborum', 'obliques'],
-    dose: { kind: 'reps', reps: 4, sets: 1, perSide: true, tempoNote: '10s holds.' },
+    dose: { kind: 'reps', reps: 4, sets: 1, perSide: true, tempoNote: '10s holds.', secondsPerRep: 12 },
     cues: [
       'Push the ground away with your elbow — do not sag into the shoulder.',
       'Hips, shoulders and knees in one line.',
@@ -1172,7 +1172,7 @@ export const EXERCISES: Exercise[] = [
       'Foam roller across your mid-back, hands supporting your head, extend backwards over it at two or three heights.',
     why: 'The highest-yield spine target for a desk worker. Your lower back already lives near the end of its extension range; your mid-back is the bit that has stopped moving. Getting it back also improves your overhead position and your ability to keep your chest up under a bar.',
     targets: ['thoracic extension', 'rib mobility'],
-    dose: { kind: 'reps', reps: 6, sets: 2, perSide: false, tempoNote: 'Exhale as you extend.' },
+    dose: { kind: 'reps', reps: 6, sets: 2, perSide: false, tempoNote: 'Exhale as you extend.', secondsPerRep: 5 },
     cues: [
       'Support your head with your hands — never pull on your neck.',
       'Exhale as you extend back.',

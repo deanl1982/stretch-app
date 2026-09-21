@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { EXERCISES, getExercise } from '../content/exercises.ts';
-import { buildPhases, SECONDS_PER_REP, totalPhaseSeconds } from './phases.ts';
+import {
+  buildPhases,
+  SECONDS_PER_REP,
+  secondsPerRepFor,
+  totalPhaseSeconds,
+} from './phases.ts';
 
 describe('buildPhases', () => {
   it('gives a per-side hold one countdown per side, not one long one', () => {
@@ -48,11 +53,15 @@ describe('buildPhases', () => {
     }
   });
 
-  it('times rep work from a nominal tempo', () => {
-    const catCow = getExercise('cat-cow'); // 8 reps, 1 set
+  it("budgets rep work from the exercise's own tempo", () => {
+    const catCow = getExercise('cat-cow'); // 8 reps, 1 set, 4s per direction
     expect(catCow).toBeDefined();
     if (catCow === undefined) return;
-    expect(buildPhases(catCow)[0]?.seconds).toBe(8 * SECONDS_PER_REP);
+    const phase = buildPhases(catCow)[0];
+    expect(phase?.kind).toBe('reps');
+    expect(phase?.seconds).toBe(8 * secondsPerRepFor(catCow));
+    // A cat-cow rep is both directions, so it is not the flat fallback rate.
+    expect(secondsPerRepFor(catCow)).not.toBe(SECONDS_PER_REP);
   });
 
   it('never produces a zero-length or absurd phase anywhere in the library', () => {
