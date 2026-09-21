@@ -1,6 +1,7 @@
 import { useMemo, useState, type JSX } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { REGION_LABELS, type Region } from '../content/types.ts';
+import { searchExercises } from '../content/search.ts';
 import { eligiblePool } from '../session/generator.ts';
 import { randomSeed } from '../session/rng.ts';
 import { describeDose, estimateSeconds } from '../session/phases.ts';
@@ -10,7 +11,7 @@ import { loadFavourites, useFavourites } from '../storage/favourites.ts';
 import { createRoutine, getRoutine, saveRoutine } from '../storage/routines.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
-import { Button, Card, Empty, FavouriteButton, PageTitle, Screen } from '../ui.tsx';
+import { Button, Empty, FavouriteButton, PageTitle, Screen } from '../ui.tsx';
 
 const ORDER: Region[] = ['hips', 'hamstrings', 'ankles', 'back', 'fullBody'];
 
@@ -44,6 +45,7 @@ export function Build(): JSX.Element {
   const [selected, setSelected] = useState<string[]>(
     () => editing?.exerciseIds ?? (startFromFavourites ? loadFavourites() : []),
   );
+  const [query, setQuery] = useState('');
   const [naming, setNaming] = useState(false);
   const [name, setName] = useState(editing?.name ?? '');
 
@@ -60,14 +62,38 @@ export function Build(): JSX.Element {
     [profile],
   );
 
-  const shown = useMemo(() => {
+  const searching = query.trim() !== '';
+  const filtered = useMemo(() => {
     const base = favouritesOnly ? pool.filter((e) => favourites.includes(e.id)) : pool;
-    const byRegion =
-      regions.size === 0 ? base : base.filter((e) => e.regions.some((r) => regions.has(r)));
-    return [...byRegion].sort(
+    return regions.size === 0
+      ? base
+      : base.filter((e) => e.regions.some((r) => regions.has(r)));
+  }, [pool, favourites, favouritesOnly, regions]);
+
+  const shown = useMemo(() => {
+    // While searching, relevance wins. Otherwise keep the running order the
+    // list is meant to teach: warm up, then work, then something restful.
+    if (searching) return searchExercises(filtered, query);
+    return [...filtered].sort(
       (a, b) => (ROLE_RANK[a.role] ?? 9) - (ROLE_RANK[b.role] ?? 9) || a.name.localeCompare(b.name),
     );
-  }, [pool, favourites, favouritesOnly, regions]);
+  }, [filtered, searching, query]);
+
+  // What the same words would find with the chips off. A search that comes back
+  // short is usually the filters' fault rather than the query's, and without
+  // this the user has no way to tell the difference between "no such position"
+  // and "not in the areas you ticked".
+  const matchingAnywhere = useMemo(
+    () => (searching ? searchExercises(pool, query).length : 0),
+    [searching, pool, query],
+  );
+  const hidden = matchingAnywhere - shown.length;
+  const filtersActive = favouritesOnly || regions.size > 0;
+
+  const clearFilters = (): void => {
+    setFavouritesOnly(false);
+    setRegions(new Set<Region>());
+  };
 
   const chosen = useMemo(
     () => selected.flatMap((id) => pool.filter((e) => e.id === id)),
@@ -205,6 +231,51 @@ export function Build(): JSX.Element {
         {editing === undefined ? 'Build your workout' : `Editing ${editing.name}`}
       </PageTitle>
 
+      <div className="relative mb-3">
+        <label htmlFor="exercise-search" className="sr-only">
+          Search positions by name
+        </label>
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-bone-dim"
+        >
+          <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M16 16l4.5 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        <input
+          id="exercise-search"
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') setQuery('');
+          }}
+          placeholder="Search by name, e.g. shin box"
+          autoComplete="off"
+          // Safari draws its own clear control on a search input; ours is
+          // bigger than its 14px and sits where the thumb expects it.
+          className="min-h-12 w-full rounded-xl border border-control bg-surface py-3 pl-12 pr-12 text-bone placeholder:text-bone-dim focus:border-accent [&::-webkit-search-cancel-button]:appearance-none"
+        />
+        {searching && (
+          <button
+            type="button"
+            onClick={() => setQuery('')}
+            aria-label="Clear search"
+            className="absolute right-0.5 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-xl text-bone-dim hover:text-bone"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="size-5">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+
       <div className="-mx-4 mb-4 flex gap-2 overflow-x-auto px-4 pb-1">
         <button
           type="button"
@@ -235,11 +306,56 @@ export function Build(): JSX.Element {
         ))}
       </div>
 
+      {/* Announced on change so a screen reader hears the list shrink as you
+          type, rather than typing into silence. */}
+      <p
+        role="status"
+        aria-live="polite"
+        className={`mb-3 text-sm text-bone-dim ${searching ? '' : 'sr-only'}`}
+      >
+        {searching
+          ? `${shown.length} match${shown.length === 1 ? '' : 'es'} for "${query.trim()}"`
+          : `${shown.length} of ${pool.length} positions`}
+        {/* Only meaningful mid-search, only when a chip is doing the hiding, and
+            only when something is showing - a zero-result search already has
+            its own button in the empty state below. */}
+        {searching && hidden > 0 && filtersActive && shown.length > 0 && (
+          <>
+            {' · '}
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="-my-2 inline-flex min-h-11 items-center underline underline-offset-4 hover:text-bone"
+            >
+              {hidden} more outside these filters
+            </button>
+          </>
+        )}
+      </p>
+
       {shown.length === 0 ? (
         <Empty>
-          {favouritesOnly
-            ? 'No favourites in these areas yet. Star a few in the library.'
-            : 'Nothing matches. Try another area.'}
+          {searching ? (
+            <>
+              <p>Nothing here called &ldquo;{query.trim()}&rdquo;.</p>
+              {matchingAnywhere > 0 && (
+                <>
+                  <p className="mt-1 text-sm">
+                    {matchingAnywhere} position{matchingAnywhere === 1 ? '' : 's'} match
+                    {matchingAnywhere === 1 ? 'es' : ''}, but the filters above are hiding
+                    {matchingAnywhere === 1 ? ' it' : ' them'}.
+                  </p>
+                  <Button onClick={clearFilters} className="mt-4">
+                    Search all {pool.length} positions
+                  </Button>
+                </>
+              )}
+            </>
+          ) : favouritesOnly ? (
+            'No favourites in these areas yet. Star a few in the library.'
+          ) : (
+            'Nothing matches. Try another area.'
+          )}
         </Empty>
       ) : (
         <ul className="space-y-2">
@@ -249,16 +365,19 @@ export function Build(): JSX.Element {
             const pose = getPose(exercise.id);
             return (
               <li key={exercise.id}>
-                <button
-                  type="button"
-                  onClick={() => toggleExercise(exercise.id)}
-                  aria-pressed={on}
-                  className="w-full text-left"
+                {/* The star is its own button, so it cannot live inside the row's
+                    button - nested interactive controls are invalid and read
+                    unpredictably in a screen reader. Two siblings in one card. */}
+                <div
+                  className={`flex items-center gap-1 rounded-2xl border bg-surface pr-3 transition-colors ${
+                    on ? 'border-accent bg-accent/5' : 'border-edge hover:border-bone-dim'
+                  }`}
                 >
-                  <Card
-                    className={`flex items-center gap-3 py-3 transition-colors ${
-                      on ? 'border-accent bg-accent/5' : 'hover:border-bone-dim'
-                    }`}
+                  <button
+                    type="button"
+                    onClick={() => toggleExercise(exercise.id)}
+                    aria-pressed={on}
+                    className="flex min-w-0 flex-1 items-center gap-3 rounded-2xl py-3 pl-5 text-left"
                   >
                     <span
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-sm tabular-nums ${
@@ -277,9 +396,9 @@ export function Build(): JSX.Element {
                         {minutes(estimateSeconds(exercise, profile.holdLevel))}
                       </span>
                     </span>
-                    <FavouriteButton id={exercise.id} />
-                  </Card>
-                </button>
+                  </button>
+                  <FavouriteButton id={exercise.id} />
+                </div>
               </li>
             );
           })}
