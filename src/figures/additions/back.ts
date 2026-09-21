@@ -119,4 +119,103 @@ export const BACK_POSES: Record<string, Pose> = {
     farUpperArm: 170, farForearm: 250,
     highlight: ['spine'],
   }),
+
+  // Sat tall on a chair, arms crossed over the chest, turning the upper body while the hips stay square.
+  'seated-thoracic-rotation': pose({
+    torso: 180,
+    thigh: 85, shin: 5, farThigh: 85, farShin: 5,
+    upperArm: 40, forearm: 200, farUpperArm: 50, farForearm: 205,
+    props: (j) => [{ kind: 'chair', at: [j.pelvis[0] - 22, j.pelvis[1] + 4], width: 40, height: 34 }],
+    highlight: ['spine'],
+  }),
+
+  // Kneeling at a seat with the elbows on it, hips over the heels, chest sinking between the arms.
+  'bench-thoracic-extension': pose({
+    torso: 95, head: 100,
+    thigh: 55, shin: 270, foot: 270,
+    upperArm: 100, forearm: 90,
+    props: (j) => [{ kind: 'block', at: [j.elbow[0] - 6, j.elbow[1] + 3], width: 32, height: Math.max(8, 131 - j.elbow[1] - 3) }],
+    highlight: ['spine'],
+  }),
+
+  // Back, head and arms against a wall; the arms sliding up it from goalposts to overhead.
+  'wall-angels': pose({
+    torso: 180,
+    thigh: 352, shin: 8,
+    // The goalpost position they slide up from: elbows out behind, forearms up the wall. Arms fully
+    // overhead cover the face side-on and run off the top of the frame.
+    upperArm: 255, forearm: 185,
+    props: (j) => [{ kind: 'wall', at: [j.pelvis[0] - 9, 12], to: [j.pelvis[0] - 9, 140] }],
+    highlight: ['upperArm'],
+  }),
+
+  // Face down with the arms overhead in a Y, lifted a little off the floor.
+  'prone-ytw': pose({
+    torso: 90, head: 100,
+    thigh: 270, shin: 270, foot: 270,
+    upperArm: 95, forearm: 95,
+    props: (j) => [{ kind: 'cushion', at: [j.head[0] - 10, j.head[1] + 8], width: 20, height: 5 }],
+    highlight: ['upperArm', 'spine'],
+  }),
+
+  // On all fours, hips sent back towards the heels while the lower back holds its position.
+  'quadruped-rock-back': pose({
+    torso: 100,
+    thigh: 30, shin: 275, foot: 270,
+    upperArm: 0, forearm: 0,
+    highlight: ['thigh'],
+  }),
+
+  // Chin to chest and rolling down one bone at a time, knees soft, arms and head hanging.
+  'standing-roll-down': pose({
+    torso: 75, head: 30,
+    thigh: 3, shin: 357,
+    upperArm: 5, forearm: 0,
+    highlight: ['spine'],
+  }),
+
+  // Front view. One hand on the frame above head height, hips pushed away so the working side lengthens.
+  'doorframe-lat-stretch': pose({
+    view: 'front',
+    torso: 195,
+    thigh: 350, shin: 0, farThigh: 10, farShin: 0,
+    upperArm: 235, forearm: 235, farUpperArm: 15, farForearm: 340,
+    props: (j) => [{ kind: 'wall', at: [j.hand[0] - 2, j.hand[1] - 22], to: [j.hand[0] - 2, 140] }],
+    highlight: ['upperArm', 'forearm', 'spine'],
+  }),
+
+  // Front view. Sat tall on a chair, one arm reaching overhead as the trunk bends away from it.
+  'seated-side-bend': pose({
+    view: 'front',
+    torso: 200,
+    thigh: 300, shin: 0, farThigh: 60, farShin: 0,
+    upperArm: 350, forearm: 20, farUpperArm: 195, farForearm: 200,
+    props: (j) => [{ kind: 'block', at: [j.pelvis[0] - 22, j.pelvis[1] + 4], width: 44, height: Math.max(8, 132 - j.pelvis[1] - 4) }],
+    highlight: ['spine'],
+  }),
+
+  // Face down, forehead on stacked hands, breathing low into the belly and back ribs.
+  'crocodile-breathing': pose({
+    torso: 90, head: 95,
+    thigh: 270, shin: 270, foot: 270,
+    upperArm: 30, forearm: 100,
+    highlight: ['spine'],
+  }),
+
+  // On the side with a pillow under the head, knees bent, one hand on the lower ribs.
+  'side-lying-rib-breathing': pose({
+    torso: 270,
+    thigh: 120, shin: 75, farThigh: 115, farShin: 70,
+    upperArm: 90, forearm: 130,
+    props: (j) => [{ kind: 'cushion', at: [j.head[0] - 11, j.head[1] + 8], width: 22, height: 7 }],
+    highlight: ['spine'],
+  }),
+
+  // On the back, knees bent, a hand resting on the lower belly as it draws gently in.
+  'abdominal-draw-in': pose({
+    torso: 270,
+    thigh: 135, shin: 45, farThigh: 135, farShin: 45,
+    upperArm: 95, forearm: 100,
+    highlight: ['spine'],
+  }),
 };

@@ -115,4 +115,87 @@ export const HAMSTRING_POSES: Record<string, Pose> = {
     upperArm: 110, forearm: 130,
     highlight: ['shin', 'thigh'],
   }),
+
+  // Bottom of the hinge: knees soft, hips sent back, back flat, arms hanging.
+  'romanian-deadlift': pose({
+    torso: 105, head: 110,
+    thigh: 5, shin: 355,
+    upperArm: 5, forearm: 5,
+    highlight: ['thigh'],
+  }),
+
+  // On the standing leg, hinged to horizontal with the other leg straight out behind: a T.
+  'single-leg-romanian-deadlift': pose({
+    torso: 90, head: 95,
+    thigh: 4, shin: 356, farThigh: 270, farShin: 270,
+    upperArm: 0, forearm: 0,
+    highlight: ['thigh'],
+  }),
+
+  // Kneeling on a cushion, heels held down, the whole body a straight line tipped forward, hands ready.
+  'nordic-hamstring-curl': pose({
+    torso: 135, head: 130,
+    thigh: 315, shin: 270, foot: 270,
+    upperArm: 90, forearm: 100,
+    props: (j) => [{ kind: 'cushion', at: [j.knee[0] - 10, j.knee[1] + 3], width: 24, height: 7 }],
+    highlight: ['thigh'],
+  }),
+
+  // A bridge with the heels on towels, slid out until the knees are only part bent.
+  'bridge-slider-leg-curl': pose({
+    torso: 288, head: 270,
+    thigh: 100, shin: 47, farThigh: 108, farShin: 29,
+    upperArm: 90, forearm: 90,
+    highlight: ['thigh'],
+  }),
+
+  // A bridge with the heels placed far from the hips, knees only slightly bent, toes up.
+  'long-lever-bridge-hold': pose({
+    torso: 282, head: 270,
+    thigh: 95, shin: 63, foot: 150,
+    upperArm: 90, forearm: 90,
+    highlight: ['thigh'],
+  }),
+
+  // Sat on the floor with a roller under one thigh, hands behind, hips lifted a little off the floor.
+  'foam-roller-hamstring-roll': pose({
+    torso: 200, head: 205, lift: 8,
+    thigh: 92, shin: 92, foot: 170, farThigh: 130, farShin: 20,
+    upperArm: 330, forearm: 335,
+    props: (j) => [{ kind: 'roller', at: [j.pelvis[0] + 14, j.pelvis[1] + 9], width: 8 }],
+    highlight: ['thigh'],
+  }),
+
+  // Inverted V, hips the highest point: one knee bent with the heel lifted, the other leg straighter.
+  'pedalling-downward-dog': pose({
+    torso: 78, head: 65,
+    thigh: 10, shin: 330, farThigh: 340, farShin: 340,
+    upperArm: 0, forearm: 5,
+    highlight: ['thigh', 'shin'],
+  }),
+
+  // Standing on a wedge with the toes raised, folded forward with slightly soft knees.
+  'toes-up-toe-touch': pose({
+    torso: 70, head: 55,
+    thigh: 5, shin: 355, foot: 120,
+    upperArm: 5, forearm: 0,
+    props: (j) => [{ kind: 'wedge', at: [j.toe[0] - 12, j.toe[1] - 4], width: 24, height: 8 }],
+    highlight: ['thigh'],
+  }),
+
+  // The bottom position: deep squat with the chest on the thighs, hands still holding the toes.
+  'squat-to-stand': pose({
+    torso: 110, head: 115,
+    thigh: 105, shin: 335, foot: 90,
+    upperArm: 335, forearm: 345,
+    highlight: ['thigh'],
+  }),
+
+  // Folded from the hips with soft knees, head and arms hanging heavy.
+  'ragdoll-forward-fold': pose({
+    torso: 75, head: 60,
+    thigh: 10, shin: 350,
+    upperArm: 0, forearm: 0,
+    highlight: ['thigh', 'spine'],
+  }),
 };

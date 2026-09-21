@@ -134,6 +134,17 @@ describe('generateSession', () => {
     expect(new Set(shapes).size).toBeGreaterThan(1);
   });
 
+  it('keeps its opener and closing rest even in the shortest session', () => {
+    // At five minutes the randomly chosen opener used to be dropped whenever it was a long one, so the
+    // session started cold. Many seeds, because the failure depended on which opener came up first.
+    for (let i = 0; i < 300; i += 1) {
+      const session = generateSession({ seed: `short-${i}`, budgetSeconds: 5 * 60 });
+      expect(session.items[0]?.exercise.role, `short-${i} opener`).toBe('opener');
+      expect(session.items.at(-1)?.exercise.role, `short-${i} rest`).toBe('rest');
+      expect(session.totalSeconds, `short-${i}`).toBeLessThanOrEqual(5 * 60);
+    }
+  });
+
   it('opens with an opener and closes with a rest position by default', () => {
     for (const seed of SEEDS) {
       const session = generateSession({ seed, budgetSeconds: 20 * 60 });

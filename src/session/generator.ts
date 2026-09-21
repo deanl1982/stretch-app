@@ -144,16 +144,26 @@ export function generateSession(options: GenerateOptions): Session {
     return { seed, budgetSeconds, items, totalSeconds: sumSeconds(items) };
   }
 
-  const opener = pool.find((exercise) => exercise.role === 'opener');
-  const rest = pool.find((exercise) => exercise.role === 'rest' && exercise.id !== opener?.id);
+  // Take the first opener and rest that actually FIT. Picking one at random and giving up when it
+  // does not fit lets a short session lose the gentle opener that exists so nobody starts cold in a
+  // deep position - which a five-minute budget did whenever the pick happened to be a long one.
+  // The pool is already in seeded random order, so "first that fits" is still a random choice.
+  const cost = (exercise: Exercise): number => toItem(exercise, holdLevel).estimatedSeconds;
+  const shortestRest = Math.min(
+    ...pool.filter((exercise) => exercise.role === 'rest').map(cost),
+    Number.POSITIVE_INFINITY,
+  );
+  const openerRoom = budgetSeconds - (Number.isFinite(shortestRest) ? shortestRest : 0);
+  const opener = pool.find((exercise) => exercise.role === 'opener' && cost(exercise) <= openerRoom);
+  const restRoom = budgetSeconds - (opener === undefined ? 0 : cost(opener));
+  const rest = pool.find(
+    (exercise) => exercise.role === 'rest' && exercise.id !== opener?.id && cost(exercise) <= restRoom,
+  );
 
   const head: SessionItem[] = [];
   if (opener !== undefined) {
-    const item = toItem(opener, holdLevel);
-    if (item.estimatedSeconds <= budgetSeconds) {
-      head.push(item);
-      used.add(opener.id);
-    }
+    head.push(toItem(opener, holdLevel));
+    used.add(opener.id);
   }
 
   // Reserve the closing rest position up front, so the session always ends somewhere

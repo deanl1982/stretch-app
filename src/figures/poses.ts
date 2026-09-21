@@ -1,3 +1,4 @@
+import { ANKLE_POSES } from './additions/ankles.ts';
 import { BACK_POSES } from './additions/back.ts';
 import { COSSACK_POSES } from './additions/cossack.ts';
 import { HAMSTRING_POSES } from './additions/hamstrings.ts';
@@ -303,6 +304,7 @@ export const POSES: Record<string, Pose> = {
   ...BACK_POSES,
   ...HIPS_POSES,
   ...HAMSTRING_POSES,
+  ...ANKLE_POSES,
 };
 
 export function getPose(exerciseId: string): Pose | undefined {
