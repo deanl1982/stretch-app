@@ -99,6 +99,21 @@ jobs:
         # loudly here rather than discovering that in production.
         run: test -f dist/staticwebapp.config.json
 
+      - name: Check the deployment token is present
+        # The deploy action's own error for a missing token is vague. Fail here
+        # with something you can act on instead.
+        run: |
+          if [ -z "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}" ]; then
+            echo "::error::AZURE_STATIC_WEB_APPS_API_TOKEN is not set on this repository."
+            echo "Add it at Settings -> Secrets and variables -> Actions -> New repository secret."
+            echo "Get the value with:"
+            echo "  az staticwebapp secrets list --name swa-groundwork \\"
+            echo "    --resource-group rg-uks-groundwork --query properties.apiKey -o tsv"
+            echo "It must be a SECRET, not a variable, and the name must match exactly."
+            exit 1
+          fi
+          echo "Token present."
+
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:

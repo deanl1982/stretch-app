@@ -6,18 +6,21 @@ name: Infra
 #   push to main -> apply
 #
 # Gated on infra/** so app-only changes never touch infrastructure.
+#
+# MANUAL ONLY, deliberately. This workflow authenticates with OIDC federated
+# credentials that do not exist yet - infra/bootstrap/bootstrap.sh creates them,
+# and that needs permission to register an Entra application, which a corporate
+# tenant may withhold. Until that bootstrap has been run it fails at the login
+# step on every push, which is noise rather than signal.
+#
+# The live app was instead created directly with `az staticwebapp create` and is
+# deployed with a token, so Terraform does not currently own it. Importing it
+# would be `terraform import azurerm_static_web_app.this <resource id>`.
+#
+# To re-enable automatic runs, restore the pull_request and push triggers below
+# once the bootstrap has been completed.
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'infra/**'
-      - '.github/workflows/infra.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'infra/**'
-      - '.github/workflows/infra.yml'
   workflow_dispatch:
 
 concurrency:
