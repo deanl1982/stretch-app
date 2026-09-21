@@ -142,7 +142,6 @@ const CORE: Exercise[] = [
   {
     id: 'ninety-ninety-lean',
     name: '90/90 Forward Lean',
-    aka: ['90/90 pigeon'],
     regions: ['hips'],
     role: 'main',
     intensity: 2,
@@ -298,7 +297,7 @@ const CORE: Exercise[] = [
   {
     id: 'couch-stretch',
     name: 'Couch Stretch',
-    aka: ['Half-kneeling hip flexor'],
+    aka: ['Wall couch stretch', 'Wall hip flexor stretch', 'Rear shin up the wall', 'Couch stretch on the wall', 'Bench couch stretch', 'Elevated couch stretch', 'Back foot on a box hip flexor stretch', 'Chair couch stretch', 'Low couch stretch', 'Foot-on-chair hip flexor stretch', 'Couch stretch PNF', 'Couch stretch with contract-relax', 'Squeeze-and-sink couch stretch', 'Psoas couch stretch', 'Couch stretch with lateral flexion', 'Couch stretch with side bend'],
     regions: ['hips', 'back'],
     role: 'main',
     intensity: 2,
@@ -318,10 +317,15 @@ const CORE: Exercise[] = [
       { label: 'Kneel in front of a chair', detail: 'Cushion under the knee, hands on the seat.', props: ['cushion', 'chair'] },
       { label: 'Hands on the desk', detail: 'For balance.', props: ['none'] },
       { label: 'Standing split stance', detail: 'Back foot on a low step. No knee pressure at all.', props: ['step'] },
+      { label: 'Knee well out from the chair', detail: 'Kneel with the back foot on the chair seat but the knee 30 to 40 cm away, so the shin slopes instead of standing upright.', props: ['chair', 'cushion'] },
     ],
     progressions: [
       { label: 'Back foot on the chair', detail: 'The full couch stretch.' },
       { label: 'Overhead reach', detail: 'Same-side arm up and lean away.' },
+      { label: 'Back shin up the wall', detail: 'The tallest version: kneel with the back shin flat up a wall, foot in the air, and sink the hips towards the wall. Start with the knee 20 to 40 cm out and walk it back.' },
+      { label: 'Back foot on a bench, no knee down', detail: 'Stand in a lunge with the back foot up on a bench or box and sink until the front of the back hip stretches. Kneeling is the easier version.' },
+      { label: 'Glute squeeze cycles', detail: 'Squeeze the back glute hard for 5 seconds, relax, then sink a little deeper. Repeat three times.' },
+      { label: 'Overhead reach with side bend', detail: 'Raise the arm on the back-leg side and lean the ribcage a little away from the stretched hip. Stay tall; do not arch the lower back.' },
     ],
     props: ['cushion', 'chair'],
     officeFriendly: true,
@@ -373,7 +377,7 @@ const CORE: Exercise[] = [
   {
     id: 'dowel-hinge',
     name: 'Broomstick Hinge',
-    aka: ['Dowel hinge calibration'],
+    aka: ['Dowel hinge calibration', 'Wall hip hinge', 'Butt-to-wall hinge', 'Wall hinge drill', 'Wall tap hinge'],
     regions: ['hamstrings', 'back'],
     role: 'opener',
     intensity: 1,
@@ -397,6 +401,7 @@ const CORE: Exercise[] = [
     progressions: [
       { label: 'Straighten the knees', detail: 'Reduce the bend towards straight.' },
       { label: 'Film it', detail: 'Drop the stick and check yourself from the side.' },
+      { label: 'Step further from the wall', detail: 'Move the feet a little further from the wall each week so the hips have to travel further back before they touch it.' },
     ],
     props: ['dowel'],
     officeFriendly: true,
@@ -518,6 +523,7 @@ const CORE: Exercise[] = [
   {
     id: 'active-slr',
     name: 'Active Straight Leg Raise',
+    aka: ['AIS hamstring stretch', 'Mattes method hamstring stretch', 'Rope hamstring stretch', 'Active isolated hamstring stretch'],
     regions: ['hamstrings'],
     role: 'main',
     intensity: 1,
@@ -541,6 +547,7 @@ const CORE: Exercise[] = [
     progressions: [
       { label: 'Down leg straight', detail: 'Pressed flat to the floor.' },
       { label: 'Own the assisted range', detail: 'Hold the top for 5 seconds with no help after an assisted rep.' },
+      { label: 'Two-second strap assist at the top', detail: 'Lift the straight leg with your own muscles, then use a strap for a gentle extra two seconds at the end before lowering.' },
     ],
     props: ['none'],
     officeFriendly: false,
@@ -632,7 +639,7 @@ const CORE: Exercise[] = [
   {
     id: 'wall-ankle-drive',
     name: 'Wall Ankle Drive',
-    aka: ['Knee-to-wall reps'],
+    aka: ['Knee-to-wall reps', 'Banded ankle mobilisation', 'Banded ankle distraction', 'Band-assisted ankle dorsiflexion', 'Posterior talar glide with band'],
     regions: ['ankles'],
     role: 'opener',
     intensity: 1,
@@ -656,6 +663,7 @@ const CORE: Exercise[] = [
     progressions: [
       { label: 'Foot further back', detail: 'A centimetre a week.' },
       { label: 'Sweep the joint', detail: 'Drive the knee inside, over and outside the second toe.' },
+      { label: 'Band across the front of the ankle', detail: 'Loop a band around the front of the ankle, anchored behind you at foot height so it pulls the ankle bone back, and drive the knee forward against it.' },
     ],
     props: ['wall'],
     officeFriendly: true,
@@ -707,7 +715,7 @@ const CORE: Exercise[] = [
   {
     id: 'gastroc-calf-stretch',
     name: 'Straight-Knee Calf Stretch',
-    aka: ['Gastrocnemius stretch'],
+    aka: ['Gastrocnemius stretch', 'Half-dome calf stretch', 'Half-roller calf stretch', 'Dome calf stretch'],
     regions: ['ankles'],
     role: 'main',
     intensity: 1,
@@ -721,6 +729,7 @@ const CORE: Exercise[] = [
     regressions: [
       { label: 'Wall push, foot flat', detail: 'No step at all.', props: ['wall'] },
       { label: 'Shallower drop', detail: 'Less depth off the step.', props: ['step'] },
+      { label: 'Half foam roller under the ball of the foot', detail: 'With no step, put the ball of the foot on a half foam roller, drop the heel and straighten the knee.', props: ['roller', 'wall'] },
     ],
     progressions: [
       { label: 'Single leg on a full step', detail: 'Full bodyweight.' },
@@ -906,6 +915,7 @@ const CORE: Exercise[] = [
   {
     id: 'deep-squat-hold',
     name: 'Deep Squat Hold',
+    aka: ['Prying squat', 'Goblet squat pry', 'Elbow-prying deep squat', 'Prying kettlebell squat'],
     regions: ['ankles', 'hips', 'back', 'fullBody'],
     role: 'rest',
     intensity: 2,
@@ -936,6 +946,8 @@ const CORE: Exercise[] = [
       { label: 'Lower the heel wedge', detail: 'One book thickness every few weeks.' },
       { label: 'Hands off', detail: 'Elbows inside the knees, gently pushing them out.' },
       { label: 'Play in the bottom', detail: 'Rock side to side, reach, shift your weight.' },
+      { label: 'Pry the knees out', detail: 'Palms together at the chest, press the elbows into the inside of the knees to push them out, then squeeze and sink.' },
+      { label: 'Hold a light weight at the chest', detail: 'Hold a light dumbbell or kettlebell at the chest while you sit in the bottom.' },
     ],
     props: ['doorframe', 'wedge'],
     officeFriendly: false,
@@ -1063,7 +1075,7 @@ const CORE: Exercise[] = [
   {
     id: 'open-book',
     name: 'Open Book',
-    aka: ['Thread the needle'],
+    aka: ['Side-lying windmill', 'Thoracic windmill', 'Windmill rotation', 'Side-lying arm sweep'],
     regions: ['back'],
     role: 'opener',
     intensity: 1,
@@ -1087,6 +1099,7 @@ const CORE: Exercise[] = [
     progressions: [
       { label: 'Hold the end range', detail: '5 seconds with a long exhale.' },
       { label: 'Half-kneeling version', detail: 'With a dowel across the shoulders.' },
+      { label: 'Full windmill sweep', detail: 'Sweep the top arm in a big arc across the body, up past the head and down to the floor behind you.' },
     ],
     props: ['cushion'],
     officeFriendly: true,

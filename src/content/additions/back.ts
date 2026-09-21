@@ -179,7 +179,6 @@ export const BACK: Exercise[] = [
     "id": "glute-bridge",
     "name": "Glute Bridge",
     "aka": [
-      "Bridge",
       "Supine bridge",
       "Hip bridge",
       "Pelvic lift"
@@ -242,6 +241,10 @@ export const BACK: Exercise[] = [
       {
         "label": "Band above the knees",
         "detail": "Press out against a light band throughout."
+      },
+      {
+        "label": "Tucked hold",
+        "detail": "Tuck the pelvis first, lift by squeezing the glutes until thighs line up with the torso, and hold 20 seconds to lengthen the front of the hip."
       }
     ],
     "props": [
@@ -420,7 +423,6 @@ export const BACK: Exercise[] = [
     "name": "Forearm Plank",
     "aka": [
       "Front plank",
-      "Prone bridge",
       "McGill front plank"
     ],
     "regions": [
@@ -588,7 +590,11 @@ export const BACK: Exercise[] = [
       "McKenzie press-up",
       "Extension in lying",
       "EIL",
-      "Cobra press-up"
+      "Cobra press-up",
+      "Sphinx",
+      "Sphinx pose",
+      "Propped prone lying",
+      "McKenzie prone on elbows"
     ],
     "regions": [
       "back"
@@ -669,85 +675,11 @@ export const BACK: Exercise[] = [
     "evidenceNote": "The evidence for the McKenzie method is real but has limits. Network meta-analyses of exercise for chronic low back pain found it among the better-performing types, but the certainty is low to moderate and the differences from other exercise are small. What the method actually claims is about direction: if repeating this movement moves your pain from your leg into your back, that is a good sign ('centralisation'). Centralisation is a marker of a better outlook, found in roughly 60 to 70 percent of people with leg-referred pain in the reviews I found. It does not tell you which tissue hurts, does not prove a disc problem, and pain that gets worse further down the leg means stop. Nothing about this position is 'putting a disc back in'. Extension is not always the right direction either: some people feel better bending forward, and some conditions like spinal stenosis prefer flexion. Any pain that moves down the leg, new numbness or weakness, or bladder or bowel changes needs a clinician, not more press-ups."
   },
   {
-    "id": "prone-on-elbows",
-    "name": "Prone on Elbows",
-    "aka": [
-      "Sphinx",
-      "Sphinx pose",
-      "Propped prone lying",
-      "McKenzie prone on elbows"
-    ],
-    "regions": [
-      "back"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "Lie face down and prop yourself on your forearms, elbows under your shoulders, and rest there.",
-    "why": "The gentle version of the press-up. Your lower back sits in a mild, supported arch and you do nothing. A minute or two here undoes some of the forward-flexed position you spend the day in.",
-    "targets": [
-      "lumbar extension",
-      "hip flexors",
-      "abdominal wall"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 60,
-      "sets": 1,
-      "perSide": false
-    },
-    "cues": [
-      "Elbows under shoulders, forearms flat.",
-      "Let your belly, hips and legs be heavy on the floor.",
-      "Look at the floor a little in front of you, neck long.",
-      "Breathe slowly."
-    ],
-    "shouldFeel": "A gentle arch and stretch through the lower back and front of the trunk. Comfortable and easy.",
-    "shouldNotFeel": "Pinching in the lower back, pain that travels down the leg, or shoulder or neck strain.",
-    "regressions": [
-      {
-        "label": "Lie flat",
-        "detail": "Rest face down for a minute with your head turned to one side.",
-        "props": [
-          "none"
-        ]
-      },
-      {
-        "label": "Pillow under the hips",
-        "detail": "Reduces the arch.",
-        "props": [
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Press-up",
-        "detail": "Straighten your arms to lift higher."
-      }
-    ],
-    "props": [
-      "none"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "sciatica",
-      "shoulder"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Robin McKenzie, Treat Your Own Back",
-      "Physiopedia: McKenzie Method"
-    ],
-    "evidenceNote": "Popular sources say this position 'decompresses the discs' or 'pushes bulging discs back in'. Those are theories, not measured facts. What has been measured is that people with back and leg symptoms sometimes feel better in extension and sometimes worse, so use your own response as the guide. If it makes the leg symptoms worse or spreads them lower down, stop."
-  },
-  {
     "id": "standing-back-extension",
     "name": "Standing Back Extension",
     "aka": [
       "McKenzie standing extension",
-      "Standing lumbar extension",
-      "One stretch"
+      "Standing lumbar extension"
     ],
     "regions": [
       "back"
@@ -1203,84 +1135,6 @@ export const BACK: Exercise[] = [
     "evidenceNote": "Good for a quick desk break. Nobody has shown that seated rotations reduce back pain or prevent it. The value is that you moved."
   },
   {
-    "id": "side-lying-windmill",
-    "name": "Side-Lying Windmill",
-    "aka": [
-      "Thoracic windmill",
-      "Windmill rotation",
-      "Side-lying arm sweep"
-    ],
-    "regions": [
-      "back"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Lying on your side with your top knee bent and resting on a cushion, sweep your top arm in a big arc across your body and back over your head to the floor behind you.",
-    "why": "The open book with a bigger sweep. The bent, supported knee locks the pelvis so the rotation and reach come from the mid-back and shoulder girdle. It works both thoracic extension and rotation in one move.",
-    "targets": [
-      "thoracic rotation",
-      "thoracic extension",
-      "shoulder girdle mobility"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 6,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "4s across, 4s back.",
-      "secondsPerRep": 8
-    },
-    "cues": [
-      "Lie on your side, bottom leg straight, top hip and knee bent to 90 degrees on a stack of cushions.",
-      "Sweep your top arm forward, up and over, keeping your eyes on your hand.",
-      "Press the top knee down into the cushion so your pelvis does not roll.",
-      "Exhale as the arm goes back."
-    ],
-    "shouldFeel": "A stretch through the chest, mid-back and front of the shoulder.",
-    "shouldNotFeel": "Shoulder pinching, lower back twisting, or numbness in the arm.",
-    "regressions": [
-      {
-        "label": "Smaller sweep",
-        "detail": "Do not go all the way to the floor.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Use the open book",
-        "detail": "Simpler version with knees stacked.",
-        "props": [
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Hold the end",
-        "detail": "Hold the open position for 5 seconds with a slow exhale."
-      },
-      {
-        "label": "Foam roller",
-        "detail": "Rest the top knee on a foam roller instead of a cushion."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "shoulder",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Rehab Hero",
-      "Physiopedia: Thoracic Manual Techniques and Exercises"
-    ],
-    "evidenceNote": "Popular claims say this 'unlocks' the spine. Range often feels better straight after drills like this, but I found no trials showing a change in back pain. Treat it as movement practice."
-  },
-  {
     "id": "bench-thoracic-extension",
     "name": "Kneeling Bench Thoracic Extension",
     "aka": [
@@ -1542,10 +1396,9 @@ export const BACK: Exercise[] = [
     "id": "quadruped-rock-back",
     "name": "Quadruped Rock-Back",
     "aka": [
-      "Rocking",
-      "Rock-back",
       "Quadruped hip hinge",
-      "Rocking test"
+      "Rocking test",
+      "Quadruped rocking"
     ],
     "regions": [
       "back",
@@ -1618,83 +1471,6 @@ export const BACK: Exercise[] = [
       "Duke R2P"
     ],
     "evidenceNote": "This is a drill, not a rule. Rounding your lower back is not dangerous. It is useful to know your hip range, because if your hips stop early your lower back tends to make up the difference under load. The 'neutral spine at all times' message that comes with hinge cues has no backing: a review of lifting studies found no link between lumbar flexion while lifting and disabling low back pain."
-  },
-  {
-    "id": "wall-hip-hinge",
-    "name": "Wall Hip Hinge",
-    "aka": [
-      "Butt-to-wall hinge",
-      "Wall hinge drill",
-      "Wall tap hinge"
-    ],
-    "regions": [
-      "hamstrings",
-      "back"
-    ],
-    "role": "opener",
-    "intensity": 1,
-    "summary": "Stand a step in front of a wall, facing away, and push your hips back until your bum touches the wall, then stand up again.",
-    "why": "A wall gives your hips a target to move to, which is easier than a broomstick if you have never felt a hinge. It teaches your body to move backwards at the hips first, the same start to every deadlift and every pick-up from the floor.",
-    "targets": [
-      "hip hinge",
-      "hamstrings",
-      "glutes"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 8,
-      "sets": 1,
-      "perSide": false,
-      "tempoNote": "3s back, 2s up.",
-      "secondsPerRep": 5
-    },
-    "cues": [
-      "Stand about a foot from the wall, facing away, feet hip-width, soft knees.",
-      "Push your bum back to touch the wall. Let the trunk lean forward as it goes.",
-      "Keep your weight over your mid-foot.",
-      "Stand up by pushing the floor away and squeezing the glutes."
-    ],
-    "shouldFeel": "A stretch in the hamstrings and a push through the glutes as you stand.",
-    "shouldNotFeel": "Lower back pain, or knee pain.",
-    "regressions": [
-      {
-        "label": "Closer to the wall",
-        "detail": "Reduces the depth.",
-        "props": [
-          "wall"
-        ]
-      },
-      {
-        "label": "Hands on thighs",
-        "detail": "Slide the hands down the thighs for support.",
-        "props": [
-          "wall"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Step further away",
-        "detail": "An inch at a time until you no longer touch the wall."
-      },
-      {
-        "label": "Add the dowel",
-        "detail": "Same movement with the broomstick along your back."
-      }
-    ],
-    "props": [
-      "wall"
-    ],
-    "officeFriendly": true,
-    "barefootOnly": false,
-    "contraindications": [],
-    "dailySafe": true,
-    "source": [
-      "Physiopedia: Hip Hinge",
-      "T Nation: Wall and Dowel Hip Hinge Drills",
-      "PhysioFit Adelaide"
-    ],
-    "evidenceNote": "The idea that you must keep your back neutral at all times when you bend or lift is not supported by the evidence. A 2020 systematic review found no association between lumbar flexion while lifting and the development of disabling low back pain. Hinging is worth learning because it uses your strong hips for the work, not because rounding is dangerous."
   },
   {
     "id": "standing-roll-down",

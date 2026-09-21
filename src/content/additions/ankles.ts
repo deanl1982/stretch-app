@@ -663,81 +663,6 @@ export const ANKLES: Exercise[] = [
     "evidenceNote": "This is the best-studied foot exercise here, and it still has thin support. A review and meta-analysis found intrinsic foot training modestly lowered navicular drop and improved balance, strength and disability scores, but the certainty was low to very low and it was no better for pain. Research tying arch height to muscle strength is weak, so the popular claim that it fixes flat feet is not supported. Short foot works the intrinsic muscles more than toe curling does (an EMG study), which is the good reason to prefer it."
   },
   {
-    "id": "single-leg-short-foot",
-    "name": "Single-Leg Short Foot",
-    "aka": [
-      "Standing short foot",
-      "Short foot balance"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Hold the short-foot dome while you stand on one leg.",
-    "why": "Doming the arch sitting down is easy. Doing it under bodyweight while your ankle wobbles is where the foot has to work as a stabiliser, which is the point. This is the version that transfers to standing and walking.",
-    "targets": [
-      "intrinsic foot muscles",
-      "medial arch",
-      "single-leg balance"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 20,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Stand next to a wall. Find the short foot on two feet first.",
-      "Shift onto one foot and keep the dome. Big toe down, toes long.",
-      "Keep the knee soft and over the second toe.",
-      "Fingertips on the wall if you need them."
-    ],
-    "shouldFeel": "The arch muscles working steadily and small corrections through the ankle.",
-    "shouldNotFeel": "Toes gripping the floor, or the arch collapsing inwards.",
-    "regressions": [
-      {
-        "label": "Two feet",
-        "detail": "Stay on both feet, weight on the working one.",
-        "props": [
-          "wall"
-        ]
-      },
-      {
-        "label": "Toe touch on the other foot",
-        "detail": "Other foot lightly touching the floor beside you.",
-        "props": [
-          "wall"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Eyes closed",
-        "detail": "Only when the wall is not needed."
-      },
-      {
-        "label": "Add a hinge",
-        "detail": "Slow single-leg hinge while keeping the dome."
-      }
-    ],
-    "props": [
-      "wall"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": true,
-    "contraindications": [
-      "balance"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Damien Howell PT",
-      "Patrick Ward",
-      "Podiapaedia"
-    ],
-    "evidenceNote": "Same caveat as the seated version: low-certainty evidence, no proof it fixes a flat foot. Balance gains in foot-strengthening studies are the more believable outcome."
-  },
-  {
     "id": "towel-scrunch",
     "name": "Towel Scrunch",
     "aka": [
@@ -869,74 +794,6 @@ export const ANKLES: Exercise[] = [
       "Z-Health Performance (toe push)"
     ],
     "evidenceNote": "This is practitioner coaching, not a tested protocol. Cramping around the third rep is normal and passes. Do not believe the balance and falls claims that come with it."
-  },
-  {
-    "id": "banded-first-ray-press",
-    "name": "Banded First-Ray Press",
-    "aka": [
-      "Peroneus longus strengthening",
-      "First ray plantarflexion drill",
-      "Banded eversion with big toe press"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "Turn the sole outwards against a band while pressing the base of the big toe down into the floor.",
-    "why": "The muscle down the outside of your shin has a tendon that runs under the arch and hooks the first metatarsal, the long bone behind your big toe, pulling it down into the ground. It is what keeps the big toe planted at push-off. This drill trains it specifically.",
-    "targets": [
-      "peroneus longus",
-      "first ray plantarflexion",
-      "eversion"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 10,
-      "sets": 3,
-      "perSide": true,
-      "tempoNote": "2s out, 2s back.",
-      "secondsPerRep": 4
-    },
-    "cues": [
-      "Sit with your knees at ninety degrees. Loop a light band over the foot and hold both ends in the hand on the same side.",
-      "Turn the sole outwards while you press the base of the big toe down into the floor.",
-      "The heel pivots on the floor. It does not slide.",
-      "Come back slowly."
-    ],
-    "shouldFeel": "Work down the outside of the shin and under the inside of the ball of the foot.",
-    "shouldNotFeel": "Cramping in the arch, or the whole leg twisting to cheat the move.",
-    "regressions": [
-      {
-        "label": "No band",
-        "detail": "Just the movement, pressing the big toe down while turning the sole out.",
-        "props": [
-          "chair"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Heavier band",
-        "detail": "Only once the movement is clean."
-      },
-      {
-        "label": "Standing balance",
-        "detail": "Same press while standing on one leg."
-      }
-    ],
-    "props": [
-      "band",
-      "chair"
-    ],
-    "officeFriendly": true,
-    "barefootOnly": false,
-    "contraindications": [],
-    "dailySafe": true,
-    "source": [
-      "Strengthening of the Peroneus Longus Muscle in Patients With Dorsiflexed First Ray (clinical trial NCT05647616)"
-    ],
-    "evidenceNote": "A preliminary randomised trial in people with a flexible, raised first ray used exactly this drill (3 sets of 10, three times a week for 4 weeks) and found greater first-ray plantarflexion and less time loading the first metatarsal head when walking. It measured foot pressure, not pain or performance, and the group was people with a specific finding a clinician has to spot. Whether it matters for a healthy man is not known."
   },
   {
     "id": "windlass-check",
@@ -1157,89 +1014,14 @@ export const ANKLES: Exercise[] = [
     "evidenceNote": "This is coaching practice. Sock brands and some foot-fix books say it fixes foot pain; there is no trial behind that. What it does is give you the plantarflexion range the kneeling positions ask for."
   },
   {
-    "id": "banded-ankle-mobilisation",
-    "name": "Banded Ankle Mobilisation",
-    "aka": [
-      "Banded ankle distraction",
-      "Band-assisted ankle dorsiflexion",
-      "Posterior talar glide with band"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "A band pulls the ankle bone back and down while you drive your knee forward over the foot.",
-    "why": "The knee-to-wall drill stretches the calf. When the ankle is stopped by something deeper, at the joint itself, a band that pulls the ankle bone backwards is a way to work on that. It is a mobilisation borrowed from physiotherapy, and it is one of the few ankle tools that can make a stubborn ankle feel different within a few minutes.",
-    "targets": [
-      "ankle dorsiflexion",
-      "posterior talar glide",
-      "ankle joint"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 10,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "2s in, 5s hold at the end, 1s back.",
-      "secondsPerRep": 8
-    },
-    "cues": [
-      "Anchor a band low behind you and loop it just below the ankle crease, over the front of the ankle bone. It should pull down and back, not up the shin.",
-      "Put the foot on a low step, below knee height, and drive the knee forward over the second toe.",
-      "Take some weight off the front foot so the joint can glide. Heel stays down, arch stays up.",
-      "Hold the end range for five seconds, then come back."
-    ],
-    "shouldFeel": "A stretch at the ankle joint and the calf, with a sense of the joint sliding rather than the calf pulling.",
-    "shouldNotFeel": "A hard pinch at the front of the ankle, tingling in the foot, or the band cutting into the skin.",
-    "regressions": [
-      {
-        "label": "Less pull",
-        "detail": "A lighter band or a longer loop.",
-        "props": [
-          "band",
-          "step"
-        ]
-      },
-      {
-        "label": "Knee-to-wall drill",
-        "detail": "The plain version, with no band.",
-        "props": [
-          "wall"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Longer holds",
-        "detail": "Five to ten holds of 30 seconds each, about two minutes of total time."
-      },
-      {
-        "label": "Knee out",
-        "detail": "Drive the knee to the outside of the foot, like the knees-out position of a deep squat."
-      }
-    ],
-    "props": [
-      "band",
-      "step",
-      "doorframe"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [],
-    "dailySafe": true,
-    "source": [
-      "Kelly Starrett / The Ready State (banded ankle distraction)",
-      "Mission MVMT"
-    ],
-    "evidenceNote": "The physiotherapy version of this, mobilisation with movement, has meta-analyses showing modest, short-term gains in dorsiflexion in people with ankle sprains or chronic ankle instability. Small studies of band flossing report quick, short-term gains. What is not supported is the explanation you often hear that a band releases the ankle capsule or fixes a stuck bone. If your ankle stops with a hard pinch at the front rather than a stretch behind, that can be a bony block, such as a spur, and no amount of banding will move it."
-  },
-  {
     "id": "ankle-cars",
     "name": "Ankle CARs",
     "aka": [
       "Ankle circles",
-      "Controlled articular rotations for the ankle"
+      "Controlled articular rotations for the ankle",
+      "Ankle alphabet",
+      "Ankle ABCs",
+      "Alphabet exercise"
     ],
     "regions": [
       "ankles"
@@ -1284,6 +1066,10 @@ export const ANKLES: Exercise[] = [
       {
         "label": "Stand on one leg",
         "detail": "Do it with the foot off the ground and the other leg holding the balance."
+      },
+      {
+        "label": "Trace the alphabet",
+        "detail": "Instead of circles, write the letters A to Z in the air with the big toe, moving only the ankle."
       }
     ],
     "props": [
@@ -1298,70 +1084,6 @@ export const ANKLES: Exercise[] = [
       "ACE Fitness"
     ],
     "evidenceNote": "Peer-reviewed evidence for this technique is limited. The idea that circles lubricate the joints with synovial fluid is repeated everywhere and has no measurement behind it. Treat it as a low-risk way to warm up and look at your ankle."
-  },
-  {
-    "id": "ankle-alphabet",
-    "name": "Ankle Alphabet",
-    "aka": [
-      "Ankle ABCs",
-      "Alphabet exercise"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "opener",
-    "intensity": 1,
-    "summary": "Draw the letters of the alphabet in the air with your big toe, moving only the ankle.",
-    "why": "The physio's standard first exercise for a stiff or sprained ankle: easy, precise and takes the ankle in all directions. If you sprained your ankle years ago and it has never felt quite right, this shows you which direction is the weak one.",
-    "targets": [
-      "ankle range in all directions",
-      "small ankle stabilisers",
-      "ankle control"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 2,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "One full A to Z takes about 40 seconds.",
-      "secondsPerRep": 40
-    },
-    "cues": [
-      "Sit with the foot off the floor and imagine your big toe is a pen.",
-      "Write A to Z in capital letters, small and slow.",
-      "Move from the ankle. The knee and hip stay quiet.",
-      "Go through the whole alphabet twice."
-    ],
-    "shouldFeel": "Small, precise muscle work around the ankle.",
-    "shouldNotFeel": "Sharp pain in a particular direction.",
-    "regressions": [
-      {
-        "label": "Lower case",
-        "detail": "Smaller letters, less range.",
-        "props": [
-          "chair"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Stand on one leg",
-        "detail": "Draw the alphabet on the floor with the toe of the free foot."
-      }
-    ],
-    "props": [
-      "chair"
-    ],
-    "officeFriendly": true,
-    "barefootOnly": false,
-    "contraindications": [],
-    "dailySafe": true,
-    "source": [
-      "Harvard Health",
-      "UMass Memorial Health",
-      "Kaiser Permanente"
-    ],
-    "evidenceNote": "The alphabet is a rehab drill for the first days after a sprain and for waking the ankle up. Harvard Health say it helps balance and prevents falls but give no evidence for that. It is easy and harmless, and not a substitute for balance or strength work."
   },
   {
     "id": "heel-elevated-goblet-squat",
@@ -1525,7 +1247,10 @@ export const ANKLES: Exercise[] = [
     "aka": [
       "Alfredson protocol",
       "Eccentric calf raise",
-      "Straight-knee heel drop"
+      "Straight-knee heel drop",
+      "Slow single-leg calf raise",
+      "Heavy slow resistance calf raise",
+      "Single-leg heel raise"
     ],
     "regions": [
       "ankles"
@@ -1581,6 +1306,10 @@ export const ANKLES: Exercise[] = [
       {
         "label": "Bent-knee version",
         "detail": "Same drop with a soft knee to shift the load to the soleus."
+      },
+      {
+        "label": "Slow rise as well",
+        "detail": "Rise on the same single leg for three seconds and lower for three, all the way below the step, then load with a backpack as it gets easy."
       }
     ],
     "props": [
@@ -1668,86 +1397,6 @@ export const ANKLES: Exercise[] = [
     "evidenceNote": "This is the second half of the same protocol, so the same caveats apply: built for Achilles tendinopathy at very high volume, and not needed at that volume. Cap it at twice a week."
   },
   {
-    "id": "single-leg-calf-raise",
-    "name": "Slow Single-Leg Calf Raise",
-    "aka": [
-      "Heavy slow resistance calf raise",
-      "Single-leg heel raise"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "load",
-    "intensity": 3,
-    "summary": "Rise up on one foot for three seconds and lower for three, all the way below a step.",
-    "why": "Calf strength is what carries you up stairs, out of a squat and through every stride. Slow, heavy, full-range raises are how calf and Achilles capacity is built, and single-leg versions show up weaknesses that two-leg raises hide.",
-    "targets": [
-      "gastrocnemius",
-      "soleus",
-      "Achilles tendon",
-      "calf strength"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 12,
-      "sets": 3,
-      "perSide": true,
-      "tempoNote": "3s up, 3s down.",
-      "secondsPerRep": 6
-    },
-    "cues": [
-      "Ball of the foot on the edge of a step, a hand on a wall.",
-      "Rise as high as you can and pause for a beat.",
-      "Lower for three seconds, all the way below the step.",
-      "Repeat with the knee slightly bent to hit the soleus."
-    ],
-    "shouldFeel": "The calf working, with a burn towards the last reps.",
-    "shouldNotFeel": "Sharp pain in the Achilles, or a foot that rolls to the outside.",
-    "regressions": [
-      {
-        "label": "Two feet",
-        "detail": "Both feet up, one foot down.",
-        "props": [
-          "step",
-          "wall"
-        ]
-      },
-      {
-        "label": "Floor only",
-        "detail": "No step, smaller range.",
-        "props": [
-          "wall"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Add weight",
-        "detail": "Hold a dumbbell, or use a backpack."
-      },
-      {
-        "label": "Heavier and fewer",
-        "detail": "Sets of 6 to 8 with a heavy load."
-      }
-    ],
-    "props": [
-      "step",
-      "wall"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "achilles"
-    ],
-    "dailySafe": false,
-    "source": [
-      "Beyer et al., Am J Sports Med 2015 (heavy slow resistance)",
-      "JOSPT Achilles tendinopathy guideline",
-      "Physiopedia Achilles tendinopathy toolkit"
-    ],
-    "evidenceNote": "The trial evidence is all from people with Achilles tendinopathy: 3 seconds up and 3 down, 6 to 15 reps, 3 sets, 3 days a week, load going heavier. There is no good trial showing it prevents anything in healthy tendons. It is a standard calf strength move, so do it with the same twice-a-week cap as the eccentric drills."
-  },
-  {
     "id": "seated-soleus-pushup",
     "name": "Seated Soleus Push-Up",
     "aka": [
@@ -1819,7 +1468,11 @@ export const ANKLES: Exercise[] = [
     "aka": [
       "Peroneal raise",
       "Resisted ankle eversion",
-      "Outward band pull"
+      "Outward band pull",
+      "Banded first-ray press",
+      "Peroneus longus strengthening",
+      "First ray plantarflexion drill",
+      "Banded eversion with big toe press"
     ],
     "regions": [
       "ankles"
@@ -1866,6 +1519,10 @@ export const ANKLES: Exercise[] = [
       {
         "label": "Add inversion",
         "detail": "The opposite direction for the inner ankle and arch muscle (tibialis posterior)."
+      },
+      {
+        "label": "Press the big toe down",
+        "detail": "As you turn the sole outwards against the band, press the base of the big toe down into the floor to bias the peroneus longus."
       }
     ],
     "props": [
@@ -2024,7 +1681,10 @@ export const ANKLES: Exercise[] = [
     "name": "Supported Single-Leg Stand",
     "aka": [
       "One-leg stand",
-      "Single-leg balance"
+      "Single-leg balance",
+      "Single-leg short foot",
+      "Standing short foot",
+      "Short foot balance"
     ],
     "regions": [
       "ankles"
@@ -2081,6 +1741,10 @@ export const ANKLES: Exercise[] = [
       {
         "label": "Soft surface",
         "detail": "A folded towel or a cushion."
+      },
+      {
+        "label": "Short-foot dome",
+        "detail": "While balancing, dome the arch by drawing the ball of the foot back towards the heel without curling the toes."
       }
     ],
     "props": [
@@ -2238,69 +1902,6 @@ export const ANKLES: Exercise[] = [
       "Physitrack"
     ],
     "evidenceNote": "A meta-analysis of 58 studies (2,097 people) found balance training improved function, dynamic balance and joint position sense in chronic ankle instability. That does not isolate this drill, and there is no equivalent evidence in healthy adults."
-  },
-  {
-    "id": "half-dome-calf-stretch",
-    "name": "Half-Dome Calf Stretch",
-    "aka": [
-      "Half-roller calf stretch",
-      "Dome calf stretch"
-    ],
-    "regions": [
-      "ankles"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "Put the ball of your foot on the top of a half foam roller, drop the heel and straighten the knee.",
-    "why": "The half dome tilts the forefoot up, so the calf stretches without you needing a step. It is a flat, portable, cheaper version of the step and easier on the arch. It is the tool Katy Bowman teaches the calf stretch with, and a good fit if you like doing this at home.",
-    "targets": [
-      "gastrocnemius",
-      "soleus",
-      "ankle dorsiflexion"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Half foam roller flat side down. Ball of the foot on the top, heel on the floor.",
-      "Straighten the knee and step the other foot forward for balance. Hips level.",
-      "Hold for a few breaths, then soften both knees a little to shift it into the soleus.",
-      "Second toe points straight ahead."
-    ],
-    "shouldFeel": "A long stretch through the calf.",
-    "shouldNotFeel": "Pain in the Achilles cord or the arch.",
-    "regressions": [
-      {
-        "label": "Smaller dome",
-        "detail": "A rolled towel under the ball of the foot.",
-        "props": [
-          "towel"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Bent-knee soleus",
-        "detail": "Bend both knees, heels down."
-      }
-    ],
-    "props": [
-      "roller",
-      "wall"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "achilles"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Katy Bowman (Nutritious Movement)"
-    ],
-    "evidenceNote": "The dome only changes the angle of the stretch. There is no evidence it does more than a step or a wall. Static calf stretching gives short-term gains in ankle range, but the evidence for lasting change or for preventing injury is weak, and calf tightness is not the hidden cause of most foot problems, however often that is claimed."
   },
   {
     "id": "knee-to-wall-check",

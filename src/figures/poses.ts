@@ -1,3 +1,4 @@
+import { BACK_POSES } from './additions/back.ts';
 import { COSSACK_POSES } from './additions/cossack.ts';
 import type { Pose } from './types.ts';
 
@@ -297,6 +298,7 @@ const CORE_POSES: Record<string, Pose> = {
 export const POSES: Record<string, Pose> = {
   ...CORE_POSES,
   ...COSSACK_POSES,
+  ...BACK_POSES,
 };
 
 export function getPose(exerciseId: string): Pose | undefined {

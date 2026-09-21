@@ -16,7 +16,12 @@ export const COSSACK: Exercise[] = [
     "aka": [
       "Cossack",
       "Lateral squat",
-      "Side squat"
+      "Side squat",
+      "Horse-stance transition",
+      "Cossack switch",
+      "Low lateral shift",
+      "Low switch Cossack squat",
+      "Side-to-side squat"
     ],
     "regions": [
       "hips",
@@ -213,109 +218,6 @@ export const COSSACK: Exercise[] = [
       "BarBend"
     ],
     "evidenceNote": "The video says the deeper you go the better and to push the knees out with your hands. We softened both. Pushing hard into the end of hip abduction and rotation is exactly where groin strains and pinching at the front of the hip happen: symptoms of hip impingement typically show up at end range, such as a deep squat, and limited hip abduction range is itself listed as a groin injury risk factor in athletes. That argues for building range gradually, not forcing it. There is no evidence that a forced deep groin stretch prevents injury. Time in a comfortable deep position is what the evidence for stretching supports. We set dailySafe to false to be conservative for men with a groin-strain history; with light cues and a supported version it could reasonably be relaxed later. The video also says this is done before Cossack squats to create space in the groin. That is plausible, since stretching does briefly raise range, but the effect is small and short-lived."
-  },
-  {
-    "id": "horse-stance-transition",
-    "name": "Horse-Stance Transition",
-    "aka": [
-      "Cossack switch",
-      "Low lateral shift",
-      "Low switch Cossack squat",
-      "Side-to-side squat"
-    ],
-    "regions": [
-      "hips",
-      "hamstrings"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "Sit low onto one leg, then stay low as you shift across to sit onto the other, passing through a wide horse stance.",
-    "why": "It is the Cossack squat without the standing up in between, so the inner thighs and hips work continuously through a long side-to-side range. It is a strength drill that happens to ask for range, and it is where a bodyweight Cossack turns into real training. It is also the easiest way to find out that one side is weaker than the other.",
-    "targets": [
-      "hip adductors",
-      "glutes",
-      "quadriceps",
-      "medial hamstrings",
-      "hip abduction range"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 8,
-      "sets": 2,
-      "perSide": false,
-      "tempoNote": "4s per crossing, one crossing is one rep. Stay low the whole time.",
-      "secondsPerRep": 4
-    },
-    "cues": [
-      "Stay low as you cross. Your hips do not rise between sides.",
-      "Arms out in front, chest up.",
-      "Feet flat, knees over the toes, straight leg toes up if your ankle allows it.",
-      "Depth does not matter. Smooth and controlled does."
-    ],
-    "shouldFeel": "Steady work in the thighs and buttocks, and a long stretch through the inner thigh of whichever leg is straight.",
-    "shouldNotFeel": "A sharp pull in the groin as you change direction, pinching in the front of the hip, pain in either knee, or a bounce out of the bottom.",
-    "regressions": [
-      {
-        "label": "Stay higher",
-        "detail": "Keep your hips well above the deepest point and shift across from a wide, shallow squat.",
-        "props": [
-          "none"
-        ]
-      },
-      {
-        "label": "Hold a chair back",
-        "detail": "Rest your hands on the back of a chair and shuffle beside it.",
-        "props": [
-          "chair"
-        ]
-      },
-      {
-        "label": "Slower crossings",
-        "detail": "Take 6 seconds per crossing.",
-        "props": [
-          "none"
-        ]
-      },
-      {
-        "label": "Go back to single-side Cossack squats",
-        "detail": "If the crossing pulls in the groin, do the single-side version until it does not.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Go deeper",
-        "detail": "Let each end reach a full Cossack squat while staying low through the middle."
-      },
-      {
-        "label": "Pause at each end",
-        "detail": "Hold 2 seconds at the bottom of each side."
-      },
-      {
-        "label": "Light weight at the chest",
-        "detail": "Strength training, not a mobility drill. Only once bodyweight is easy and controlled, at most twice a week. Do not chase heavy loads."
-      }
-    ],
-    "props": [
-      "none"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "groin",
-      "hipReplacement",
-      "balance"
-    ],
-    "dailySafe": false,
-    "source": [
-      "Strength Side Follow Alongs - I Only Do This For Hip Mobility, now (https://youtu.be/SZ7f_nXJJ98)",
-      "BarBend",
-      "Rehab Hero"
-    ],
-    "evidenceNote": "The video says real groin conditioning and opening happens here, and that the goal is to load it with heavy weights. Both are training opinions rather than findings. Moving continuously through a long lateral range keeps the inner thighs working under tension, which is a sensible way to train them. But we found no trial of this drill, and nothing showing it opens the groin better than the single-side version. Loaded, deep lateral work is also where groin strains occur if the strength is not there yet, and changing direction at the bottom is where they happen. So it is a stage after the single-side Cossack squat, not an alternative to it, and it should never be drawn cold. Heavy loading belongs in a strength session, not a stretch session."
   },
   {
     "id": "standing-side-leg-lift",

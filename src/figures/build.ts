@@ -80,6 +80,12 @@ export interface Stance {
   highlight?: Segment[];
   /** Front view only: the far limbs' highlight. See `Pose.farHighlight`. */
   farHighlight?: Segment[];
+  /**
+   * Force the lying rule on or off. By default a torso within about 55 degrees of horizontal counts
+   * as lying, which is right for a supine or prone figure but not for one propped steeply on their
+   * hands, as in a prone press-up, whose whole front still rests on the floor.
+   */
+  lying?: boolean;
   /** False for poses that should not draw a floor line. */
   ground?: boolean;
   /** Raise the whole figure, e.g. sitting up on a block. */
@@ -97,10 +103,17 @@ export const FOOT = 12;
 export const UPPER_ARM = 20;
 export const FOREARM = 18;
 
-/** Where the lowest limb rests, and where a trunk resting on the floor sits. Both match the existing poses. */
+/**
+ * Where the lowest limb rests, and where a trunk resting on the floor sits. A sitting or kneeling
+ * trunk matches the older hand-drawn poses. A trunk lying flat sits lower, level with the feet,
+ * because a person lying on their back with their feet flat has back and heels on the same floor;
+ * the sitting figure's higher rest would leave the feet floating.
+ */
 const LIMB_FLOOR = 130;
 const TRUNK_FLOOR = 121;
+const LYING_TRUNK_FLOOR = 128;
 const HEAD_FLOOR = 134;
+const LYING_HEAD_FLOOR = 139;
 
 const step = (from: Point, bearing: Bearing, length: number): Point => {
   const radians = (bearing * Math.PI) / 180;
@@ -151,13 +164,15 @@ export function pose(stance: Stance): Pose {
     );
   const lowestLimb = Math.max(...limbs.map((p) => p[1]));
   const lowestTrunk = Math.max(raw.pelvis[1], raw.neck[1]);
+  // Lying, prone, or held in a plank or bridge: the trunk is close to horizontal.
+  const lying = stance.lying ?? Math.abs(Math.sin((stance.torso * Math.PI) / 180)) > 0.8;
 
   // Rest on whichever of limb, trunk or head reaches the floor first, then apply any lift.
   const dy =
     Math.min(
       LIMB_FLOOR - lowestLimb,
-      TRUNK_FLOOR - lowestTrunk,
-      HEAD_FLOOR - HEAD_RADIUS - raw.head[1],
+      (lying ? LYING_TRUNK_FLOOR : TRUNK_FLOOR) - lowestTrunk,
+      (lying ? LYING_HEAD_FLOOR : HEAD_FLOOR) - HEAD_RADIUS - raw.head[1],
     ) - (stance.lift ?? 0);
 
   const xs = [raw.head, raw.neck, raw.pelvis, ...limbs].map((p) => p[0]);

@@ -11,552 +11,26 @@ import type { Exercise } from '../types.ts';
  */
 export const HIPS: Exercise[] = [
   {
-    "id": "wall-couch-stretch",
-    "name": "Wall Couch Stretch",
-    "aka": [
-      "Wall hip flexor stretch",
-      "Rear shin up the wall",
-      "Couch stretch on the wall"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "Kneel with your back shin flat up a wall, foot in the air, and sink your hips towards the wall.",
-    "why": "This is the original, hardest form of the couch stretch, and the one that asks the most of your hip extension and your quads together. It is a good test: if you cannot get your hips near the wall without your back arching, you have found the range you have lost from sitting. For a lifter it is the difference between finishing a deadlift with your glutes and finishing it with your lower back.",
-    "targets": [
-      "hip extension",
-      "rectus femoris",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Start with your knee a foot away from the wall, then walk it back as the stretch allows.",
-      "Squeeze the back glute hard, then tuck your tailbone under.",
-      "Stay tall. If your ribs flare out, you are arching, so come out of it a little.",
-      "Pad the knee, and keep breathing."
-    ],
-    "shouldFeel": "A strong pull down the front of the thigh, just above the knee, and across the front of the back hip.",
-    "shouldNotFeel": "Pinching in the lower back (you are arching), pain at the kneecap, or a hamstring cramp that will not settle.",
-    "regressions": [
-      {
-        "label": "Knee away from the wall",
-        "detail": "Move the knee 20 to 40 cm out so your shin leans on the wall instead of standing flat against it.",
-        "props": [
-          "wall",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Hands on the floor",
-        "detail": "Lean forward on your hands beside the front foot so the load on the back hip drops.",
-        "props": [
-          "wall",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Chair couch stretch",
-        "detail": "Foot on a chair seat instead of the wall. Much lower demand.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Front foot on a block",
-        "detail": "Raise the front foot to bring the hips further forward."
-      },
-      {
-        "label": "Add the glute squeeze cycles",
-        "detail": "Squeeze the back glute for 5 seconds, relax, and sink a little further. Three rounds."
-      },
-      {
-        "label": "Reach overhead",
-        "detail": "Same-side arm up and lean gently away."
-      }
-    ],
-    "props": [
-      "wall",
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "maxHoldSeconds": 120,
-    "source": [
-      "Kelly Starrett (Becoming a Supple Leopard, The Ready State)",
-      "Garage Gym Reviews",
-      "Healthline"
-    ],
-    "evidenceNote": "With the back knee bent to 90 degrees or more, most of what you feel is rectus femoris, the quad muscle, not the psoas. That is not a flaw, but do not call it a psoas stretch. Starrett also says this stretch can fix knee pain and back pain. Nothing tested supports that. What is supported: hip-extension stretches held for 30 seconds or more increase hip extension range in the short term, and posterior pelvic tilt with a glute squeeze makes them work better (see the pelvic-tuck half-kneeling entry)."
-  },
-  {
-    "id": "rear-foot-elevated-hip-flexor-stretch",
-    "name": "Rear-Foot-Elevated Hip Flexor Stretch",
-    "aka": [
-      "Bench couch stretch",
-      "Elevated couch stretch",
-      "Back foot on a box hip flexor stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "Standing lunge with your back foot up on a bench or box, sinking down until the front of the back hip stretches. No knee on the floor.",
-    "why": "It keeps the couch-stretch position but takes the floor out of it, so there is no kneecap pressure. It is the right pick for a man whose knees hate kneeling but who can hold a split squat. Because the back foot is raised, the hip is pulled into extension without you having to lunge forward and arch.",
-    "targets": [
-      "hip extension",
-      "rectus femoris",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Back foot laces down on the bench, front foot far enough out that your front shin stays roughly upright.",
-      "Tuck the tailbone and squeeze the back glute before you lower.",
-      "Sink straight down, not forward. Stay tall.",
-      "Hold a wall or rack with one hand."
-    ],
-    "shouldFeel": "A stretch along the front of the back thigh and the front of the hip, with the front leg working to hold you.",
-    "shouldNotFeel": "Pinching in the lower back, pain at the front knee, or wobbling that makes you brace instead of relax.",
-    "regressions": [
-      {
-        "label": "Lower surface",
-        "detail": "Use a low step instead of a bench.",
-        "props": [
-          "step"
-        ]
-      },
-      {
-        "label": "Hand support",
-        "detail": "Hold a wall, chair back or rack with one hand.",
-        "props": [
-          "chair",
-          "wall"
-        ]
-      },
-      {
-        "label": "Kneel instead",
-        "detail": "Chair couch stretch, if balance is the problem.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Lower the back knee towards the floor",
-        "detail": "Sink until the back knee hovers, then rests, on a cushion."
-      },
-      {
-        "label": "Overhead reach",
-        "detail": "Same-side arm up and lean gently away."
-      },
-      {
-        "label": "Front foot on a plate",
-        "detail": "Lengthens the stance for a deeper stretch."
-      }
-    ],
-    "props": [
-      "chair"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "balance",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Garage Gym Reviews",
-      "Kelly Starrett"
-    ],
-    "evidenceNote": "The bench or box can be any solid surface that reaches about knee to hip height. Raising the back foot keeps the knee bent, so this is as much a quad stretch as a hip one. There is no trial comparing it to floor couch stretches, so choose it on comfort, not on claims that higher is better."
-  },
-  {
-    "id": "chair-couch-stretch",
-    "name": "Chair Couch Stretch",
-    "aka": [
-      "Low couch stretch",
-      "Foot-on-chair hip flexor stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Kneel with your back foot resting on a chair seat and the knee well out from the chair, so the shin slopes rather than standing up straight.",
-    "why": "The couch stretch you can actually build up to. Moving the knee away from the chair softens it enough for most people to hold for 45 seconds, and you make it harder by shuffling the knee closer. It is also the version you can do beside an office desk.",
-    "targets": [
-      "hip extension",
-      "rectus femoris",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Cushion under the knee. Foot resting on the seat, toes pointing back.",
-      "Squeeze the back glute, then tuck the tailbone.",
-      "Shuffle closer to the chair only when the stretch fades.",
-      "Keep the ribs down. Do not arch to get lower."
-    ],
-    "shouldFeel": "A firm stretch down the front of the back thigh and across the front of the hip.",
-    "shouldNotFeel": "Pinching in the low back, a hamstring cramp, or knee pain.",
-    "regressions": [
-      {
-        "label": "Knee further from the chair",
-        "detail": "Every 10 cm away from the chair takes tension off the thigh.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Hands on the seat",
-        "detail": "Lean on your hands to share the load with the front leg.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Half-kneeling lunge",
-        "detail": "Back foot flat on the floor instead of on the chair.",
-        "props": [
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Knee closer to the chair",
-        "detail": "Bring the shin steeper, then vertical against a wall."
-      },
-      {
-        "label": "Glute squeeze cycles",
-        "detail": "Squeeze 5 seconds, relax and sink."
-      },
-      {
-        "label": "Overhead reach",
-        "detail": "Same-side arm up, lean gently away."
-      }
-    ],
-    "props": [
-      "chair",
-      "cushion"
-    ],
-    "officeFriendly": true,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Kelly Starrett",
-      "Garage Gym Reviews",
-      "Healthline"
-    ],
-    "evidenceNote": "Kelly Starrett's version stands the shin against the couch back or wall. Moving the knee away is the widely used regression, not a different stretch. The claim that the couch stretch is the fix for tight hips and knee pain has no controlled evidence behind it. The effect that is actually measured is a short-term rise in hip extension range."
-  },
-  {
-    "id": "couch-stretch-side-bend",
-    "name": "Couch Stretch with Overhead Reach and Side Bend",
-    "aka": [
-      "Couch stretch with lateral flexion",
-      "Couch stretch with contralateral side bend",
-      "Psoas couch stretch"
-    ],
-    "regions": [
-      "hips",
-      "back"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "In a couch stretch, raise the arm on the back-leg side overhead and lean your ribcage a little away from the stretched hip.",
-    "why": "The psoas is the only hip flexor that also attaches to your lower spine. Leaning away from the stretched side pulls on that attachment, which a plain lunge or couch stretch does not. It is the closest a stretch gets to biasing the psoas, and it is a smaller movement than it looks: a few centimetres of lean, not a dramatic bend.",
-    "targets": [
-      "psoas",
-      "hip extension",
-      "hip flexors",
-      "lateral trunk"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Get set in the couch stretch first, glute squeezed, tailbone tucked.",
-      "Reach the arm on the back-leg side straight up.",
-      "Lean the top half slightly away from that leg. Keep the hips square and still.",
-      "Breathe into the ribs on the reaching side."
-    ],
-    "shouldFeel": "The stretch along the front of the hip climbing towards the ribs on the reaching side, and a long line up that side of the body.",
-    "shouldNotFeel": "Pinching in the lower back on the leaning side, or a pull that turns into sharp groin pain.",
-    "regressions": [
-      {
-        "label": "Half-kneeling version",
-        "detail": "Do the reach and lean from the half-kneeling lunge instead.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Reach only, no lean",
-        "detail": "Arm overhead, spine tall, no bend.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Hand on the hip",
-        "detail": "Skip the overhead arm and just lean a little.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Add a small twist",
-        "detail": "Turn the chest slightly towards the front leg while keeping the hips square."
-      },
-      {
-        "label": "Wall version",
-        "detail": "The same reach from the wall couch stretch."
-      }
-    ],
-    "props": [
-      "chair",
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "backPain"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Kelly Starrett",
-      "Stuart McGill",
-      "Garage Gym Reviews",
-      "Healthline"
-    ],
-    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. Adding a lean away from the stretched side is what the anatomy points to, and it is the reasoning McGill gives for it, but I found no imaging or muscle-recording study that confirms any position stretches the psoas more than the iliacus. Treat it as a reasonable bias, not an isolation. Popular claims that stretching the psoas releases stored emotion or trauma have no scientific support. If you feel emotional in a deep hip stretch, that is a normal response to a strenuous position and to slow breathing, not something stored in one muscle."
-  },
-  {
-    "id": "couch-stretch-contract-relax",
-    "name": "Couch Stretch with Glute Squeeze (Contract-Relax)",
-    "aka": [
-      "Couch stretch PNF",
-      "Couch stretch with contract-relax",
-      "Squeeze-and-sink couch stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "In a couch stretch, squeeze the back glute hard for 5 seconds, relax, then sink a little deeper. Repeat.",
-    "why": "It is the honest version of \"get more from the stretch\". Instead of waiting for the muscle to give, you contract first, which reliably lets you sink deeper afterwards. For a lifter that fits: earn the range with tension, then use it.",
-    "targets": [
-      "hip extension",
-      "hip flexors",
-      "rectus femoris"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 3,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "5s hard glute squeeze, 5s relax and sink deeper.",
-      "secondsPerRep": 10
-    },
-    "cues": [
-      "Set the couch stretch: glute on, tailbone tucked, ribs down.",
-      "Squeeze the back glute hard for 5 seconds, then let go and lean in a little.",
-      "Breathe out as you sink. Do not hold your breath.",
-      "Stop the round when the range stops growing."
-    ],
-    "shouldFeel": "A hard glute squeeze, then a clear release in the front of the hip and thigh that lets you sink further.",
-    "shouldNotFeel": "Cramping in the hamstring or glute that will not release, pinching in the lower back, or knee pain.",
-    "regressions": [
-      {
-        "label": "Half effort",
-        "detail": "Squeeze at about half your strength.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Half-kneeling",
-        "detail": "Do the squeeze in a half-kneeling lunge.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Chair couch stretch",
-        "detail": "Foot on a chair rather than the wall.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Squeeze harder",
-        "detail": "Build towards near-maximal squeeze, still breathing."
-      },
-      {
-        "label": "Wall couch stretch",
-        "detail": "Same cycles with the shin against the wall."
-      }
-    ],
-    "props": [
-      "chair",
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "bloodPressure"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Kelly Starrett (The Ready State)"
-    ],
-    "evidenceNote": "Starrett describes tensing muscles for 5 to 10 seconds then relaxing deeper. The popular explanation is that squeezing the glute makes the hip flexor \"switch off\" (reciprocal inhibition). The stronger evidence is simply that contract-relax methods raise range of motion in the short term, mostly because you tolerate more stretch. A 2004 trial of 33 people with limited hip extension found active and passive home stretching improved range equally over 6 weeks, so there is no proof this beats a plain hold. Nothing here breaks up tissue."
-  },
-  {
-    "id": "half-kneeling-lunge-stretch",
-    "name": "Half-Kneeling Lunge Stretch",
-    "aka": [
-      "Kneeling hip flexor stretch",
-      "Kneeling lunge stretch",
-      "Basic hip flexor stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "One knee down on a cushion, the other foot forward, and shift your weight gently forward with your chest tall.",
-    "why": "The starting point for every hip flexor stretch here. Sitting all day leaves the front of your hip less used to opening, and this asks it to open a little at a time. It is also the easiest to regress with a chair, so it is where a stiff man should begin.",
-    "targets": [
-      "hip extension",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Cushion under the back knee. Front knee over the ankle.",
-      "Stand tall out of your hips. Do not lean forward at the chest.",
-      "Shift forward a small amount, only until you feel a stretch.",
-      "Breathe out and let the hips settle."
-    ],
-    "shouldFeel": "A stretch along the front of the back hip and the top of the thigh.",
-    "shouldNotFeel": "Pinching in the lower back, or pressure on the kneecap.",
-    "regressions": [
-      {
-        "label": "Kneel in front of a chair",
-        "detail": "Hands on the seat, cushion under the knee, shift forward gently.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Hands on the front thigh",
-        "detail": "Press down on the front knee for steadiness.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Standing split stance",
-        "detail": "No kneeling. Back foot on the floor.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Glute squeeze and pelvic tuck",
-        "detail": "The pelvic-tuck version is a real step up."
-      },
-      {
-        "label": "Overhead reach",
-        "detail": "Same-side arm up."
-      },
-      {
-        "label": "Chair couch stretch",
-        "detail": "Back foot up on a chair."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": true,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "HSS (Hospital for Special Surgery) physical therapist",
-      "The Prehab Guys",
-      "Mike Reinold"
-    ],
-    "evidenceNote": "Most people do this one wrong: they lean forward and arch the lower back, which lets the hip flexors stay short. Stay tall and add the pelvic tuck. This is a hip-extension stretch for the whole hip flexor group. It does not isolate the psoas."
-  },
-  {
     "id": "half-kneeling-pelvic-tuck-stretch",
     "name": "Half-Kneeling Hip Flexor Stretch with Pelvic Tuck",
     "aka": [
       "Posterior pelvic tilt hip flexor stretch",
       "Glute-squeeze lunge stretch",
-      "Reinold hip flexor stretch"
+      "Reinold hip flexor stretch",
+      "Half-kneeling lunge stretch",
+      "Kneeling hip flexor stretch",
+      "Kneeling lunge stretch",
+      "Basic hip flexor stretch",
+      "Psoas lunge stretch with side bend",
+      "Kneeling hip flexor stretch with rotation",
+      "Low lunge with lateral flexion",
+      "Low lunge",
+      "Anjaneyasana",
+      "Low crescent lunge",
+      "Kneeling lunge with arms up",
+      "Band-distracted hip flexor stretch",
+      "Band-assisted couch stretch",
+      "Starrett banded hip flexor stretch"
     ],
     "regions": [
       "hips"
@@ -607,6 +81,21 @@ export const HIPS: Exercise[] = [
         "props": [
           "none"
         ]
+      },
+      {
+        "label": "Plain lunge, no tuck",
+        "detail": "Shift the weight gently forward with the chest tall and skip the glute squeeze. The easiest entry point; add the tuck once it feels easy.",
+        "props": [
+          "cushion"
+        ]
+      },
+      {
+        "label": "Blocks under the hands",
+        "detail": "Rest the hands on blocks beside the front foot to take the arms out of it.",
+        "props": [
+          "block",
+          "cushion"
+        ]
       }
     ],
     "progressions": [
@@ -621,6 +110,14 @@ export const HIPS: Exercise[] = [
       {
         "label": "Couch stretch",
         "detail": "Same tuck with the foot up."
+      },
+      {
+        "label": "Side bend and small twist",
+        "detail": "Reach the back-leg-side arm up, lean away from that leg, then add a small twist towards the front leg."
+      },
+      {
+        "label": "Back leg lifted",
+        "detail": "Lift the back knee off the floor, keeping the glute squeezed. This is a much harder position."
       }
     ],
     "props": [
@@ -640,94 +137,6 @@ export const HIPS: Exercise[] = [
       "HSS physical therapist"
     ],
     "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. The pelvic tuck has real evidence behind it: a 2024 crossover trial (26 healthy, active adults, 30 seconds by 2) found that adding a tuck cut hip-flexor resistance more than the standard half-kneeling stretch. That measures how tense the tissue feels to stretch straight afterwards, not how you sit or stand. Two related claims are not supported. A tight psoas is not proven to cause back pain (a small 2024 study of 70 students found no link between iliopsoas length and low back pain, and 96% tested normal length). And releasing it will not fix your posture."
-  },
-  {
-    "id": "half-kneeling-side-bend-twist",
-    "name": "Half-Kneeling Lunge with Side Bend and Twist",
-    "aka": [
-      "Psoas lunge stretch with side bend",
-      "Kneeling hip flexor stretch with rotation",
-      "Low lunge with lateral flexion"
-    ],
-    "regions": [
-      "hips",
-      "back"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "In the pelvic-tuck lunge, reach the back-leg-side arm up, lean away from that leg, and add a small twist towards the front leg.",
-    "why": "The extra steps a straight lunge does not have. The side bend brings in the psoas's spinal attachment; the twist is the bit coaches add on top. Done properly it looks small: a lean, not a lunge.",
-    "targets": [
-      "psoas",
-      "hip extension",
-      "hip flexors",
-      "lateral trunk"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Set the tuck and glute squeeze first. That is the base.",
-      "Reach the back-leg-side arm overhead, lean the ribs away from the back leg.",
-      "Keep the hips square, then rotate the chest slightly toward the front knee.",
-      "Stop where you feel the stretch move up towards the ribs."
-    ],
-    "shouldFeel": "The stretch on the front of the hip climbing up the front of the body towards the ribs on the reaching side.",
-    "shouldNotFeel": "Pinching in the low back on the leaning side, or a sharp pull in the groin.",
-    "regressions": [
-      {
-        "label": "Bend only",
-        "detail": "Skip the twist and just reach and lean.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Hand on the front knee",
-        "detail": "Lean without the arm overhead.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Kneel in front of a chair",
-        "detail": "Hold the seat with the other hand.",
-        "props": [
-          "chair",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Couch stretch with side bend",
-        "detail": "Same reach with the foot up."
-      },
-      {
-        "label": "Breathe into the ribs",
-        "detail": "Two slow breaths into the ribs of the reaching side."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "backPain"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Stuart McGill",
-      "The Prehab Guys",
-      "Garage Gym Reviews"
-    ],
-    "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. Coaches differ on the twist: the Prehab Guys add hip internal rotation and a side bend away, McGill describes lateral bending with some twist, and Garage Gym Reviews turns towards the front leg. No study I found tests which is best, so use whichever gives a stretch at the front of the hip without pinching. Do not be sold a \"psoas release\": stretching cannot release stored emotion, fix posture, or cure back pain. Hip flexor length was not linked to low back pain in the small study I found."
   },
   {
     "id": "psoas-stride",
@@ -815,96 +224,6 @@ export const HIPS: Exercise[] = [
       "Stuart McGill"
     ],
     "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. McGill's stated reasoning is that the psoas is only reached by a lunge that includes lateral bending, some twist and extension, and that a plain lunge misses it. That follows from anatomy, but I found no study that measured it. He also warns that psoas-heavy exercises like sit-ups and leg raises compress the spine, which is a separate, better-supported point. The stretch is a movement drill, not a treatment."
-  },
-  {
-    "id": "low-lunge",
-    "name": "Low Lunge",
-    "aka": [
-      "Anjaneyasana",
-      "Low crescent lunge",
-      "Kneeling lunge with arms up"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Back knee on the floor, front foot forward, arms overhead, sink your hips forward while keeping your ribs down.",
-    "why": "The yoga version of the half-kneeling lunge, with the arms up so the front of the body opens too. The arms make it easy to arch the lower back and hide a lack of hip movement, so it earns its place only if you keep the pelvis tucked.",
-    "targets": [
-      "hip extension",
-      "hip flexors",
-      "shoulder flexion"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Back knee down on a cushion, front knee over the ankle.",
-      "Squeeze the back glute and tuck the tailbone before you sink.",
-      "Lift the arms only as high as your ribs stay down.",
-      "Slide the back knee a little further back if you want more."
-    ],
-    "shouldFeel": "A stretch across the front of the back hip and thigh, and a lift through the front of the chest.",
-    "shouldNotFeel": "A crunch in the low back as the arms go up, pain at the back kneecap, or a pinch in the shoulders.",
-    "regressions": [
-      {
-        "label": "Hands on the front thigh",
-        "detail": "Skip the arms and keep the hands down.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Blocks under the hands",
-        "detail": "Lean on blocks to take load off.",
-        "props": [
-          "block",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Towel under the knee",
-        "detail": "More padding for the back knee.",
-        "props": [
-          "towel"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Arms overhead, palms together",
-        "detail": "Keep the ribs down."
-      },
-      {
-        "label": "Side bend away",
-        "detail": "Add the lean from the psoas-focused entries."
-      },
-      {
-        "label": "Back leg lifted",
-        "detail": "The full runner's lunge."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "shoulder"
-    ],
-    "dailySafe": true,
-    "source": [
-      "YogaUOnline",
-      "Yoga International",
-      "Liforme"
-    ],
-    "evidenceNote": "Yoga sources routinely say lengthening the psoas here releases tension \"physical and mental\" or breaks the stress cycle. There is no evidence that stretching a muscle releases emotional tension. What is true is that slow breathing in a strong stretch tends to calm most people down. The hip stretch itself is the same hip-extension stretch as a half-kneeling lunge."
   },
   {
     "id": "runners-lunge-rotation",
@@ -1083,100 +402,19 @@ export const HIPS: Exercise[] = [
     "evidenceNote": "Keeping the back knee straight leaves the rectus femoris (quad) with slack at the knee, so more of the stretch lands on the one-joint hip flexors, which is closer to the psoas and iliacus. That is anatomical reasoning; it has not been tested against a bent-knee version."
   },
   {
-    "id": "banded-hip-flexor-stretch",
-    "name": "Banded Hip Flexor Stretch",
-    "aka": [
-      "Band-distracted hip flexor stretch",
-      "Band-assisted couch stretch",
-      "Starrett banded hip flexor stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Kneeling with a heavy band looped high on the back thigh and anchored behind you, so it pulls the hip forward as you tuck and squeeze.",
-    "why": "Kelly Starrett uses a band to pull the top of the thigh bone forward in the socket, on the theory that this gives the joint room and reduces the pinch at the front. It is more setup than most, so only worth it if plain lunge stretches leave you feeling pinched rather than stretched.",
-    "targets": [
-      "hip extension",
-      "hip flexors",
-      "hip joint capsule"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Anchor a heavy band low behind you. Loop it high on the back thigh, close to the crease of the hip.",
-      "Step forward until the band pulls the top of the thigh forward and you feel tension.",
-      "Squeeze the back glute so the thigh bone stays back against the band.",
-      "Lean back slightly or reach the same-side arm overhead if it is comfortable."
-    ],
-    "shouldFeel": "A deeper, less pinchy stretch at the front of the hip, with your back glute working against the band.",
-    "shouldNotFeel": "Sharp pain in the groin, pinching at the front of the hip joint, or the band biting into the skin.",
-    "regressions": [
-      {
-        "label": "Lighter band",
-        "detail": "Less tension.",
-        "props": [
-          "band"
-        ]
-      },
-      {
-        "label": "Skip the lean back",
-        "detail": "Just tuck, squeeze and hold in half-kneeling.",
-        "props": [
-          "band",
-          "cushion"
-        ]
-      },
-      {
-        "label": "Pad the crease",
-        "detail": "Fold a towel where the band sits.",
-        "props": [
-          "towel"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Arm overhead",
-        "detail": "Same-side arm up."
-      },
-      {
-        "label": "Lower into a lunge from split stance",
-        "detail": "Squeeze, then lower under band tension."
-      }
-    ],
-    "props": [
-      "band",
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "groin",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "maxHoldSeconds": 90,
-    "source": [
-      "Kelly Starrett (MobilityWOD / The Ready State)",
-      "Squat University (Aaron Horschig)"
-    ],
-    "evidenceNote": "The claim that a band \"opens the hip joint\" and clears impingement is a theory. I found no trial testing it against the same stretch without a band. Treat it as an option that some people feel more comfortable in, not as a joint-space treatment. If you have a diagnosed hip impingement, get it assessed rather than stretching it with a band."
-  },
-  {
     "id": "thomas-stretch",
     "name": "Thomas Stretch",
     "aka": [
       "Bed-edge hip flexor stretch",
       "Thomas test position stretch",
       "Supine hip flexor stretch",
-      "Lying hip flexor stretch off the bed"
+      "Lying hip flexor stretch off the bed",
+      "Supine quad stretch",
+      "Rectus femoris stretch off the bed",
+      "Thomas test strap stretch",
+      "Hip flexor PNF stretch",
+      "Hold-relax hip flexor stretch",
+      "Isometric hip flexor stretch"
     ],
     "regions": [
       "hips"
@@ -1240,6 +478,10 @@ export const HIPS: Exercise[] = [
       {
         "label": "Slightly longer holds",
         "detail": "Build towards 60 seconds."
+      },
+      {
+        "label": "Strap the hanging heel",
+        "detail": "Loop a strap around the hanging ankle and pull the heel towards your bottom while the thigh stays still."
       }
     ],
     "props": [
@@ -1257,170 +499,6 @@ export const HIPS: Exercise[] = [
       "Physiopedia (Thomas test)"
     ],
     "evidenceNote": "Psoas major is one of several hip flexors. It runs from the sides of the lower spine (T12 to L5) to the top of the thigh bone, and joins the iliacus (from inside the pelvis) to form the iliopsoas. Rectus femoris, the quad muscle that crosses both hip and knee, and TFL also flex the hip. Any stretch that takes the hip into extension lengthens all of them, so you cannot stretch the psoas alone. The Thomas position is a clinical test before it is a stretch. If your hanging thigh stays above the surface, that points to short one-joint hip flexors (iliopsoas); if your knee straightens as the thigh reaches the surface, it points to the rectus femoris. Some physio sites say this position \"isolates\" the psoas. That is an overstatement: it keeps the lower back from cheating, which is useful, but the same muscle group is still stretched. In a 2004 trial, 33 people with limited hip extension who stretched at home improved over 6 weeks whether the stretching was passive or active, with no difference between the two. The Thomas position was the measuring position, not necessarily the stretch."
-  },
-  {
-    "id": "thomas-stretch-strap-knee-bend",
-    "name": "Thomas Stretch with Strap (Knee Bent)",
-    "aka": [
-      "Supine quad stretch",
-      "Thomas test strap stretch",
-      "Rectus femoris stretch off the bed"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "From the Thomas stretch, loop a strap around the hanging ankle and pull the heel towards your bottom while the thigh stays still.",
-    "why": "The rectus femoris is a quad muscle that crosses the hip and the knee. Bend the knee and it is stretched; keep the knee loose and it is not. This version turns the Thomas stretch into a rectus femoris stretch so you can feel the difference between two different \"hip flexor\" tight spots.",
-    "targets": [
-      "rectus femoris",
-      "hip extension",
-      "knee flexion"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Get set in the Thomas stretch first, lower back flat.",
-      "Loop a strap around the ankle of the hanging leg.",
-      "Pull the heel towards your bottom. The thigh stays where it is.",
-      "Stop when the front of the thigh is firm."
-    ],
-    "shouldFeel": "A stretch on the front of the thigh, above the knee, more than the front of the hip.",
-    "shouldNotFeel": "Pain in the front of the knee, or a cramp in the back of the thigh.",
-    "regressions": [
-      {
-        "label": "Less knee bend",
-        "detail": "Bend the knee only a little.",
-        "props": [
-          "band"
-        ]
-      },
-      {
-        "label": "Hold the foot",
-        "detail": "Hold the ankle with your hand if you can reach.",
-        "props": [
-          "none"
-        ]
-      },
-      {
-        "label": "Prop the foot",
-        "detail": "Rest the foot on a cushion stack to shorten the range.",
-        "props": [
-          "cushion",
-          "band"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Longer hold",
-        "detail": "Build towards 60 seconds."
-      },
-      {
-        "label": "Add a glute squeeze",
-        "detail": "Squeeze the hanging-side glute gently."
-      }
-    ],
-    "props": [
-      "band"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Physitrack",
-      "The Prehab Guys (prone rectus femoris stretch)"
-    ],
-    "evidenceNote": "In the modified Thomas test, the hip angle reflects the length of the iliopsoas and the knee angle reflects the rectus femoris. That is the reason the strap version matters: it shows the difference between the deep hip flexor and the quad. It does not make either stretch better, and there is no trial showing it changes running or lifting outcomes."
-  },
-  {
-    "id": "thomas-contract-relax",
-    "name": "Thomas Stretch, Contract-Relax",
-    "aka": [
-      "Hip flexor PNF stretch",
-      "Hold-relax hip flexor stretch",
-      "Isometric hip flexor stretch"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "In the Thomas position, gently lift the hanging thigh against a strap for 5 seconds, then relax and let it drop a little further. Repeat three times.",
-    "why": "A well-used way to get more from a stretch: tense the muscle, then relax it. Clinics use this contract-relax method on the hip flexors from this position, and it gives you a way to work at the stretch instead of just waiting for it.",
-    "targets": [
-      "hip extension",
-      "psoas",
-      "iliacus",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 3,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "5s gentle lift, 10s relax and drop deeper.",
-      "secondsPerRep": 15
-    },
-    "cues": [
-      "Set the Thomas stretch. Loop a strap over the hanging thigh, hold the ends in both hands.",
-      "Lift the hanging thigh up against the strap at about a third of your effort for 5 seconds.",
-      "Relax fully and let the thigh sink lower for 10 seconds.",
-      "Keep your lower back flat and keep breathing."
-    ],
-    "shouldFeel": "A steady lift with no pain, then a clear sink into a bigger stretch.",
-    "shouldNotFeel": "A groin pain or cramp during the lift. Back off the effort.",
-    "regressions": [
-      {
-        "label": "Lighter contraction",
-        "detail": "Half the effort.",
-        "props": [
-          "band"
-        ]
-      },
-      {
-        "label": "Skip the strap",
-        "detail": "Do a plain Thomas stretch.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Harder lift",
-        "detail": "Build towards a stronger contraction, still breathing."
-      },
-      {
-        "label": "Add a lean",
-        "detail": "The same cycles in the couch stretch."
-      }
-    ],
-    "props": [
-      "band"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "hipReplacement",
-      "groin",
-      "bloodPressure"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Physiopedia (Proprioceptive Neuromuscular Facilitation)",
-      "Physitrack"
-    ],
-    "evidenceNote": "In clinics this is done with a therapist holding the leg, contracting for about 6 seconds at high effort and then stretching statically. Doing it alone with a strap is a home adaptation. PNF reliably increases range in the short term, but mostly because you tolerate more stretch, not because the muscle physically lengthens or \"releases\". The 2004 trial that compared active and passive home stretching for hip flexors found both improved range over 6 weeks and neither was better."
   },
   {
     "id": "side-lying-hip-flexor-stretch",
@@ -1586,79 +664,6 @@ export const HIPS: Exercise[] = [
     "evidenceNote": "A quad stretch, not a psoas stretch. The rectus femoris is a two-joint muscle, so it needs both the hip extended and the knee bent to be stretched. That is why a bent-knee kneeling lunge feels mostly like a quad stretch, and why the Thomas stretch keeps the hanging knee loose when the aim is the deeper hip flexors."
   },
   {
-    "id": "bridge-hip-flexor-stretch",
-    "name": "Glute Bridge with Pelvic Tuck",
-    "aka": [
-      "Bridge pose (hip flexor lengthening)",
-      "Setu bandhasana",
-      "Glute bridge hold"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "opener",
-    "intensity": 1,
-    "summary": "Lie on your back, tuck your pelvis, then lift your hips by squeezing your glutes until your thighs line up with your torso. Hold.",
-    "why": "A way to use hip extension rather than just stretch it. The glutes drive the hips up, which takes the front of the hip into a gentle extension. It is also a fair warm-up for the glutes before lifting.",
-    "targets": [
-      "hip extension",
-      "gluteus maximus",
-      "hip flexors"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 20,
-      "sets": 2,
-      "perSide": false
-    },
-    "cues": [
-      "Feet flat, hip-width, heels close to your bottom.",
-      "Tuck your pelvis first, then squeeze the glutes to lift.",
-      "Stop when your thighs and torso make one line. Do not arch higher.",
-      "Ribs down, breathe."
-    ],
-    "shouldFeel": "The glutes doing the work, and a gentle stretch at the front of the hips at the top.",
-    "shouldNotFeel": "Hamstring cramps, or your lower back doing the lifting. If so, tuck harder and lift lower.",
-    "regressions": [
-      {
-        "label": "Shorter lift",
-        "detail": "Lift only a few centimetres.",
-        "props": [
-          "none"
-        ]
-      },
-      {
-        "label": "Feet closer to the bottom",
-        "detail": "Reduces hamstring cramping.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Longer hold",
-        "detail": "Build towards 30 seconds."
-      },
-      {
-        "label": "One leg",
-        "detail": "Single-leg version."
-      }
-    ],
-    "props": [
-      "none"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [],
-    "dailySafe": true,
-    "source": [
-      "Yoga International",
-      "Common physiotherapy exercise"
-    ],
-    "evidenceNote": "Yoga International explains that the iliopsoas lengthens when the glutes drive the hips into extension, as in bridge. That is true in principle, but the stretch at the top of a bridge is small: the hips reach about neutral, well short of what a lunge or couch stretch asks. Treat this as glute activation and practice at using your hip range, not as a hip flexor stretch. The popular claim that the psoas is chronically tight and the glutes are chronically asleep from sitting is repeated widely and is not well tested."
-  },
-  {
     "id": "seated-hip-flexor-lift-off",
     "name": "Seated Hip Flexor Lift-Off",
     "aka": [
@@ -1739,7 +744,15 @@ export const HIPS: Exercise[] = [
     "aka": [
       "Half pigeon",
       "Pigeon pose",
-      "Eka Pada Rajakapotasana"
+      "Eka Pada Rajakapotasana",
+      "Sleeping pigeon",
+      "Folded pigeon",
+      "Sleeping swan",
+      "Forward-folding pigeon",
+      "Pigeon on a bolster",
+      "Propped pigeon",
+      "Supported pigeon",
+      "Restorative pigeon"
     ],
     "regions": [
       "hips"
@@ -1806,6 +819,14 @@ export const HIPS: Exercise[] = [
       {
         "label": "Front shin parallel to the mat's edge",
         "detail": "Only once the knee has zero pain and the hips stay level."
+      },
+      {
+        "label": "Forehead or forearms to the floor",
+        "detail": "Fold all the way down over the front leg and rest your forearms or forehead on the floor."
+      },
+      {
+        "label": "Lower the prop",
+        "detail": "Use a lower bolster or cushion each week until the hip rests near the floor."
       }
     ],
     "props": [
@@ -1827,179 +848,6 @@ export const HIPS: Exercise[] = [
     "evidenceNote": "The safety rule that matters: in pigeon the front hip has to rotate outward far enough for the shin to lie across the mat. If the hip runs out of rotation, the twist goes into the front knee, and the knee tolerates twisting poorly. Teachers describe a front hip that needs about 90 degrees of outward rotation, and most people fall short. The claim that pigeon \"releases stored emotions\" has no evidence behind it, and the claim that it treats sciatica is not well supported either. Pigeon combines deep hip flexion, outward rotation and knee bend, which is exactly what hip replacement precautions restrict, so it is off the list after a replacement unless your surgeon has cleared it. Yoga sources suggest reclining or seated versions until the joint has recovered most of its range."
   },
   {
-    "id": "sleeping-pigeon",
-    "name": "Sleeping Pigeon",
-    "aka": [
-      "Folded pigeon",
-      "Sleeping swan",
-      "Forward-folding pigeon"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 3,
-    "summary": "From classic pigeon, fold forward over the front leg and rest your forearms or forehead on the floor.",
-    "why": "The longer, quieter version. Folding forward loads the outer hip harder and lets you stay a while, which is where the stretch builds. It is also the version that adds your torso weight to the front knee, which is the risk.",
-    "targets": [
-      "hip external rotation",
-      "piriformis",
-      "glutes",
-      "lower back"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 60,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Get set in pigeon first, cushion under the front hip.",
-      "Walk the hands forward and lower the chest over the front shin.",
-      "Forearms or forehead on the floor or a bolster. Keep the pelvis level.",
-      "Breathe out and let the hips settle. Come up slowly."
-    ],
-    "shouldFeel": "A heavy, long stretch in the outer hip and glute of the front leg.",
-    "shouldNotFeel": "Any pinching or twist at the front knee, sacrum or low back pain, or tingling down the leg.",
-    "regressions": [
-      {
-        "label": "Bolster under the chest and hips",
-        "detail": "Prop the front hip, thigh and knee, and rest the chest on a second cushion.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Stay upright",
-        "detail": "Return to classic pigeon on the hands.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Figure-4 lying down",
-        "detail": "Reclined version.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Longer hold",
-        "detail": "Up to 90 seconds once the knee is quiet."
-      },
-      {
-        "label": "Arms forward, elbows off the floor",
-        "detail": "Deepens the outer-hip stretch."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "sciatica",
-      "backPain"
-    ],
-    "dailySafe": true,
-    "maxHoldSeconds": 90,
-    "source": [
-      "Yoga Journal",
-      "YogaRenew",
-      "Yoga International"
-    ],
-    "evidenceNote": "The safety rule that matters: in pigeon the front hip has to rotate outward far enough for the shin to lie across the mat. If the hip runs out of rotation, the twist goes into the front knee, and the knee tolerates twisting poorly. Teachers describe a front hip that needs about 90 degrees of outward rotation, and most people fall short. Yoga Journal's own teaching notes warn that folding forward without safe alignment puts a lot of stress on the knee and sacrum, because your torso weight lands on the front leg. Higher props under the front thigh make it safer. There is no evidence that a long hold in this position does anything beyond a temporary rise in range and a settled feeling."
-  },
-  {
-    "id": "supported-pigeon",
-    "name": "Pigeon on a Bolster",
-    "aka": [
-      "Propped pigeon",
-      "Supported pigeon",
-      "Restorative pigeon"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Pigeon with a bolster or firm cushion under the front hip and thigh, so the pelvis stays level and the knee sits lower.",
-    "why": "The version most men should actually use. A prop under the front hip gets the pelvis level, lets the knee sit at an easier angle and lowers the demand on the joints. It gives a similar stretch to classic pigeon with less risk to the knee.",
-    "targets": [
-      "hip external rotation",
-      "piriformis",
-      "glutes"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Slide the bolster under the buttock and the back of the front thigh.",
-      "Adjust the height until the pelvis feels level, not tipped to one side.",
-      "Hands down, chest tall. Then fold forward if it feels quiet.",
-      "Different height for each side. One hip is usually stiffer."
-    ],
-    "shouldFeel": "A broad stretch in the outer hip of the front leg, easier to relax into than the floor version.",
-    "shouldNotFeel": "Any twist or pinch in the front knee, or pain in the groin.",
-    "regressions": [
-      {
-        "label": "Higher prop",
-        "detail": "A firmer or taller support under the front hip.",
-        "props": [
-          "cushion",
-          "block"
-        ]
-      },
-      {
-        "label": "Front heel in",
-        "detail": "Bring the front foot closer to the groin.",
-        "props": [
-          "cushion"
-        ]
-      },
-      {
-        "label": "Reclined figure-4",
-        "detail": "Lying on your back.",
-        "props": [
-          "none"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Lower the prop",
-        "detail": "Step down one height at a time."
-      },
-      {
-        "label": "Fold forward over the prop",
-        "detail": "Sleeping pigeon, supported."
-      }
-    ],
-    "props": [
-      "cushion"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "sciatica"
-    ],
-    "dailySafe": true,
-    "source": [
-      "YogaUOnline",
-      "Yoga Journal"
-    ],
-    "evidenceNote": "The safety rule that matters: in pigeon the front hip has to rotate outward far enough for the shin to lie across the mat. If the hip runs out of rotation, the twist goes into the front knee, and the knee tolerates twisting poorly. Teachers describe a front hip that needs about 90 degrees of outward rotation, and most people fall short. A prop lets the pelvis stay level and the shin lie closer to parallel with less twist in the knee. Yoga Journal's advice is that the higher you prop the front thigh and hip, the safer the front knee. Props help; they do not remove the requirement that the hip actually rotates."
-  },
-  {
     "id": "reclined-pigeon",
     "name": "Reclined Pigeon",
     "aka": [
@@ -2007,7 +855,10 @@ export const HIPS: Exercise[] = [
       "Supine figure four",
       "Supine piriformis stretch",
       "Reclining pigeon",
-      "Supta Kapotasana"
+      "Supta Kapotasana",
+      "Wall figure-4",
+      "Wall-assisted figure four",
+      "Figure-4 with feet on the wall"
     ],
     "regions": [
       "hips"
@@ -2070,6 +921,10 @@ export const HIPS: Exercise[] = [
       {
         "label": "Longer hold",
         "detail": "Build towards 60 seconds."
+      },
+      {
+        "label": "Walk the supporting foot down the wall",
+        "detail": "With the hips near a wall, slide the supporting foot lower on the wall to bring the knee closer."
       }
     ],
     "props": [
@@ -2165,168 +1020,6 @@ export const HIPS: Exercise[] = [
       "pt2 Austin"
     ],
     "evidenceNote": "Yoga teachers recommend the seated version for people with limited hip, hamstring and back mobility, since the range is smaller and the joints are supported. Crossing the legs at the knee is on the precaution list for many hip replacements, so leave it out unless your surgeon has cleared it."
-  },
-  {
-    "id": "wall-figure-4",
-    "name": "Wall Figure-4",
-    "aka": [
-      "Figure-4 with feet on the wall",
-      "Supine piriformis stretch against the wall",
-      "Wall-assisted figure four"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Lie on your back with your hips near a wall, cross one ankle over the opposite knee, and let the wall hold your supporting foot.",
-    "why": "The wall carries your leg so you do not have to pull on it. That leaves the neck and shoulders relaxed and gives you a stretch you can hold, rather than one you have to work at. Good for anyone who finds the reclined pigeon hard on the arms or neck.",
-    "targets": [
-      "hip external rotation",
-      "piriformis",
-      "glutes"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 1,
-      "perSide": true
-    },
-    "cues": [
-      "Lie with the hips about a foot from the wall and both feet on it, knees bent.",
-      "Cross one ankle over the opposite thigh.",
-      "Walk the supporting foot down the wall to deepen. Stop where it feels firm.",
-      "Keep the hips flat on the floor. Do not press the crossed knee."
-    ],
-    "shouldFeel": "A steady stretch in the outer hip of the crossed leg with the neck and arms relaxed.",
-    "shouldNotFeel": "Knee pain, a pinch at the front of the hip, or any nerve pain down the leg.",
-    "regressions": [
-      {
-        "label": "Foot higher on the wall",
-        "detail": "Less hip flexion.",
-        "props": [
-          "wall"
-        ]
-      },
-      {
-        "label": "Hips farther from the wall",
-        "detail": "Less range.",
-        "props": [
-          "wall"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Foot lower on the wall",
-        "detail": "More flexion."
-      },
-      {
-        "label": "Gentle press on the crossed knee",
-        "detail": "Small pressure with the hand."
-      }
-    ],
-    "props": [
-      "wall"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Physitrack"
-    ],
-    "evidenceNote": "The stretch is the same as the reclined figure-4. The wall's value is comfort, not a different tissue effect. Physitrack lists it as a figure-4 piriformis/glute stretch performed supine with the foot on the wall."
-  },
-  {
-    "id": "prying-goblet-squat",
-    "name": "Prying Squat",
-    "aka": [
-      "Goblet squat pry",
-      "Elbow-prying deep squat",
-      "Prying kettlebell squat"
-    ],
-    "regions": [
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Sit into a deep squat with your palms together at your chest and press your elbows into your knees to push them out.",
-    "why": "The deep squat hold with a job to do. Your elbows push the knees apart, which opens the inner thighs and hips far further than just sitting. Coaches like Aaron Horschig use it as a hip mobility drill you can do before squatting.",
-    "targets": [
-      "hip flexion",
-      "hip external rotation",
-      "adductors",
-      "ankle dorsiflexion"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 45,
-      "sets": 2,
-      "perSide": false
-    },
-    "cues": [
-      "Feet flat, toes turned out slightly.",
-      "Sit down, chest tall, palms together at your chest.",
-      "Press the elbows into the inside of the knees and push the knees out.",
-      "Keep the whole foot planted."
-    ],
-    "shouldFeel": "A broad stretch through the inner thighs, groin and the fronts of the hips.",
-    "shouldNotFeel": "Knee pain, heels lifting, or pinching at the front of the hip.",
-    "regressions": [
-      {
-        "label": "Hold a doorframe",
-        "detail": "Hold onto something solid in front of you.",
-        "props": [
-          "doorframe"
-        ]
-      },
-      {
-        "label": "Heels on a wedge",
-        "detail": "Prop the heels on a book or plate.",
-        "props": [
-          "wedge"
-        ]
-      },
-      {
-        "label": "Sit on a block",
-        "detail": "Only go as low as a block.",
-        "props": [
-          "block"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Squeeze then sink",
-        "detail": "Squeeze the glutes for a few seconds, then relax and sink."
-      },
-      {
-        "label": "Hold a light weight",
-        "detail": "Goblet-style at the chest."
-      },
-      {
-        "label": "Hold longer",
-        "detail": "Build towards a minute."
-      }
-    ],
-    "props": [
-      "weight"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "knee",
-      "hipReplacement",
-      "balance"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Squat University (Aaron Horschig)"
-    ],
-    "evidenceNote": "The deep squat hold is already in the app. This adds the elbow pry, a coaching tool that raises the stretch in the hips. There is no research on it specifically. Contract-relax, squeezing the glutes for a few seconds before sinking, is described by Squat University but has no direct trial in the squat."
   },
   {
     "id": "happy-baby",

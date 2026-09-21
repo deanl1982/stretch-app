@@ -17,7 +17,18 @@ export const HAMSTRINGS: Exercise[] = [
       "Supine hamstring stretch",
       "Towel hamstring stretch",
       "Supta Padangusthasana",
-      "Reclined hand-to-big-toe pose"
+      "Reclined hand-to-big-toe pose",
+      "Doorway hamstring stretch",
+      "Doorframe hamstring stretch",
+      "Wall hamstring stretch",
+      "Lying doorframe hamstring stretch",
+      "Legs up the wall",
+      "Viparita Karani (wall version)",
+      "Wall hamstring rest",
+      "Hold-relax",
+      "PNF hamstring stretch",
+      "Isometric hamstring stretch",
+      "Hamstring PAILs and RAILs"
     ],
     "regions": [
       "hamstrings"
@@ -64,6 +75,20 @@ export const HAMSTRINGS: Exercise[] = [
         "props": [
           "towel"
         ]
+      },
+      {
+        "label": "Doorframe, no strap",
+        "detail": "Lie with the hips at a doorway, one leg through the opening, and walk the other heel up the frame until the knee is straight.",
+        "props": [
+          "doorframe"
+        ]
+      },
+      {
+        "label": "Both legs up a wall",
+        "detail": "Scoot the hips to a wall and rest both legs straight up it for two minutes. Further from the wall or bent knees for less; hips to the wall for more.",
+        "props": [
+          "wall"
+        ]
       }
     ],
     "progressions": [
@@ -74,6 +99,14 @@ export const HAMSTRINGS: Exercise[] = [
       {
         "label": "Add a contract-relax",
         "detail": "Push gently into the strap for about 6 seconds, relax, then take up the slack (see Contract-Relax Hamstring Stretch)."
+      },
+      {
+        "label": "Hips closer to the frame",
+        "detail": "Scoot the hips closer to the frame for a stronger stretch."
+      },
+      {
+        "label": "Contract-relax rounds",
+        "detail": "Push the leg gently into the strap for a few seconds, relax, take up the slack, and repeat for three rounds."
       }
     ],
     "props": [
@@ -90,78 +123,6 @@ export const HAMSTRINGS: Exercise[] = [
       "Hatha yoga: Supta Padangusthasana"
     ],
     "evidenceNote": "The popular story is that this physically lengthens the muscle. It mostly does not. In a 4-week daily hamstring stretching trial (Halbertsma and Goeken 1994) the leg went higher but the muscle was no longer and no less stiff; people simply tolerated a bigger pull. A 2025 meta-analysis of 65 trials found the same: stretch tolerance up substantially, muscle fibre length essentially unchanged. That is still useful, because range you are comfortable using is range you can use, but do not expect the tissue to change shape. On duration, Bandy and Irion (1997) found 30 seconds worked and 60 seconds was no better; a recent dose-response meta-analysis found one 1.5-minute session did not beat measurement noise, whereas repeated stretching over a week or more, around 70 minutes in total, more often did. So: 30-second holds, done regularly, for weeks."
-  },
-  {
-    "id": "doorway-hamstring-stretch",
-    "name": "Doorway Hamstring Stretch",
-    "aka": [
-      "Wall hamstring stretch",
-      "Lying doorframe hamstring stretch"
-    ],
-    "regions": [
-      "hamstrings"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "Lie on your back with your hips at a doorframe, one leg through the opening and the other heel walked up the frame until the knee is straight.",
-    "why": "The frame does the job a strap or a partner would do, and it does it without you having to hold anything. You can relax completely into it, which matters more than it sounds: a hamstring that is braced against the stretch will not give you range. Good for the evening, when you have no energy for technique.",
-    "targets": [
-      "hamstrings"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 60,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Shuffle your hips right up to the frame, then slide the top heel up it.",
-      "Keep the down leg straight and flat through the doorway.",
-      "Breathe out slowly and let the leg get heavy on the wood."
-    ],
-    "shouldFeel": "A steady, growing pull down the back of the raised thigh that fades a little as you settle.",
-    "shouldNotFeel": "A sharp or electric feeling behind the knee, pins and needles in the foot, or your lower back arching off the floor.",
-    "regressions": [
-      {
-        "label": "Move away from the frame",
-        "detail": "Slide your hips a few centimetres further from the doorframe so the raised leg sits at a gentler angle.",
-        "props": [
-          "doorframe"
-        ]
-      },
-      {
-        "label": "Soft knee",
-        "detail": "A small bend in the raised knee is fine. Straighten it a little more each week.",
-        "props": [
-          "doorframe"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Hips closer",
-        "detail": "Shuffle a couple of centimetres closer to the frame over weeks."
-      },
-      {
-        "label": "Lift-off finish",
-        "detail": "At the end, lift the leg 2 centimetres off the frame for 5 seconds so the new range is yours, not the wall's."
-      }
-    ],
-    "props": [
-      "doorframe"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "sciatica"
-    ],
-    "dailySafe": true,
-    "maxHoldSeconds": 120,
-    "source": [
-      "Healthwise patient guide (HealthLink BC, Kaiser Permanente, Cigna)",
-      "Physical therapy home exercise programs"
-    ],
-    "evidenceNote": "Several patient handouts say to build up to 6 minutes per leg. No trial shows one very long hold beats several 30 to 60 second holds; the evidence points to total weekly volume, not a single marathon. One minute per side, twice, is plenty. Note also that this feels like it works because the stretch sensation fades as you settle, but that fade is your nervous system accepting the position, not the muscle being physically lengthened."
   },
   {
     "id": "seated-chair-hamstring-stretch",
@@ -241,7 +202,11 @@ export const HAMSTRINGS: Exercise[] = [
     "aka": [
       "Elevated-foot hamstring stretch",
       "Foot-on-step hamstring stretch",
-      "Foot-on-chair hamstring stretch"
+      "Foot-on-chair hamstring stretch",
+      "Pyramid pose",
+      "Parsvottanasana",
+      "Intense side stretch",
+      "Split-stance forward fold"
     ],
     "regions": [
       "hamstrings"
@@ -287,6 +252,13 @@ export const HAMSTRINGS: Exercise[] = [
         "detail": "Bend the raised knee slightly.",
         "props": [
           "step"
+        ]
+      },
+      {
+        "label": "Long stride on the floor, no step",
+        "detail": "Stand with the front foot flat in a long stride and fold over it with hands on blocks. It has no elevation at all, so it is gentler than the step.",
+        "props": [
+          "block"
         ]
       }
     ],
@@ -489,89 +461,6 @@ export const HAMSTRINGS: Exercise[] = [
     "evidenceNote": "Getting your chest flat to the floor in a wide straddle depends heavily on the shape of your hip sockets and the twist of your thigh bones, which no stretching changes. Some people will fold flat and some never will, at any level of effort. That is a widely made point among clinicians; there is little direct research on the pancake itself, so treat a lack of depth as normal, not failure."
   },
   {
-    "id": "pyramid-pose",
-    "name": "Pyramid Pose",
-    "aka": [
-      "Parsvottanasana",
-      "Intense side stretch",
-      "Split-stance forward fold"
-    ],
-    "regions": [
-      "hamstrings",
-      "hips"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Stand with one foot a stride ahead of the other, both legs straight, and fold forward over the front leg with your hands on blocks.",
-    "why": "It stretches one hamstring at a time in a standing position that also demands hip control. With the feet staggered the back leg gives you something to push against, which is what stops most people diving through the lower back.",
-    "targets": [
-      "front-leg hamstring",
-      "hip hinge",
-      "calf"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 30,
-      "sets": 2,
-      "perSide": true
-    },
-    "cues": [
-      "Feet on railroad tracks, not a tightrope: hip-width apart, not in a straight line.",
-      "Square your hips to the front leg and hinge with a long spine.",
-      "Keep a soft front knee and put your hands on blocks."
-    ],
-    "shouldFeel": "A stretch through the back of the front thigh and into the calf.",
-    "shouldNotFeel": "Pinching in the lower back, pain at the back of the knee, or wobbling that makes you round.",
-    "regressions": [
-      {
-        "label": "Hands on a chair or wall",
-        "detail": "Lean on something so you can hinge without balance.",
-        "props": [
-          "chair"
-        ]
-      },
-      {
-        "label": "Hands on blocks",
-        "detail": "Bring the floor up to you.",
-        "props": [
-          "block"
-        ]
-      },
-      {
-        "label": "Soft front knee",
-        "detail": "Keep the front knee slightly bent.",
-        "props": [
-          "block"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Hands to the floor",
-        "detail": "Work down from blocks over weeks."
-      },
-      {
-        "label": "Shorten the stance",
-        "detail": "Bring the back foot closer while the hips stay square."
-      }
-    ],
-    "props": [
-      "block"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "balance",
-      "sciatica",
-      "hipReplacement"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Hatha yoga: Parsvottanasana (Yoga Journal)"
-    ],
-    "evidenceNote": "Yoga-teaching claims that pyramid pose 'improves digestion' or 'rejuvenates the abdominal organs' are traditional and have no supporting evidence. What it plainly does is stretch the hamstring of the front leg; the stagger makes it easier to keep the pelvis level than a two-leg fold."
-  },
-  {
     "id": "half-split",
     "name": "Half Split",
     "aka": [
@@ -739,86 +628,6 @@ export const HAMSTRINGS: Exercise[] = [
       "Hatha yoga: Prasarita Padottanasana (Yoga Journal)"
     ],
     "evidenceNote": "The head is below the heart in this position. That is why it is on the blood pressure list and why you should come up slowly. Claims that it 'calms the brain' or 'improves circulation to the head' are not supported by evidence; it is a hamstring and adductor stretch."
-  },
-  {
-    "id": "legs-up-wall-hamstring-hang",
-    "name": "Legs-Up-the-Wall Hamstring Hang",
-    "aka": [
-      "Viparita Karani (wall version)",
-      "Legs up the wall",
-      "Wall hamstring rest"
-    ],
-    "regions": [
-      "hamstrings"
-    ],
-    "role": "rest",
-    "intensity": 1,
-    "summary": "Lie on your back with your legs resting straight up a wall; the closer your hips are to the wall, the stronger the hamstring stretch.",
-    "why": "It is a calm finishing position that also doubles as a passive, gravity-only hamstring stretch. You can dial the effort with a single thing: how far your hips sit from the wall. After a hard session on your feet it is a good place to breathe out and stop.",
-    "targets": [
-      "hamstrings"
-    ],
-    "dose": {
-      "kind": "hold",
-      "seconds": 120,
-      "sets": 1,
-      "perSide": false
-    },
-    "cues": [
-      "Set your distance from the wall so the stretch is mild.",
-      "Keep the back of your knees soft and let the legs rest on the wall.",
-      "Breathe slowly and let your hands lie by your sides."
-    ],
-    "shouldFeel": "A mild, steady stretch behind the thighs and legs feeling heavy.",
-    "shouldNotFeel": "Numbness or pins and needles in the feet, pain behind the knees, or your lower back arching off the floor.",
-    "regressions": [
-      {
-        "label": "Move further from the wall",
-        "detail": "30 to 45 centimetres away from the wall, knees soft, legs resting on it.",
-        "props": [
-          "wall"
-        ]
-      },
-      {
-        "label": "Bend the knees",
-        "detail": "Feet on the wall, knees bent.",
-        "props": [
-          "wall"
-        ]
-      },
-      {
-        "label": "Pillow under hips",
-        "detail": "A folded towel under the pelvis helps the lower back.",
-        "props": [
-          "wall",
-          "cushion"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Hips to the wall",
-        "detail": "Shuffle closer over weeks for more hamstring stretch."
-      },
-      {
-        "label": "Straddle the legs",
-        "detail": "Let the legs fall apart to the sides for a gentle adductor stretch."
-      }
-    ],
-    "props": [
-      "wall"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "bloodPressure"
-    ],
-    "dailySafe": true,
-    "maxHoldSeconds": 300,
-    "source": [
-      "Hatha yoga: Viparita Karani (Yoga Journal)"
-    ],
-    "evidenceNote": "Popular claims say this drains lymph, detoxifies, reverses ageing or treats anxiety. None of that is established. The likely reason it feels good is the same as any other still, slow-breathing rest: you are lying down and not doing anything. Tingling feet are common (the legs are simply above the heart); if that happens, bend your knees, move back from the wall, or come down."
   },
   {
     "id": "active-knee-extension",
@@ -1126,84 +935,6 @@ export const HAMSTRINGS: Exercise[] = [
       "Dynamic warm-up clinician notes"
     ],
     "evidenceNote": "The hamstring stretch here is mild and brief; the value is that it takes the whole chain through a hinge and a plank in a few minutes. Any claim about 'lengthening' the hamstrings from repeated walkouts is stronger than the evidence supports."
-  },
-  {
-    "id": "contract-relax-hamstring-stretch",
-    "name": "Contract-Relax Hamstring Stretch",
-    "aka": [
-      "Hold-relax",
-      "PNF hamstring stretch",
-      "Isometric hamstring stretch",
-      "Hamstring PAILs and RAILs"
-    ],
-    "regions": [
-      "hamstrings"
-    ],
-    "role": "main",
-    "intensity": 2,
-    "summary": "Lie on your back with a strap on one foot, push the leg gently into the strap for a few seconds, relax, and take up the slack.",
-    "why": "It is the one stretching method that consistently beats a plain hold in the short term. Doing a brief push against the strap gets you a few extra degrees, and it trains your nervous system to be comfortable at the end of your range, not just tolerate it passively.",
-    "targets": [
-      "hamstrings",
-      "stretch tolerance"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 3,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "6s gentle push into the strap, then relax and hold 24s a little deeper.",
-      "secondsPerRep": 30
-    },
-    "cues": [
-      "Use about a third of your effort on the push. Harder is not better.",
-      "Breathe throughout. No breath-holding.",
-      "After the push, relax fully, then draw the leg a bit further and hold."
-    ],
-    "shouldFeel": "A moderate stretch at the start, some working tension in the back of the thigh during the push, and a slightly deeper stretch after.",
-    "shouldNotFeel": "Sharp pain, cramping in the hamstring, a thin wiry line down the leg, or holding your breath.",
-    "regressions": [
-      {
-        "label": "Gentler push",
-        "detail": "Push at about 20 percent effort.",
-        "props": [
-          "towel"
-        ]
-      },
-      {
-        "label": "Shorter contraction",
-        "detail": "3 seconds instead of 6.",
-        "props": [
-          "towel"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Add an active pull",
-        "detail": "After the relax, lift the leg towards you for 5 seconds using the front of the hip; this is the CRAC or RAIL step."
-      },
-      {
-        "label": "Longer rounds",
-        "detail": "Two to three rounds of 30 seconds, still at modest effort."
-      }
-    ],
-    "props": [
-      "towel"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "sciatica",
-      "bloodPressure"
-    ],
-    "dailySafe": true,
-    "source": [
-      "PNF stretching literature (Sharman, Cresswell and Riek 2006; Hindle 2012)",
-      "The Prehab Guys",
-      "Functional Range Conditioning (PAILs and RAILs)"
-    ],
-    "evidenceNote": "The usual explanation, that the contraction 'switches the muscle off' through a reflex (autogenic inhibition), is not well supported; the range gains still look like tolerance to stretch. A 2019 meta-analysis found hold-relax and contract-relax raised hamstring range immediately more than doing nothing, but long-term benefit compared with other stretches, and the best protocol, remain unclear. Reviews suggest contractions of 3 to 10 seconds at 20 to 60 percent of maximum work as well as full effort. Avoid doing it right before a sprint or jump, as PNF can temporarily reduce performance."
   },
   {
     "id": "supine-sciatic-nerve-glide",
@@ -2000,82 +1731,6 @@ export const HAMSTRINGS: Exercise[] = [
       "Mobility coaching (STACK)"
     ],
     "evidenceNote": "It is popular as a 'hip opener' and 'hamstring lengthener'. No trials I found test it against other hamstring stretches; it is a movement drill, and as with all of these the gains in reach are most likely tolerance, not length. Deep knee bend means it is not a cold opener."
-  },
-  {
-    "id": "active-isolated-hamstring-stretch",
-    "name": "Active Isolated Hamstring Stretch",
-    "aka": [
-      "AIS hamstring stretch",
-      "Mattes method hamstring stretch",
-      "Rope hamstring stretch"
-    ],
-    "regions": [
-      "hamstrings"
-    ],
-    "role": "main",
-    "intensity": 1,
-    "summary": "Lie on your back with a rope or strap on one foot, lift the straight leg with your own muscles, then use the strap for a gentle extra 2 seconds at the end and lower.",
-    "why": "It is the stretching version of the active straight leg raise: you find your active range first, then borrow a couple of degrees for a moment. No long holds means it is unlikely to make your legs feel weak afterwards, and the repetition makes it easy to notice progress.",
-    "targets": [
-      "hamstrings",
-      "hip flexion"
-    ],
-    "dose": {
-      "kind": "reps",
-      "reps": 10,
-      "sets": 1,
-      "perSide": true,
-      "tempoNote": "1s lift, 2s gentle assist, 2s lower.",
-      "secondsPerRep": 5
-    },
-    "cues": [
-      "Lift the leg first with the front of the hip, then take up the strap.",
-      "Hold the assist for two seconds only.",
-      "Keep the down leg heavy on the floor."
-    ],
-    "shouldFeel": "A light stretch and a working sensation in the front of the hip.",
-    "shouldNotFeel": "A sharp pinch, a thin wiry line, or the down leg lifting off the floor.",
-    "regressions": [
-      {
-        "label": "Bend the down leg",
-        "detail": "Foot flat on the floor.",
-        "props": [
-          "towel"
-        ]
-      },
-      {
-        "label": "Fewer reps",
-        "detail": "Five smooth reps.",
-        "props": [
-          "towel"
-        ]
-      }
-    ],
-    "progressions": [
-      {
-        "label": "Longer assist",
-        "detail": "Three seconds at the top."
-      },
-      {
-        "label": "Own the range",
-        "detail": "Lift the leg with no strap to the same height."
-      }
-    ],
-    "props": [
-      "towel"
-    ],
-    "officeFriendly": false,
-    "barefootOnly": false,
-    "contraindications": [
-      "sciatica"
-    ],
-    "dailySafe": true,
-    "source": [
-      "Aaron Mattes, Active Isolated Stretching",
-      "Runner's Connect",
-      "Rehab Connection"
-    ],
-    "evidenceNote": "The main claim made for this method, that holding a stretch longer than 2 to 3 seconds triggers a protective 'stretch reflex' that makes the muscle tighten and even tear, is wrong. The stretch reflex is a brief, fast response to a sudden stretch; it does not build up over a longer hold, and static stretches for 30 seconds do not tear muscle. Claims that it reduces injuries more than other stretching are also unsupported. Its real appeal is different: short, active, easy to repeat."
   },
   {
     "id": "ragdoll-forward-fold",

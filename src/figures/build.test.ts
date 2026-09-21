@@ -31,7 +31,8 @@ describe('pose()', () => {
 
   it('rests a lying figure on its trunk rather than floating or sinking', () => {
     const lying = pose({ torso: 270, thigh: 90, shin: 90, upperArm: 90, forearm: 90 });
-    expect(lying.pelvis[1]).toBeCloseTo(121, 0);
+    // Level with feet that are flat on the same floor, not hovering above it.
+    expect(lying.pelvis[1]).toBeCloseTo(128, 0);
     // Head to the left of the pelvis: the figure faces right.
     expect(lying.head[0]).toBeLessThan(lying.pelvis[0]);
   });
