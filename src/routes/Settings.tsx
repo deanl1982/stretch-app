@@ -3,6 +3,7 @@ import { FLAG_LABELS, type Flag } from '../content/types.ts';
 import { downloadBackup, loadProfile, restoreBackup, saveProfile } from '../storage/store.ts';
 import type { Profile } from '../storage/types.ts';
 import { DISCLAIMER } from '../safety.ts';
+import { BUILD, buildAge, commitUrl, formatBuiltAt } from '../buildInfo.ts';
 import {
   HOLD_LEVELS,
   HOLD_LEVEL_HINTS,
@@ -193,6 +194,42 @@ export function Settings(): JSX.Element {
           </div>
           <p role="status" aria-live="polite" className="mt-3 text-sm text-accent">
             {message}
+          </p>
+        </Card>
+      </Section>
+
+      <Section title="This build">
+        <Card>
+          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+            <dt className="text-bone-dim">Version</dt>
+            <dd className="tabular-nums">{BUILD.version}</dd>
+
+            <dt className="text-bone-dim">Commit</dt>
+            <dd className="tabular-nums">
+              {commitUrl() === null ? (
+                BUILD.sha
+              ) : (
+                <a
+                  href={commitUrl() ?? undefined}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-4 hover:text-accent"
+                >
+                  {BUILD.sha}
+                </a>
+              )}
+            </dd>
+
+            <dt className="text-bone-dim">Built</dt>
+            <dd>
+              {formatBuiltAt()}
+              <span className="text-bone-dim"> · {buildAge()}</span>
+            </dd>
+          </dl>
+          <p className="mt-4 text-xs leading-relaxed text-bone-dim">
+            If something misbehaves, quote these. The app caches itself to work offline,
+            so the version you are running is not always the newest one published — a
+            hard refresh picks up the latest.
           </p>
         </Card>
       </Section>
