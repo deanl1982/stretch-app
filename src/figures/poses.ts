@@ -1,3 +1,4 @@
+import { COSSACK_POSES } from './additions/cossack.ts';
 import type { Pose } from './types.ts';
 
 /**
@@ -7,7 +8,7 @@ import type { Pose } from './types.ts';
  * runs from about y=13 at the top of the head to y=132 at the heel. Shoulder is taken
  * as `neck` and hip as `pelvis`, so most poses are eight points.
  */
-export const POSES: Record<string, Pose> = {
+const CORE_POSES: Record<string, Pose> = {
   // ─────────────────────────────────────────────────────────────── HIPS ──
 
   'hip-cars': {
@@ -290,6 +291,12 @@ export const POSES: Record<string, Pose> = {
     farKnee: [68, 122], farAnkle: [94, 130], farToe: [108, 127],
     props: [{ kind: 'cushion', at: [88, 126], width: 22, height: 7 }],
   },
+};
+
+/** Every pose: the hand-drawn core set, then the ones built from joint angles. */
+export const POSES: Record<string, Pose> = {
+  ...CORE_POSES,
+  ...COSSACK_POSES,
 };
 
 export function getPose(exerciseId: string): Pose | undefined {

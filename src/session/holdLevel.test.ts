@@ -125,17 +125,19 @@ describe('rep work is counted, not run against one clock', () => {
       expect(exercise.dose.secondsPerRep, exercise.id).toBeGreaterThanOrEqual(
         MIN_SECONDS_PER_REP,
       );
-      expect(exercise.dose.secondsPerRep, exercise.id).toBeLessThanOrEqual(20);
+      // A contract-relax cycle (contract, then relax into the stretch) is legitimately ~30s.
+      expect(exercise.dose.secondsPerRep, exercise.id).toBeLessThanOrEqual(60);
       expect(secondsPerRepFor(exercise), exercise.id).toBe(exercise.dose.secondsPerRep);
     }
   });
 
-  it('keeps a rep block short enough to fit the shortest session', () => {
+  it('keeps every rep block inside the longest session', () => {
     for (const exercise of EXERCISES) {
       if (exercise.dose.kind !== 'reps') continue;
       expect(estimateSeconds(exercise), exercise.id).toBeGreaterThan(0);
-      // 5 minutes is the smallest budget offered; nothing may be undrawable.
-      expect(estimateSeconds(exercise), exercise.id).toBeLessThanOrEqual(5 * 60);
+      // Longer than the short sessions is fine - the generator skips what does not fit its
+      // budget - but nothing may be undrawable even at the 20-minute cap.
+      expect(estimateSeconds(exercise), exercise.id).toBeLessThanOrEqual(20 * 60);
     }
   });
 

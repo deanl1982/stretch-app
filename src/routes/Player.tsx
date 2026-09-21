@@ -17,6 +17,9 @@ import {
 import { useWakeLock } from '../hooks/useWakeLock.ts';
 import { Button } from '../ui.tsx';
 
+/** Past this many reps the pips are noise; the ring and the count carry it. */
+const MAX_PIPS = 24;
+
 function Ring({ progress }: { progress: number }): JSX.Element {
   const radius = 54;
   const circumference = 2 * Math.PI * radius;
@@ -331,6 +334,7 @@ export function Player(): JSX.Element {
 
             {/* One pip per rep, filled as they bank - the count at a glance from
                 arm's length, which the number alone is not. */}
+            {phase.reps <= MAX_PIPS && (
             <div className="flex flex-wrap justify-center gap-1.5" aria-hidden="true">
               {Array.from({ length: phase.reps }).map((_, index) => (
                 <span
@@ -341,6 +345,7 @@ export function Player(): JSX.Element {
                 />
               ))}
             </div>
+            )}
 
             {exercise.dose.kind === 'reps' && exercise.dose.tempoNote !== undefined && (
               <p className="text-sm text-bone-dim">{exercise.dose.tempoNote}</p>

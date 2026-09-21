@@ -1,4 +1,5 @@
 import type { JSX } from 'react';
+import { useSearchParams } from 'react-router';
 import { EXERCISES } from '../content/exercises.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
@@ -7,13 +8,21 @@ import { PageTitle, Screen } from '../ui.tsx';
 /**
  * Development QA sheet. Every pose on one page, so a bad set of coordinates is
  * obvious at a glance rather than being discovered mid-session.
+ *
+ * `?only=a,b,c` narrows it to those ids, for reviewing a handful at a readable size.
  */
 export function Figures(): JSX.Element {
+  const [params] = useSearchParams();
+  const only = params.get('only');
+  const wanted = only === null ? null : new Set(only.split(',').map((id) => id.trim()));
+  const exercises =
+    wanted === null ? EXERCISES : EXERCISES.filter((exercise) => wanted.has(exercise.id));
+
   return (
     <Screen className="max-w-5xl">
       <PageTitle sub="Every pose in the library. Development view.">Figures</PageTitle>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {EXERCISES.map((exercise) => {
+        {exercises.map((exercise) => {
           const pose = getPose(exercise.id);
           return (
             <figure key={exercise.id} className="m-0">

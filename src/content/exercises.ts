@@ -1,4 +1,9 @@
 import type { Exercise } from './types.ts';
+import { ANKLES } from './additions/ankles.ts';
+import { BACK } from './additions/back.ts';
+import { COSSACK } from './additions/cossack.ts';
+import { HAMSTRINGS } from './additions/hamstrings.ts';
+import { HIPS } from './additions/hips.ts';
 
 /**
  * The exercise library.
@@ -8,7 +13,7 @@ import type { Exercise } from './types.ts';
  * checking. The editorial rule throughout: where the source offered a *mechanism*,
  * we state a *feeling* and a *behaviour* instead.
  */
-export const EXERCISES: Exercise[] = [
+const CORE: Exercise[] = [
   // ─────────────────────────────────────────────────────────────── HIPS ──
 
   {
@@ -1310,6 +1315,12 @@ export const EXERCISES: Exercise[] = [
       'Katy Bowman’s orca analogy — captive whales’ fins collapse without the ocean’s forces — is a metaphor, not a study. The real finding is that people who rest in squatting and kneeling postures keep meaningful muscle activity going, where a chair drops it to almost nothing.',
   },
 ];
+
+/**
+ * The whole library: the hand-written core, then the sets imported from research.
+ * Order here is only the default order - every screen sorts for itself.
+ */
+export const EXERCISES: Exercise[] = [...CORE, ...HIPS, ...COSSACK, ...HAMSTRINGS, ...ANKLES, ...BACK];
 
 /** Fast lookup by id, for history rendering and deep links. */
 export const EXERCISES_BY_ID: ReadonlyMap<string, Exercise> = new Map(

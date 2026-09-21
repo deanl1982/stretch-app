@@ -1,0 +1,407 @@
+import type { Exercise } from '../types.ts';
+
+/**
+ * cossack: imported from web research, then reviewed by hand. This file is the source of
+ * truth now - edit it freely. The research briefs' review-only fields (pose hints, URLs,
+ * evidence grades) were stripped on import.
+ *
+ * Same editorial rule as the core library: where a source offered a mechanism, we state a
+ * feeling and a behaviour instead, and `evidenceNote` corrects any claim that did not survive
+ * checking. Evidence for most stretching is weak; the notes say so where it matters.
+ */
+export const COSSACK: Exercise[] = [
+  {
+    "id": "cossack-squat",
+    "name": "Cossack Squat",
+    "aka": [
+      "Cossack",
+      "Lateral squat",
+      "Side squat"
+    ],
+    "regions": [
+      "hips",
+      "hamstrings"
+    ],
+    "role": "main",
+    "intensity": 3,
+    "summary": "From a wide stance, sit deep onto one leg while the other leg stays straight out to the side, toes up.",
+    "why": "Most lifters train the hips in a straight line, forwards and back, and almost never side-on. This asks the inner thigh and the back of the straight leg to lengthen while the other leg holds your whole weight, so it builds range and strength in the same rep. It is also an honest test: if one side will not go down, you have found the tight side.",
+    "targets": [
+      "hip adductors",
+      "medial hamstrings",
+      "hip abduction range",
+      "knee flexion",
+      "ankle dorsiflexion",
+      "glutes"
+    ],
+    "dose": {
+      "kind": "reps",
+      "reps": 5,
+      "sets": 2,
+      "perSide": true,
+      "tempoNote": "3s down, 1s pause, 2s up.",
+      "secondsPerRep": 6
+    },
+    "cues": [
+      "Sit back and down onto one leg. Keep your chest up and your arms reaching forward.",
+      "Keep the bent knee over your middle toes. Do not let it dive inwards.",
+      "Straight leg: heel down, toes up. Toes down is fine if that is what your ankle allows.",
+      "Only go as deep as you control. Stand up the way you went down."
+    ],
+    "shouldFeel": "A stretch along the inner thigh and hamstring of the straight leg, and hard work in the thigh and buttock of the bent leg.",
+    "shouldNotFeel": "Sharp or pinching pain in the groin or the front of the hip, a pull on the inside of the bent knee, or the heel wrenching off the floor.",
+    "regressions": [
+      {
+        "label": "Hands on a chair",
+        "detail": "Put both hands on a sturdy chair or couch in front of you and let your arms take as much weight as you need. The straight leg may bend a little at first.",
+        "props": [
+          "chair"
+        ]
+      },
+      {
+        "label": "Heel on a wedge",
+        "detail": "A book or plate under the heel of the bent leg, so the ankle has less range to find.",
+        "props": [
+          "wedge"
+        ]
+      },
+      {
+        "label": "Reach or hold a light weight",
+        "detail": "Reach your arms forward, or hold something light out in front of you, to counterbalance as your hips sit back.",
+        "props": [
+          "none"
+        ]
+      },
+      {
+        "label": "Half depth",
+        "detail": "Sit only until the thigh is about level, keeping the straight leg's foot flat. This is a plain side squat.",
+        "props": [
+          "none"
+        ]
+      }
+    ],
+    "progressions": [
+      {
+        "label": "Drop the props",
+        "detail": "No wedge, no chair, arms reaching only. Heels stay flat."
+      },
+      {
+        "label": "Slower lowering",
+        "detail": "Take 5 seconds down and pause 2 seconds at the bottom."
+      },
+      {
+        "label": "Horse-stance transition",
+        "detail": "Cross from one side to the other without standing up. See the transition entry."
+      },
+      {
+        "label": "Add a light weight at the chest",
+        "detail": "Strength work, not mobility. Only after weeks of clean bodyweight reps, and keep it out of the daily routine."
+      }
+    ],
+    "props": [
+      "chair",
+      "wedge"
+    ],
+    "officeFriendly": false,
+    "barefootOnly": false,
+    "contraindications": [
+      "knee",
+      "groin",
+      "hipReplacement",
+      "balance"
+    ],
+    "dailySafe": false,
+    "source": [
+      "Strength Side Follow Alongs - I Only Do This For Hip Mobility, now (https://youtu.be/SZ7f_nXJJ98)",
+      "BarBend",
+      "Rehab Hero",
+      "Diesel Strength & Conditioning (James Smith)"
+    ],
+    "evidenceNote": "The video says that if you master this you will never need to stretch your groins or hamstrings again, and that it bulletproofs the lower body. The first is an overreach. Pooled trials find strength training through a full range improves range of motion about as much as stretching (Afonso 2021, 11 trials; a 2025 review of 36 trials). Both are mixed and inconsistent in design, and the 2025 authors warn against dropping stretching on that basis. We found no trial of the Cossack squat itself, so a fair summary is: a deep, loaded, controlled range like this can improve range and is a reasonable substitute for some stretching, but never needing to stretch again is one person's experience. The second claim is marketing. No exercise is known to make joints bulletproof or to prevent injury on its own. What is supported is narrower: strength training in general lowered sports injuries in athlete trials (Lauersen 2014), and an adductor strengthening programme built on the Copenhagen exercise cut groin problems by about 41 percent in footballers (Harøy 2019). The Cossack squat is a different exercise from both, so neither result transfers automatically. Coaches who like this exercise still warn that most people do not have the range for it, and that forcing it can strain the hamstring or inner thigh, and load the knee when the foot is planted. On the heel: the video says everyone falls backwards and the counterweight solves it. That is partly right. A limited ankle range is the usual reason the heel lifts or you tip backwards, and a wedge lowers that demand. Reaching or holding a weight is a genuine counterbalance, so the hips can sit further back. Both work around the limit; neither fixes it, and ankle work does. The video also lets the heel float off the floor. We keep it down or on a wedge because a floating heel makes the position less stable under load."
+  },
+  {
+    "id": "wide-stance-groin-opener",
+    "name": "Wide-Stance Groin Opener",
+    "aka": [
+      "Wide-stance squat hold",
+      "Sumo squat hold",
+      "Wide squat"
+    ],
+    "regions": [
+      "hips"
+    ],
+    "role": "main",
+    "intensity": 2,
+    "summary": "Stand wide with your toes turned out, sit down between your legs, and rest your hands on your inner thighs.",
+    "why": "The Cossack squat needs the inner thighs to give way before it needs the legs to be strong. This is the quiet version: no single-leg load, just time in a wide, deep position where you can breathe. It is also a fair warm-up for the Cossack squat, though never a cold start.",
+    "targets": [
+      "hip adductors",
+      "hip abduction",
+      "hip external rotation",
+      "hip flexion",
+      "ankle dorsiflexion"
+    ],
+    "dose": {
+      "kind": "hold",
+      "seconds": 30,
+      "sets": 2,
+      "perSide": false
+    },
+    "cues": [
+      "Feet wider than your shoulders, toes turned out to the angle where your knees track over your toes.",
+      "Hands on your inner thighs. Guide the knees out gently. Do not shove them.",
+      "Sit only as deep as you can breathe slowly. Keep your chest up.",
+      "Hold something if you need to. This is not a balance test."
+    ],
+    "shouldFeel": "A deep, even stretch along both inner thighs and into the groin that eases as you breathe.",
+    "shouldNotFeel": "Sharp or pinching pain deep in the crease of the hip, a pull in the inner thigh that feels like a strain, or pain on the inside of the knee.",
+    "regressions": [
+      {
+        "label": "Hold a doorframe or post",
+        "detail": "Grab something solid at chest height in front of you and let your arms take a third of your weight.",
+        "props": [
+          "doorframe"
+        ]
+      },
+      {
+        "label": "Sit on a block or bottom step",
+        "detail": "Stop short of your full depth and rest there.",
+        "props": [
+          "block"
+        ]
+      },
+      {
+        "label": "Heels on a wedge",
+        "detail": "A book or plate under each heel takes the pressure off the ankle.",
+        "props": [
+          "wedge"
+        ]
+      },
+      {
+        "label": "Narrower stance, shallower depth",
+        "detail": "Take a stance only a little wider than your shoulders and stop where the stretch is mild.",
+        "props": [
+          "none"
+        ]
+      }
+    ],
+    "progressions": [
+      {
+        "label": "Gentle weight shifts",
+        "detail": "Slowly move your weight a little towards one foot, then the other, holding 3 to 5 seconds each side. Stay inside a range that is comfortable."
+      },
+      {
+        "label": "Longer holds",
+        "detail": "Build towards 45 to 60 seconds. Extra time, not extra force."
+      }
+    ],
+    "props": [
+      "none"
+    ],
+    "officeFriendly": false,
+    "barefootOnly": false,
+    "contraindications": [
+      "knee",
+      "groin",
+      "hipReplacement"
+    ],
+    "dailySafe": false,
+    "maxHoldSeconds": 60,
+    "source": [
+      "Strength Side Follow Alongs - I Only Do This For Hip Mobility, now (https://youtu.be/SZ7f_nXJJ98)",
+      "Rehab Hero",
+      "BarBend"
+    ],
+    "evidenceNote": "The video says the deeper you go the better and to push the knees out with your hands. We softened both. Pushing hard into the end of hip abduction and rotation is exactly where groin strains and pinching at the front of the hip happen: symptoms of hip impingement typically show up at end range, such as a deep squat, and limited hip abduction range is itself listed as a groin injury risk factor in athletes. That argues for building range gradually, not forcing it. There is no evidence that a forced deep groin stretch prevents injury. Time in a comfortable deep position is what the evidence for stretching supports. We set dailySafe to false to be conservative for men with a groin-strain history; with light cues and a supported version it could reasonably be relaxed later. The video also says this is done before Cossack squats to create space in the groin. That is plausible, since stretching does briefly raise range, but the effect is small and short-lived."
+  },
+  {
+    "id": "horse-stance-transition",
+    "name": "Horse-Stance Transition",
+    "aka": [
+      "Cossack switch",
+      "Low lateral shift",
+      "Low switch Cossack squat",
+      "Side-to-side squat"
+    ],
+    "regions": [
+      "hips",
+      "hamstrings"
+    ],
+    "role": "main",
+    "intensity": 3,
+    "summary": "Sit low onto one leg, then stay low as you shift across to sit onto the other, passing through a wide horse stance.",
+    "why": "It is the Cossack squat without the standing up in between, so the inner thighs and hips work continuously through a long side-to-side range. It is a strength drill that happens to ask for range, and it is where a bodyweight Cossack turns into real training. It is also the easiest way to find out that one side is weaker than the other.",
+    "targets": [
+      "hip adductors",
+      "glutes",
+      "quadriceps",
+      "medial hamstrings",
+      "hip abduction range"
+    ],
+    "dose": {
+      "kind": "reps",
+      "reps": 8,
+      "sets": 2,
+      "perSide": false,
+      "tempoNote": "4s per crossing, one crossing is one rep. Stay low the whole time.",
+      "secondsPerRep": 4
+    },
+    "cues": [
+      "Stay low as you cross. Your hips do not rise between sides.",
+      "Arms out in front, chest up.",
+      "Feet flat, knees over the toes, straight leg toes up if your ankle allows it.",
+      "Depth does not matter. Smooth and controlled does."
+    ],
+    "shouldFeel": "Steady work in the thighs and buttocks, and a long stretch through the inner thigh of whichever leg is straight.",
+    "shouldNotFeel": "A sharp pull in the groin as you change direction, pinching in the front of the hip, pain in either knee, or a bounce out of the bottom.",
+    "regressions": [
+      {
+        "label": "Stay higher",
+        "detail": "Keep your hips well above the deepest point and shift across from a wide, shallow squat.",
+        "props": [
+          "none"
+        ]
+      },
+      {
+        "label": "Hold a chair back",
+        "detail": "Rest your hands on the back of a chair and shuffle beside it.",
+        "props": [
+          "chair"
+        ]
+      },
+      {
+        "label": "Slower crossings",
+        "detail": "Take 6 seconds per crossing.",
+        "props": [
+          "none"
+        ]
+      },
+      {
+        "label": "Go back to single-side Cossack squats",
+        "detail": "If the crossing pulls in the groin, do the single-side version until it does not.",
+        "props": [
+          "none"
+        ]
+      }
+    ],
+    "progressions": [
+      {
+        "label": "Go deeper",
+        "detail": "Let each end reach a full Cossack squat while staying low through the middle."
+      },
+      {
+        "label": "Pause at each end",
+        "detail": "Hold 2 seconds at the bottom of each side."
+      },
+      {
+        "label": "Light weight at the chest",
+        "detail": "Strength training, not a mobility drill. Only once bodyweight is easy and controlled, at most twice a week. Do not chase heavy loads."
+      }
+    ],
+    "props": [
+      "none"
+    ],
+    "officeFriendly": false,
+    "barefootOnly": false,
+    "contraindications": [
+      "knee",
+      "groin",
+      "hipReplacement",
+      "balance"
+    ],
+    "dailySafe": false,
+    "source": [
+      "Strength Side Follow Alongs - I Only Do This For Hip Mobility, now (https://youtu.be/SZ7f_nXJJ98)",
+      "BarBend",
+      "Rehab Hero"
+    ],
+    "evidenceNote": "The video says real groin conditioning and opening happens here, and that the goal is to load it with heavy weights. Both are training opinions rather than findings. Moving continuously through a long lateral range keeps the inner thighs working under tension, which is a sensible way to train them. But we found no trial of this drill, and nothing showing it opens the groin better than the single-side version. Loaded, deep lateral work is also where groin strains occur if the strength is not there yet, and changing direction at the bottom is where they happen. So it is a stage after the single-side Cossack squat, not an alternative to it, and it should never be drawn cold. Heavy loading belongs in a strength session, not a stretch session."
+  },
+  {
+    "id": "standing-side-leg-lift",
+    "name": "Standing Side Leg Lift",
+    "aka": [
+      "Standing hip abduction",
+      "Standing side leg raise"
+    ],
+    "regions": [
+      "hips"
+    ],
+    "role": "main",
+    "intensity": 1,
+    "summary": "Stand tall, lift one leg straight out to the side, and lower it slowly.",
+    "why": "The muscles on the outside of your hips keep your pelvis level every time you stand on one leg, and they are what your standing leg leans on in a Cossack squat. If you sit most of the day they are easy to neglect. This is the simplest way to wake them up and it takes no equipment.",
+    "targets": [
+      "gluteus medius",
+      "hip abductors",
+      "standing-leg stability"
+    ],
+    "dose": {
+      "kind": "reps",
+      "reps": 10,
+      "sets": 2,
+      "perSide": true,
+      "tempoNote": "1s up, 2s down.",
+      "secondsPerRep": 3
+    },
+    "cues": [
+      "Stand tall with a hand on a wall or chair. Do not lean.",
+      "Lift the leg straight out to the side with the toes pointing forward.",
+      "Lift only as high as you can with your torso upright and your hips level.",
+      "Lower slowly."
+    ],
+    "shouldFeel": "Work in the outside of the lifted hip, and in the buttock and outer hip of the leg you are standing on.",
+    "shouldNotFeel": "Pinching at the front or side of the hip, back pain, or the body swaying sideways to get the leg higher.",
+    "regressions": [
+      {
+        "label": "Hold the wall with both hands",
+        "detail": "Face it with both hands on the wall. Take as much balance from it as you need.",
+        "props": [
+          "wall"
+        ]
+      },
+      {
+        "label": "Smaller range",
+        "detail": "Lift only 15 to 20 degrees, about a foot off the floor.",
+        "props": [
+          "none"
+        ]
+      },
+      {
+        "label": "Lie on your side",
+        "detail": "Do the same lift lying on your side with the bottom knee bent. No balance needed.",
+        "props": [
+          "none"
+        ]
+      }
+    ],
+    "progressions": [
+      {
+        "label": "Pause at the top",
+        "detail": "Hold 2 seconds at the highest point where your hips stay level."
+      },
+      {
+        "label": "Slower lowering",
+        "detail": "Take 4 seconds coming down."
+      },
+      {
+        "label": "Band above the knees",
+        "detail": "A light band around the thighs adds resistance."
+      }
+    ],
+    "props": [
+      "wall"
+    ],
+    "officeFriendly": true,
+    "barefootOnly": false,
+    "contraindications": [
+      "balance"
+    ],
+    "dailySafe": true,
+    "source": [
+      "Strength Side Follow Alongs - I Only Do This For Hip Mobility, now (https://youtu.be/SZ7f_nXJJ98)",
+      "Distefano et al, JOSPT 2009"
+    ],
+    "evidenceNote": "The video says to lift the leg as high as you can and says the Cossack squat takes a lot of strength on the outside of the hips. We changed the first: lifting further than your pelvis can stay level just means the trunk leans and the hip hitches, which takes the work away from the muscle you are trying to train. The second is reasonable but not measured: the standing leg in a Cossack squat does resist the pelvis dropping sideways, but we did not find a study showing that abductor strength limits Cossack depth. EMG studies (Distefano 2009 and others) show that simple hip abduction activates gluteus medius strongly, standing or side-lying. Standing is not better than side-lying, only a bit more practical. Hip abductor weakness is linked with hip and groin problems in athletes, but linked is not proven cause."
+  }
+];

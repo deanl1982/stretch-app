@@ -53,8 +53,8 @@ describe('searching the real library', () => {
     expect(find('seiza')[0]).toBe('seiza');
   });
 
-  it('returns nothing for a word in no name', () => {
-    expect(find('kettlebell')).toEqual([]);
+  it('returns nothing for a word in no name or alias', () => {
+    expect(find('trampoline')).toEqual([]);
   });
 
   it('leaves the list untouched when nothing is typed', () => {

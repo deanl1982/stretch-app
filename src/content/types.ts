@@ -28,7 +28,8 @@ export type Prop =
   | 'dowel'
   | 'roller'
   | 'band'
-  | 'step';
+  | 'step'
+  | 'weight';
 
 export const PROP_LABELS: Record<Prop, string> = {
   none: 'Nothing',
@@ -43,6 +44,7 @@ export const PROP_LABELS: Record<Prop, string> = {
   roller: 'Foam roller',
   band: 'Resistance band',
   step: 'Step or stair',
+  weight: 'Dumbbell or kettlebell',
 };
 
 /**

@@ -16,6 +16,22 @@ export const VIEW_HEIGHT = 150;
 export const GROUND_Y = 132;
 export const HEAD_RADIUS = 9;
 
+/**
+ * Half the distance between the two shoulders and between the two hips, used only by the
+ * front view. The side view collapses both sides onto one line, so it needs neither.
+ */
+export const SHOULDER_HALF_WIDTH = 9;
+export const HIP_HALF_WIDTH = 6;
+
+/**
+ * Which way the figure is seen.
+ *
+ * `side` faces right and is the default: right for anything that happens forwards and
+ * backwards (a hinge, a lunge, a squat). It cannot show a side bend, a rotation or a leg
+ * swung out sideways, because those move across the line of sight. `front` faces the viewer.
+ */
+export type View = 'side' | 'front';
+
 /** Limb segments that can be highlighted to show what an exercise targets. */
 export type Segment =
   | 'spine'
@@ -43,6 +59,8 @@ export interface PropShape {
  * opposite arm and leg faded behind, for positions where that reads better.
  */
 export interface Pose {
+  /** Defaults to `side`. In `front`, near limbs are the image-left ones and far limbs the image-right, drawn unfaded. */
+  view?: View;
   head: Point;
   neck: Point;
   pelvis: Point;
@@ -61,8 +79,14 @@ export interface Pose {
   farToe?: Point;
 
   props?: PropShape[];
-  /** Segments to draw in the accent colour. */
+  /** Segments of the near limbs to draw in the accent colour. */
   highlight?: Segment[];
+  /**
+   * The same for the far limbs. Front view only: in the side view the far limbs are a faded
+   * shadow and never highlighted. Kept separate because an exercise often works one side - the
+   * lifted leg in a side leg lift - and lighting up both would say it works both.
+   */
+  farHighlight?: Segment[];
   /** Set false for supine or seated-on-a-chair poses that should not show a floor. */
   ground?: boolean;
 }

@@ -2,6 +2,8 @@ import type { JSX } from 'react';
 import {
   GROUND_Y,
   HEAD_RADIUS,
+  HIP_HALF_WIDTH,
+  SHOULDER_HALF_WIDTH,
   VIEW_HEIGHT,
   VIEW_WIDTH,
   type Point,
@@ -100,16 +102,19 @@ function renderProp(prop: PropShape, index: number): JSX.Element | null {
 }
 
 export function Figure({ pose, label, className }: FigureProps): JSX.Element {
-  const on = (segment: Segment) => pose.highlight?.includes(segment) ?? false;
   const accent = 'var(--figure-accent, currentColor)';
 
-  const line = (segment: Segment) => ({
-    stroke: on(segment) ? accent : 'currentColor',
-    strokeWidth: on(segment) ? 7 : 5,
+  // Near limbs and the spine use `highlight`; the front view's second limbs use `farHighlight`.
+  const line = (segment: Segment, highlighted: readonly Segment[] | undefined) => {
+    const on = highlighted?.includes(segment) ?? false;
+    return {
+    stroke: on ? accent : 'currentColor',
+    strokeWidth: on ? 7 : 5,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
     fill: 'none',
-  });
+    };
+  };
 
   const farLine = {
     stroke: 'currentColor',
@@ -120,14 +125,22 @@ export function Figure({ pose, label, className }: FigureProps): JSX.Element {
     opacity: 0.3,
   };
 
+  const front = pose.view === 'front';
+  const at = (p: Point, dx: number): Point => [p[0] + dx, p[1]];
+  // Where each limb hangs from. Side view: one shoulder and one hip. Front view: a pair.
+  const hipNear = front ? at(pose.pelvis, -HIP_HALF_WIDTH) : pose.pelvis;
+  const hipFar = front ? at(pose.pelvis, HIP_HALF_WIDTH) : pose.pelvis;
+  const shoulderNear = front ? at(pose.neck, -SHOULDER_HALF_WIDTH) : pose.neck;
+  const shoulderFar = front ? at(pose.neck, SHOULDER_HALF_WIDTH) : pose.neck;
+
   const farArm =
     pose.farElbow !== undefined && pose.farHand !== undefined
-      ? `${xy(pose.neck)} ${xy(pose.farElbow)} ${xy(pose.farHand)}`
+      ? `${xy(shoulderFar)} ${xy(pose.farElbow)} ${xy(pose.farHand)}`
       : null;
 
   const farLeg =
     pose.farKnee !== undefined && pose.farAnkle !== undefined
-      ? `${xy(pose.pelvis)} ${xy(pose.farKnee)} ${xy(pose.farAnkle)}${
+      ? `${xy(hipFar)} ${xy(pose.farKnee)} ${xy(pose.farAnkle)}${
           pose.farToe === undefined ? '' : ` ${xy(pose.farToe)}`
         }`
       : null;
@@ -154,9 +167,9 @@ export function Figure({ pose, label, className }: FigureProps): JSX.Element {
 
       {pose.props?.map(renderProp)}
 
-      {/* Far limbs sit behind the body. */}
-      {farLeg !== null && <polyline points={farLeg} {...farLine} />}
-      {farArm !== null && <polyline points={farArm} {...farLine} />}
+      {/* Side view: the far limbs sit faded behind the body. */}
+      {!front && farLeg !== null && <polyline points={farLeg} {...farLine} />}
+      {!front && farArm !== null && <polyline points={farArm} {...farLine} />}
 
       {/*
         Limbs are drawn segment by segment rather than as one polyline, so a pose
@@ -164,17 +177,43 @@ export function Figure({ pose, label, className }: FigureProps): JSX.Element {
         mean the joins are invisible. Ten ankle and foot poses highlight segments
         that a single leg polyline could never match.
       */}
-      <polyline points={`${xy(pose.pelvis)} ${xy(pose.neck)}`} {...line('spine')} />
+      <polyline points={`${xy(pose.pelvis)} ${xy(pose.neck)}`} {...line('spine', pose.highlight)} />
 
-      <polyline points={`${xy(pose.pelvis)} ${xy(pose.knee)}`} {...line('thigh')} />
-      <polyline points={`${xy(pose.knee)} ${xy(pose.ankle)}`} {...line('shin')} />
-      <polyline points={`${xy(pose.ankle)} ${xy(pose.toe)}`} {...line('foot')} />
+      <polyline points={`${xy(hipNear)} ${xy(pose.knee)}`} {...line('thigh', pose.highlight)} />
+      <polyline points={`${xy(pose.knee)} ${xy(pose.ankle)}`} {...line('shin', pose.highlight)} />
+      <polyline points={`${xy(pose.ankle)} ${xy(pose.toe)}`} {...line('foot', pose.highlight)} />
 
-      <polyline points={`${xy(pose.neck)} ${xy(pose.elbow)}`} {...line('upperArm')} />
-      <polyline points={`${xy(pose.elbow)} ${xy(pose.hand)}`} {...line('forearm')} />
+      <polyline points={`${xy(shoulderNear)} ${xy(pose.elbow)}`} {...line('upperArm', pose.highlight)} />
+      <polyline points={`${xy(pose.elbow)} ${xy(pose.hand)}`} {...line('forearm', pose.highlight)} />
+
+      {/*
+        Front view only: the pelvis and shoulder bars, and the second leg and arm, which are
+        real limbs here rather than a faded shadow, highlighted through `farHighlight`.
+      */}
+      {front && (
+        <>
+          <polyline points={`${xy(hipNear)} ${xy(hipFar)}`} {...line('spine', pose.highlight)} />
+          <polyline points={`${xy(shoulderNear)} ${xy(shoulderFar)}`} {...line('spine', pose.highlight)} />
+          {pose.farKnee !== undefined && pose.farAnkle !== undefined && (
+            <>
+              <polyline points={`${xy(hipFar)} ${xy(pose.farKnee)}`} {...line('thigh', pose.farHighlight)} />
+              <polyline points={`${xy(pose.farKnee)} ${xy(pose.farAnkle)}`} {...line('shin', pose.farHighlight)} />
+              {pose.farToe !== undefined && (
+                <polyline points={`${xy(pose.farAnkle)} ${xy(pose.farToe)}`} {...line('foot', pose.farHighlight)} />
+              )}
+            </>
+          )}
+          {pose.farElbow !== undefined && pose.farHand !== undefined && (
+            <>
+              <polyline points={`${xy(shoulderFar)} ${xy(pose.farElbow)}`} {...line('upperArm', pose.farHighlight)} />
+              <polyline points={`${xy(pose.farElbow)} ${xy(pose.farHand)}`} {...line('forearm', pose.farHighlight)} />
+            </>
+          )}
+        </>
+      )}
 
       {/* Neck. Without this the head floats free in any lying-down pose. */}
-      <polyline points={`${xy(pose.neck)} ${xy(pose.head)}`} {...line('neck')} />
+      <polyline points={`${xy(pose.neck)} ${xy(pose.head)}`} {...line('neck', pose.highlight)} />
 
       <circle
         cx={pose.head[0]}
