@@ -1,0 +1,182 @@
+name: Infra
+
+# Terraform for the Groundwork Azure infrastructure.
+#
+#   pull_request -> fmt check, init, validate, plan, plan posted as a comment
+#   push to main -> apply
+#
+# Gated on infra/** so app-only changes never touch infrastructure.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'infra/**'
+      - '.github/workflows/infra.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'infra/**'
+      - '.github/workflows/infra.yml'
+  workflow_dispatch:
+
+concurrency:
+  # Terraform state is a single shared resource. Never run two applies at once,
+  # and never cancel an in-flight apply - a half-applied, unwritten state is
+  # exactly the mess the state lock exists to prevent.
+  group: infra-terraform
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write        # azure/login OIDC
+  pull-requests: write   # plan comment
+
+defaults:
+  run:
+    working-directory: infra
+
+env:
+  TF_VERSION: '1.16.3'
+  # Consumed directly by the azurerm provider, so no -var flags are needed.
+  ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+  ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+  ARM_USE_OIDC: 'true'
+  # Stop the provider falling back to the runner's az CLI session, so an auth
+  # failure is loud rather than silently succeeding via a different identity.
+  ARM_USE_CLI: 'false'
+
+jobs:
+  terraform:
+    name: Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          # The wrapper is what makes steps.plan.outputs.stdout available for
+          # the PR comment. Keep it on.
+          terraform_wrapper: true
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check -recursive -diff
+
+      - name: Terraform init
+        id: init
+        # Partial backend config - the real values come from repo variables so
+        # the storage account name is not baked into the repository.
+        run: |
+          terraform init \
+            -backend-config="resource_group_name=${{ vars.TFSTATE_RESOURCE_GROUP }}" \
+            -backend-config="storage_account_name=${{ vars.TFSTATE_STORAGE_ACCOUNT }}" \
+            -backend-config="container_name=${{ vars.TFSTATE_CONTAINER }}" \
+            -backend-config="key=groundwork-prod.tfstate"
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false -lock-timeout=5m
+        continue-on-error: true
+
+      - name: Comment plan on pull request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v9
+        env:
+          PLAN: ${{ steps.plan.outputs.stdout }}
+        with:
+          script: |
+            const marker = '<!-- groundwork-terraform-plan -->';
+            const plan = (process.env.PLAN || '').trim();
+
+            // GitHub comments cap at 65536 characters. Keep the tail, which is
+            // where the summary line lives.
+            const MAX = 55000;
+            const body_plan = plan.length > MAX
+              ? '...output truncated, see the workflow run for the full plan...\n\n'
+                + plan.slice(-MAX)
+              : plan;
+
+            const body = [
+              marker,
+              '### Terraform plan',
+              '',
+              '| Step | Result |',
+              '| --- | --- |',
+              `| fmt | \`${{ steps.fmt.outcome }}\` |`,
+              `| init | \`${{ steps.init.outcome }}\` |`,
+              `| validate | \`${{ steps.validate.outcome }}\` |`,
+              `| plan | \`${{ steps.plan.outcome }}\` |`,
+              '',
+              '<details><summary>Show plan</summary>',
+              '',
+              '```terraform',
+              body_plan,
+              '```',
+              '',
+              '</details>',
+              '',
+              `_Pushed by @${{ github.actor }} for \`${{ github.sha }}\`._`,
+            ].join('\n');
+
+            // Update the existing comment rather than adding one per push.
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' && c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Fail if plan failed
+        # `continue-on-error` above exists only so the comment still posts when
+        # the plan errors. Re-assert the failure here so the check goes red.
+        if: github.event_name == 'pull_request' && steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve -input=false -lock-timeout=5m
+
+      - name: Summarise outputs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        # `terraform output` redacts sensitive values, so the deployment API key
+        # is never printed here.
+        run: |
+          {
+            echo '### Deployed infrastructure'
+            echo ''
+            echo "- URL: $(terraform output -raw default_url)"
+            echo "- Static Web App: \`$(terraform output -raw static_web_app_name)\`"
+            echo "- Resource group: \`$(terraform output -raw resource_group_name)\`"
+          } >> "$GITHUB_STEP_SUMMARY"

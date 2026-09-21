@@ -57,10 +57,10 @@ type ButtonProps = {
 };
 
 const VARIANTS: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-amber text-ink hover:bg-amber-bright',
-  secondary: 'bg-surface-2 text-bone border border-edge hover:border-bone-dim',
+  primary: 'bg-accent text-ink hover:bg-accent-bright',
+  secondary: 'bg-surface-2 text-bone border border-control hover:border-bone',
   ghost: 'text-bone-dim hover:text-bone',
-  danger: 'bg-transparent text-rust border border-rust/50 hover:bg-rust/10',
+  danger: 'bg-transparent text-negative border border-negative/50 hover:bg-negative/10',
 };
 
 export function Button({
@@ -73,7 +73,7 @@ export function Button({
   type = 'button',
   ariaLabel,
 }: ButtonProps): JSX.Element {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-medium transition-colors disabled:opacity-40 disabled:pointer-events-none ${VARIANTS[variant]} ${className}`;
+  const classes = `inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-medium transition-colors disabled:opacity-40 disabled:pointer-events-none ${VARIANTS[variant]} ${className}`;
 
   if (to !== undefined) {
     return (
@@ -150,8 +150,8 @@ export function FavouriteButton({
       type="button"
       aria-pressed={on}
       aria-label={on ? 'Remove from favourites' : 'Add to favourites'}
-      className={`-m-2 shrink-0 rounded-full p-2 transition-colors ${
-        on ? 'text-amber' : 'text-bone-dim hover:text-bone'
+      className={`-m-1 flex size-11 shrink-0 items-center justify-center rounded-full transition-colors ${
+        on ? 'text-accent' : 'text-bone-dim hover:text-bone'
       } ${className}`}
       onClick={(event) => {
         event.preventDefault();

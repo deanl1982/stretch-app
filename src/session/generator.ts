@@ -1,5 +1,5 @@
 import { EXERCISES } from '../content/exercises.ts';
-import type { Exercise, Flag, Prop } from '../content/types.ts';
+import type { Exercise, Flag, Prop, Region } from '../content/types.ts';
 import { buildPhases, estimateSeconds } from './phases.ts';
 import { createRng, shuffle } from './rng.ts';
 
@@ -25,6 +25,11 @@ export interface GenerateOptions {
   availableProps?: readonly Prop[] | undefined;
   /** Only draw exercises that work at a desk. */
   officeOnly?: boolean;
+  /**
+   * Restrict the draw to these body areas. Empty or omitted means the whole library —
+   * this is how "random, but hamstrings today" works.
+   */
+  regions?: readonly Region[];
   /** Drop the opener/rest structure and draw the whole session unconstrained. */
   pureChaos?: boolean;
   /** How many times each exercise has been done in the last 7 days. */
@@ -64,17 +69,20 @@ export function eligiblePool(options: GenerateOptions): Exercise[] {
     exclusions = [],
     availableProps,
     officeOnly = false,
+    regions,
     recentCounts,
     library = EXERCISES,
   } = options;
 
   const excluded = new Set<Flag>(exclusions);
+  const focus = regions === undefined || regions.length === 0 ? null : new Set<Region>(regions);
 
   return library.filter((exercise) => {
     if (exercise.contraindications.some((flag) => excluded.has(flag))) return false;
     // Conditional items are the inverse: withheld unless the user declared the flag.
     if (exercise.requiresFlag !== undefined && !excluded.has(exercise.requiresFlag)) return false;
     if (officeOnly && !exercise.officeFriendly) return false;
+    if (focus !== null && !exercise.regions.some((region) => focus.has(region))) return false;
 
     if (availableProps !== undefined) {
       const owned = new Set<Prop>(availableProps);

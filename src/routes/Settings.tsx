@@ -2,14 +2,8 @@ import { useRef, useState, type ChangeEvent, type JSX, type ReactNode } from 're
 import { FLAG_LABELS, type Flag } from '../content/types.ts';
 import { downloadBackup, loadProfile, restoreBackup, saveProfile } from '../storage/store.ts';
 import type { Profile } from '../storage/types.ts';
-import {
-  ANKLE_NOTE,
-  DISCLAIMER,
-  EMERGENCY_FLAGS,
-  LEG_RULE,
-  NERVE_TEST,
-  SEE_SOMEONE_FLAGS,
-} from '../safety.ts';
+import { DISCLAIMER } from '../safety.ts';
+import { GATE_ENABLED, signOut } from '../auth/gate.ts';
 import { Button, Card, PageTitle, Screen } from '../ui.tsx';
 
 const ASKABLE: Flag[] = [
@@ -40,7 +34,7 @@ function Toggle({
   onChange: (value: boolean) => void;
 }): JSX.Element {
   return (
-    <label className="flex cursor-pointer items-start justify-between gap-4 py-3">
+    <label className="flex min-h-11 cursor-pointer items-start justify-between gap-4 py-3">
       <span>
         <span className="block">{label}</span>
         {hint !== undefined && <span className="block text-sm text-bone-dim">{hint}</span>}
@@ -49,7 +43,7 @@ function Toggle({
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-amber)]"
+        className="mt-0.5 size-6 shrink-0 accent-[var(--color-accent)]"
       />
     </label>
   );
@@ -163,44 +157,35 @@ export function Settings(): JSX.Element {
               className="hidden"
             />
           </div>
-          {message !== null && <p className="mt-3 text-sm text-amber">{message}</p>}
+          <p role="status" aria-live="polite" className="mt-3 text-sm text-accent">
+            {message}
+          </p>
         </Card>
       </Section>
 
-      <Section title="Two rules worth knowing">
-        <div className="space-y-3">
+      {GATE_ENABLED && (
+        <Section title="Development">
           <Card>
-            <h3 className="font-medium">The leg rule</h3>
-            <p className="mt-1 text-sm leading-relaxed text-bone-dim">{LEG_RULE}</p>
+            <p className="text-sm leading-relaxed text-bone-dim">
+              This site is behind a password while you build it. It is a browser-side
+              check, so treat it as a closed door rather than a locked one — lift it for
+              good by building with <code className="text-bone">VITE_REQUIRE_LOGIN=false</code>.
+            </p>
+            <Button
+              onClick={() => {
+                signOut();
+                window.location.reload();
+              }}
+              className="mt-4"
+            >
+              Sign out
+            </Button>
           </Card>
-          <Card>
-            <h3 className="font-medium">Nerve or muscle?</h3>
-            <p className="mt-1 text-sm leading-relaxed text-bone-dim">{NERVE_TEST}</p>
-          </Card>
-          <Card>
-            <h3 className="font-medium">If your heels will not go down</h3>
-            <p className="mt-1 text-sm leading-relaxed text-bone-dim">{ANKLE_NOTE}</p>
-          </Card>
-        </div>
-      </Section>
+        </Section>
+      )}
 
-      <Section title="When to see someone">
-        <Card className="border-rust/40">
-          <h3 className="font-medium text-rust">Go to A&amp;E straight away</h3>
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-bone-dim">
-            {EMERGENCY_FLAGS.map((flag) => (
-              <li key={flag}>{flag}</li>
-            ))}
-          </ul>
-          <h3 className="mt-4 font-medium">Book with a doctor soon</h3>
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-bone-dim">
-            {SEE_SOMEONE_FLAGS.map((flag) => (
-              <li key={flag}>{flag}</li>
-            ))}
-          </ul>
-        </Card>
-        <p className="mt-3 text-xs leading-relaxed text-bone-dim">{DISCLAIMER}</p>
-      </Section>
+      <p className="mt-8 text-xs leading-relaxed text-bone-dim">{DISCLAIMER}</p>
+
     </Screen>
   );
 }

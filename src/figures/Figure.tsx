@@ -19,7 +19,11 @@ import {
 
 interface FigureProps {
   pose: Pose;
-  /** Accessible description. Required — these carry real instructional meaning. */
+  /**
+   * Accessible description. Pass an empty string where the figure merely repeats
+   * adjacent text — it is then hidden from assistive tech rather than announced as
+   * an unlabelled image.
+   */
   label: string;
   className?: string;
 }
@@ -132,8 +136,10 @@ export function Figure({ pose, label, className }: FigureProps): JSX.Element {
     <svg
       viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
       className={className}
-      role="img"
-      aria-label={label}
+      // Decorative when it only restates the name beside it.
+      {...(label === ''
+        ? { 'aria-hidden': true as const, focusable: false as const }
+        : { role: 'img' as const, 'aria-label': label })}
       xmlns="http://www.w3.org/2000/svg"
     >
       {(pose.ground ?? true) && (

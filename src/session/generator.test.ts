@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { EXERCISES } from '../content/exercises.ts';
-import type { Exercise, Flag } from '../content/types.ts';
+import { parseRegions, type Exercise, type Flag, type Region } from '../content/types.ts';
 import {
   buildPhases,
   estimateSeconds,
@@ -230,6 +230,52 @@ describe('generateSession', () => {
     expect(sciaticPool.map((e) => e.id)).toContain('sciatic-slider');
   });
 
+  it('draws only from the chosen body areas', () => {
+    const cases: Region[][] = [['hips'], ['hamstrings'], ['ankles'], ['back'], ['hips', 'ankles']];
+
+    for (const regions of cases) {
+      for (const seed of SEEDS) {
+        const session = generateSession({ seed, budgetSeconds: 20 * 60, regions });
+        expect(session.items.length, `${regions.join('+')} @ ${seed}`).toBeGreaterThan(0);
+        for (const item of session.items) {
+          expect(
+            item.exercise.regions.some((region) => regions.includes(region)),
+            `${item.exercise.id} is not in ${regions.join('+')}`,
+          ).toBe(true);
+        }
+      }
+    }
+  });
+
+  it('treats an empty focus as the whole library', () => {
+    const focused = generateSession({ seed: 'alpha', budgetSeconds: 20 * 60, regions: [] });
+    const unfocused = generateSession({ seed: 'alpha', budgetSeconds: 20 * 60 });
+    expect(focused.items.map((i) => i.exercise.id)).toEqual(
+      unfocused.items.map((i) => i.exercise.id),
+    );
+  });
+
+  it('still opens and closes properly when focused on one area', () => {
+    for (const region of ['hips', 'hamstrings', 'ankles', 'back'] as Region[]) {
+      const session = generateSession({ seed: 'focus', budgetSeconds: 20 * 60, regions: [region] });
+      expect(session.items[0]?.exercise.role, region).toBe('opener');
+      expect(session.items.at(-1)?.exercise.role, region).toBe('rest');
+    }
+  });
+
+  it('honours exclusions and focus together', () => {
+    const session = generateSession({
+      seed: 'both',
+      budgetSeconds: 20 * 60,
+      regions: ['hips'],
+      exclusions: ['knee'],
+    });
+    for (const item of session.items) {
+      expect(item.exercise.regions).toContain('hips');
+      expect(item.exercise.contraindications).not.toContain('knee');
+    }
+  });
+
   it('never prescribes a hold longer than its cap', () => {
     for (const seed of SEEDS) {
       const session = generateSession({ seed, budgetSeconds: 20 * 60 });
@@ -301,5 +347,26 @@ describe('rng', () => {
     expect(out).toHaveLength(input.length);
     expect(new Set(out)).toEqual(new Set(input));
     expect(input).toEqual(Array.from({ length: 50 }, (_, i) => i));
+  });
+});
+
+describe('parseRegions', () => {
+  it('reads a focus parameter', () => {
+    expect(parseRegions('hips,back')).toEqual(['hips', 'back']);
+  });
+
+  it('is empty for nothing', () => {
+    expect(parseRegions(null)).toEqual([]);
+    expect(parseRegions('')).toEqual([]);
+    expect(parseRegions('   ')).toEqual([]);
+  });
+
+  it('drops anything that is not a real region', () => {
+    expect(parseRegions('hips,elbows,back')).toEqual(['hips', 'back']);
+    expect(parseRegions('nonsense')).toEqual([]);
+  });
+
+  it('tolerates whitespace', () => {
+    expect(parseRegions(' hips , back ')).toEqual(['hips', 'back']);
   });
 });

@@ -1,0 +1,11 @@
+# Copy to backend.hcl (gitignored) after running bootstrap/bootstrap.sh, then:
+#
+#   terraform init -backend-config=backend.hcl
+#
+# The storage account name is globally unique, so yours will differ - the
+# bootstrap script prints the exact values to paste here.
+
+resource_group_name  = "rg-groundwork-tfstate"
+storage_account_name = "stgroundworktfstateXXXXXX"
+container_name       = "tfstate"
+key                  = "groundwork-prod.tfstate"

@@ -1,0 +1,23 @@
+# Copy to terraform.tfvars and edit. terraform.tfvars is gitignored.
+# Every value below is optional - the defaults in variables.tf are the intended
+# production configuration.
+
+# subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# name_prefix = "groundwork"
+# environment = "prod"
+
+# Static Web Apps exists in only 5 regions:
+# centralus | eastus2 | westus2 | westeurope | eastasia
+# location = "westeurope"
+
+# repository_url = "https://github.com/TypicalLawrence/stretch-app"
+
+# tags = {
+#   owner = "dean"
+# }
+
+# --- Custom domain (off by default; read infra/custom_domain.tf first) -------
+# enable_custom_domain          = true
+# custom_domain_name            = "groundwork.example.com"
+# custom_domain_validation_type = "cname-delegation"   # apex -> "dns-txt-token"

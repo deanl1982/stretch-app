@@ -44,7 +44,7 @@ export function ExerciseDetail(): JSX.Element {
           <Figure
             pose={pose}
             label={`${exercise.name}: ${exercise.summary}`}
-            className="mx-auto h-48 w-full max-w-sm text-bone"
+            className="mx-auto h-48 w-full max-w-sm text-bone-dim"
           />
         </Card>
       )}
@@ -73,12 +73,12 @@ export function ExerciseDetail(): JSX.Element {
 
       <Section title="What it should feel like">
         <div className="space-y-3">
-          <p className="rounded-xl border border-sage/30 bg-sage/5 px-4 py-3 text-bone-dim">
-            <span className="mr-2 font-medium text-sage">Yes</span>
+          <p className="rounded-xl border border-positive/30 bg-positive/5 px-4 py-3 text-bone-dim">
+            <span className="mr-2 font-medium text-positive">Yes</span>
             {exercise.shouldFeel}
           </p>
-          <p className="rounded-xl border border-rust/40 bg-rust/5 px-4 py-3 text-bone-dim">
-            <span className="mr-2 font-medium text-rust">No</span>
+          <p className="rounded-xl border border-negative/40 bg-negative/5 px-4 py-3 text-bone-dim">
+            <span className="mr-2 font-medium text-negative">No</span>
             {exercise.shouldNotFeel}
           </p>
         </div>

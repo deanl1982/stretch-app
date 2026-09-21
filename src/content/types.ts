@@ -156,6 +156,27 @@ export interface Exercise {
   evidenceNote?: string;
 }
 
+/** Body areas in the order they are presented, everywhere. */
+export const REGION_ORDER: Region[] = ['hips', 'hamstrings', 'ankles', 'back', 'fullBody'];
+
+export function isRegion(value: string): value is Region {
+  return (REGION_ORDER as string[]).includes(value);
+}
+
+/** Parse a `focus=hips,back` URL parameter into regions, ignoring anything unknown. */
+export function parseRegions(value: string | null): Region[] {
+  if (value === null || value.trim() === '') return [];
+  return value.split(',').map((part) => part.trim()).filter(isRegion);
+}
+
+/** "Hips and ankles & feet" — a focus list rendered for a human. */
+export function describeRegions(regions: readonly Region[]): string {
+  const names = regions.map((region) => REGION_LABELS[region].toLowerCase());
+  if (names.length === 0) return 'everything';
+  if (names.length === 1) return names[0] ?? 'everything';
+  return `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+}
+
 /** "45s each side, twice" — the dose rendered for a human. */
 export function describeDose(exercise: Exercise): string {
   const { dose } = exercise;

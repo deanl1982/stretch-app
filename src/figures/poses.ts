@@ -190,6 +190,16 @@ export const POSES: Record<string, Pose> = {
     highlight: ['foot'],
   },
 
+  'big-toe-tucked-kneeling': {
+    // Seiza, hips on the heel. The near foot breaks the line at the big toe only —
+    // ball just off the floor — while the far foot stays flat, so the contrast reads.
+    head: [104, 58], neck: [104, 76], pelvis: [104, 112],
+    elbow: [114, 96], hand: [124, 112],
+    knee: [132, 128], ankle: [104, 129], toe: [93, 121],
+    farKnee: [126, 130], farAnkle: [100, 131], farToe: [86, 131],
+    highlight: ['foot'],
+  },
+
   'deep-squat-hold': {
     head: [106, 58], neck: [104, 76], pelvis: [100, 112],
     elbow: [116, 92], hand: [122, 108],

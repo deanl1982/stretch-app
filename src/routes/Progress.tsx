@@ -32,7 +32,7 @@ export function Progress(): JSX.Element {
         <dl className="grid grid-cols-3 gap-4 text-center">
           <div>
             <dt className="text-xs uppercase tracking-wider text-bone-dim">Streak</dt>
-            <dd className="mt-1 text-2xl font-semibold text-amber">{current}</dd>
+            <dd className="mt-1 text-2xl font-semibold text-accent">{current}</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-wider text-bone-dim">Longest</dt>
@@ -50,14 +50,17 @@ export function Progress(): JSX.Element {
           Last {WEEKS} weeks
         </h2>
         <Card>
-          <div className="grid grid-flow-col grid-rows-7 gap-1">
+          <p className="sr-only">
+            You trained on {days.filter((day) => active.has(day)).length} of the last{' '}
+            {days.length} days.
+          </p>
+          <div className="grid grid-flow-col grid-rows-7 gap-1" aria-hidden="true">
             {days.map((day) => (
               <span
                 key={day}
                 title={day}
-                aria-label={active.has(day) ? `${day}: trained` : day}
                 className={`aspect-square rounded-[3px] ${
-                  active.has(day) ? 'bg-amber' : 'bg-surface-2'
+                  active.has(day) ? 'bg-accent' : 'bg-surface-2'
                 }`}
               />
             ))}
@@ -81,7 +84,7 @@ export function Progress(): JSX.Element {
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-surface-2">
                   <div
-                    className="h-full rounded-full bg-amber"
+                    className="h-full rounded-full bg-accent"
                     style={{ width: `${(summary.byRegion[region] / maxRegion) * 100}%` }}
                   />
                 </div>

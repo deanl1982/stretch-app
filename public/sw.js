@@ -2,7 +2,7 @@
  * Offline support.
  *
  * Hand-rolled rather than pulled from a plugin, because the requirement is simple:
- * once you have opened Groundwork, it should work on the floor with no signal. All
+ * once you have opened Groundwork Flexibility, it should work on the floor with no signal. All
  * content ships in the bundle and there is no API, so a cache-first strategy with a
  * network fallback covers everything.
  */

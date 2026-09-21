@@ -29,7 +29,7 @@ function Ring({ progress }: { progress: number }): JSX.Element {
         cy="60"
         r={radius}
         fill="none"
-        stroke="var(--color-amber)"
+        stroke="var(--color-accent)"
         strokeWidth="5"
         strokeLinecap="round"
         strokeDasharray={circumference}
@@ -191,14 +191,22 @@ export function Player(): JSX.Element {
   const seconds = remaining % 60;
 
   return (
-    <div className="flex min-h-dvh flex-col px-4 pb-6">
+    <main className="flex min-h-dvh flex-col px-4 pb-6">
       {/* Progress through the session as a row of ticks. */}
-      <div className="flex gap-1 pt-4" aria-label={`Position ${session.index + 1} of ${session.plannedIds.length}`}>
+      <div
+        className="flex gap-1 pt-4"
+        role="progressbar"
+        aria-label="Session progress"
+        aria-valuemin={1}
+        aria-valuemax={session.plannedIds.length}
+        aria-valuenow={session.index + 1}
+        aria-valuetext={`Position ${session.index + 1} of ${session.plannedIds.length}`}
+      >
         {session.plannedIds.map((id, index) => (
           <span
             key={`${id}-${index}`}
             className={`h-1 flex-1 rounded-full ${
-              index < session.index ? 'bg-amber' : index === session.index ? 'bg-bone' : 'bg-edge'
+              index < session.index ? 'bg-accent' : index === session.index ? 'bg-bone' : 'bg-edge'
             }`}
           />
         ))}
@@ -208,12 +216,20 @@ export function Player(): JSX.Element {
         <span>
           {session.index + 1} of {session.plannedIds.length}
         </span>
-        <button type="button" onClick={quit} className="hover:text-bone">
+        <button
+          type="button"
+          onClick={quit}
+          className="-mr-2 min-h-11 rounded-lg px-2 hover:text-bone"
+        >
           End session
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-5 text-center">
+      <div
+        className="flex flex-1 flex-col items-center justify-center gap-5 text-center"
+        aria-live="polite"
+        aria-atomic="false"
+      >
         <h1 className="text-3xl font-semibold tracking-tight">{exercise.name}</h1>
         <p className="text-bone-dim">{describeDose(exercise)}</p>
 
@@ -221,13 +237,13 @@ export function Player(): JSX.Element {
           <Figure
             pose={pose}
             label={`${exercise.name}: ${exercise.summary}`}
-            className="h-44 w-full max-w-sm text-bone"
+            className="h-44 w-full max-w-sm text-bone-dim"
           />
         )}
 
         <div className="relative h-32 w-32">
           <Ring progress={progress} />
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
             <span className="text-4xl font-semibold tabular-nums">
               {minutes > 0 ? `${minutes}:${String(seconds).padStart(2, '0')}` : seconds}
             </span>
@@ -235,7 +251,7 @@ export function Player(): JSX.Element {
         </div>
 
         {phase !== undefined && phase.label !== '' && (
-          <p className="text-sm font-medium text-amber">{phase.label}</p>
+          <p className="text-sm font-medium text-accent">{phase.label}</p>
         )}
 
         <ul className="max-w-sm space-y-1.5 text-lg leading-snug text-bone-dim">
@@ -268,6 +284,6 @@ export function Player(): JSX.Element {
       >
         Too hard? See the easier versions
       </Button>
-    </div>
+    </main>
   );
 }

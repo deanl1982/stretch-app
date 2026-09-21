@@ -9,6 +9,11 @@
 
 export const DISCLAIMER = `This app gives general movement guidance. It is not medical advice, and it is not a substitute for seeing a doctor or physiotherapist. Move within a comfortable range, stop if something sharpens, and come back tomorrow — consistency does more than intensity. If you are recovering from surgery, have osteoporosis or a joint replacement, or have pain that is new, severe or not improving, talk to a clinician first.`;
 
+/**
+ * Not currently rendered anywhere — the "When to see someone" panel was removed from
+ * Settings at the owner's request. Kept because the wording took work and may be
+ * wanted again; delete if it is still unused in a few months.
+ */
 export const EMERGENCY_FLAGS = [
   'Numbness around your groin, genitals, buttocks or inner thighs — the area that would touch a saddle',
   'Trouble passing urine, or losing control of your bladder or bowels',
@@ -24,7 +29,13 @@ export const SEE_SOMEONE_FLAGS = [
   'Back pain that is not improving at all after six weeks',
 ];
 
-/** The single most useful self-triage rule a consumer app can teach. */
+/**
+ * Not currently rendered — the "Two rules worth knowing" panel was removed from
+ * Settings at the owner's request, along with LEG_RULE, NERVE_TEST and ANKLE_NOTE.
+ * Kept in case they are wanted again; delete if still unused in a few months.
+ *
+ * The single most useful self-triage rule a consumer app can teach.
+ */
 export const LEG_RULE = `If a movement makes symptoms move towards your spine and away from your leg, keep going — that direction is helping. If it pushes symptoms further down your leg, or brings on new numbness or tingling, stop that movement for today.`;
 
 /** How to tell an irritated nerve from a tight muscle, which feel identical. */

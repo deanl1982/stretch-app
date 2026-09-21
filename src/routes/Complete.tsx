@@ -28,7 +28,7 @@ export function Complete(): JSX.Element {
         <dl className="grid grid-cols-3 gap-4 text-center">
           <div>
             <dt className="text-xs uppercase tracking-wider text-bone-dim">Streak</dt>
-            <dd className="mt-1 text-2xl font-semibold text-amber">{current}</dd>
+            <dd className="mt-1 text-2xl font-semibold text-accent">{current}</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-wider text-bone-dim">Sessions</dt>

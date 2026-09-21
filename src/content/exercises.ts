@@ -768,7 +768,7 @@ export const EXERCISES: Exercise[] = [
   {
     id: 'seiza',
     name: 'Seiza',
-    aka: ['Kneeling sit'],
+    aka: ['Kneeling sit', 'Heel sit', 'Vajrasana'],
     regions: ['ankles', 'hips'],
     role: 'rest',
     intensity: 2,
@@ -805,11 +805,12 @@ export const EXERCISES: Exercise[] = [
   {
     id: 'toes-tucked-kneeling',
     name: 'Toes-Tucked Kneeling',
+    aka: ['Seiza, toes tucked', 'Toe sit', 'Kneeling toe stretch'],
     regions: ['ankles'],
     role: 'main',
     intensity: 3,
     summary: 'Kneel with your toes tucked under and sit back towards your heels. Far harder than it looks.',
-    why: 'Your big toe has to extend around 45 to 60 degrees just to walk properly, and it tensions the whole sole of your foot when it does — that is what turns your foot into a rigid lever to push off. A life in cushioned shoes loses it. This is the blunt instrument for getting it back.',
+    why: 'A healthy big toe bends up around 65 to 75 degrees, and it tensions the whole sole of your foot when it does — that is what turns your foot into a rigid lever to push off. A life in cushioned shoes loses it. This is the blunt instrument for getting it back.',
     targets: ['big toe extension', 'plantar fascia', 'toe flexors'],
     dose: { kind: 'hold', seconds: 15, sets: 3, perSide: false },
     maxHoldSeconds: 20,
@@ -837,6 +838,64 @@ export const EXERCISES: Exercise[] = [
     source: ['Give me 5 minutes, I’ll Fix your Hips'],
     evidenceNote:
       'The source says this improves ankle dorsiflexion. It does not — mechanically, this is the opposite ankle position. It is an excellent toe, forefoot and sole exercise, which is reason enough. Start at ten seconds.',
+  },
+
+  {
+    id: 'big-toe-tucked-kneeling',
+    name: 'Big-Toe-Tucked Kneeling',
+    aka: ['Seiza, big toe only', 'First ray kneeling', 'Single-toe seiza'],
+    regions: ['ankles'],
+    role: 'main',
+    intensity: 3,
+    summary:
+      'Kneel in seiza and tuck just the big toe of one foot under, so all the pressure lands on that one joint.',
+    why: 'A healthy big toe bends up around 65 to 75 degrees, and when it does the whole sole tightens and your foot becomes a stiff lever to push off. Toes-tucked kneeling spreads that job across all five toes. This puts it through one \u2014 the toe that does most of the work when you run, and the one a lifetime of stiff-soled shoes has let you avoid using.',
+    targets: ['big toe extension', 'first ray', 'plantar aponeurosis', 'knee flexion'],
+    dose: { kind: 'hold', seconds: 15, sets: 2, perSide: true },
+    maxHoldSeconds: 20,
+    cues: [
+      'Kneel in seiza, then tuck under the big toe of one foot only.',
+      'Keep the other four toes flat on the floor.',
+      'Sit back until it is a strong six out of ten, and no further.',
+      'Breathe. If you are bracing against it, come forward.',
+    ],
+    shouldFeel:
+      'A narrow, concentrated stretch under the big toe and across the inside of the ball of that foot.',
+    shouldNotFeel:
+      'A sharp, pinpoint ache directly under the big toe joint, or a hard bony stop with pain on top of it.',
+    regressions: [
+      {
+        label: 'Folded towel under the toe',
+        detail: 'The one that makes this doable on day one \u2014 it cuts the angle at the joint.',
+        props: ['towel'],
+      },
+      {
+        label: 'Hands on the floor in front',
+        detail: 'Takes most of your weight off the foot and off the knee.',
+        props: ['none'],
+      },
+      {
+        label: 'Kneel tall',
+        detail: 'Hips off the heels entirely. Least load, still the right shape.',
+        props: ['none'],
+      },
+    ],
+    progressions: [
+      { label: 'Sit all the way back', detail: 'Hips onto the heel, full weight through the toe.' },
+      { label: 'Both big toes at once', detail: 'Same hold, half the time, twice the honesty.' },
+      {
+        label: 'Hold longer',
+        detail: 'Build towards 20 seconds. That is the ceiling here, not a target to beat.',
+      },
+    ],
+    props: ['towel'],
+    officeFriendly: false,
+    barefootOnly: true,
+    contraindications: ['knee', 'plantarFascia', 'bigToe'],
+    dailySafe: true,
+    source: ['Kadour Ziani', 'Added \u2014 the loaded first ray item'],
+    evidenceNote:
+      'The windlass is real: bend the big toe up and the sheet of tissue under your foot pulls tight and the arch lifts \u2014 measured at roughly 6mm of arch rise sitting and 11mm walking. What nobody has tested is whether holding this position changes how you walk or run, so the honest claim is narrower \u2014 it is loaded range you do not currently own. Two small bones called the sesamoids sit directly under this joint and get squeezed when the toe bends up under weight, so a pinpoint ache there means stop, not push. Keep kneeling short and varied: a working life spent kneeling is associated with knee osteoarthritis and meniscal problems, and nothing here protects your knees.',
   },
 
   {
@@ -886,13 +945,13 @@ export const EXERCISES: Exercise[] = [
   {
     id: 'big-toe-extension',
     name: 'Big Toe Extension',
-    aka: ['First ray mobilisation'],
+    aka: ['First ray mobilisation', 'Hallux extension', 'Big toe mobility'],
     regions: ['ankles'],
     role: 'main',
     intensity: 1,
     summary:
       'Sitting, hold the foot still in one hand and ease the big toe back towards your shin, then try to lift it on its own.',
-    why: 'Your big toe has to extend about 45 to 60 degrees just to walk properly, and when it does it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
+    why: 'A healthy big toe bends up around 65 to 75 degrees, and when it does it tightens the whole sole of your foot and turns it into a rigid lever to push off. A life in cushioned shoes quietly takes that away. This is the precise, controllable version of toes-tucked kneeling — the one you can still do when your foot is cranky.',
     targets: ['big toe extension', 'first ray', 'plantar fascia'],
     dose: { kind: 'reps', reps: 10, sets: 1, perSide: true, tempoNote: 'Hold the last one for 30 seconds.' },
     cues: [

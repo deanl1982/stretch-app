@@ -6,23 +6,38 @@
   because the whole premise is ground, not gym.
 */
 @theme {
-  --color-ink: #12100e;
-  --color-surface: #1c1916;
-  --color-surface-2: #252119;
-  --color-edge: #322c25;
-  --color-bone: #e8e4de;
-  --color-bone-dim: #a39c92;
-  --color-amber: #c98a3a;
-  --color-amber-bright: #e0a250;
-  --color-sage: #7d9471;
-  --color-rust: #b5563f;
+  /*
+    Palette: three navy depths plus a warm cream.
+    #010736 · #0D1C42 · #22396F · #FCF1D0
+    surface-2 and bone-dim are derived mid-steps, needed for readable secondary
+    text and raised surfaces that four stops alone cannot cover.
+  */
+  --color-ink: #010736;
+  --color-surface: #0d1c42;
+  --color-surface-2: #16274e;
+  --color-edge: #22396f;
+  /* Borders that IDENTIFY a control — inputs, unselected chips, secondary buttons.
+     WCAG 1.4.11 wants 3:1 for those, and --color-edge only manages 1.5:1 against a
+     card. --color-edge stays for decorative outlines, where no minimum applies. */
+  --color-control: #6c86c7;
+  --color-bone: #fcf1d0;
+  --color-bone-dim: #9ba5c4;
+
+  /* Cream is the call to action — the lightest stop carries the emphasis. */
+  --color-accent: #fcf1d0;
+  --color-accent-bright: #fffbf0;
+
+  /* Kept outside the four stops: "should feel" / "should not feel" and delete
+     confirmations need to mean something, which navy-on-navy cannot do. */
+  --color-positive: #7fc8a9;
+  --color-negative: #e8836b;
 
   --font-sans: ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;
 }
 
 :root {
   color-scheme: dark;
-  --figure-accent: var(--color-amber);
+  --figure-accent: var(--color-bone);
   --figure-prop: var(--color-bone-dim);
 }
 
@@ -52,6 +67,22 @@ textarea {
 
 body {
   overscroll-behavior-y: contain;
+}
+
+/*
+  Visible keyboard focus (WCAG 2.4.7). Declared globally so no component can quietly
+  drop it — several inputs previously used outline-none with only a border change,
+  which is not a reliable focus indicator.
+*/
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Never let a fixed bar sit on top of the element being focused (WCAG 2.4.11). */
+:target,
+:focus-visible {
+  scroll-margin-block: 6rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

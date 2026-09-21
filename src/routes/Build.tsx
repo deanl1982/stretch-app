@@ -2,6 +2,7 @@ import { useMemo, useState, type JSX } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { REGION_LABELS, describeDose, type Region } from '../content/types.ts';
 import { eligiblePool } from '../session/generator.ts';
+import { randomSeed } from '../session/rng.ts';
 import { estimateSeconds } from '../session/phases.ts';
 import { saveActive } from '../session/active.ts';
 import { loadProfile } from '../storage/store.ts';
@@ -140,11 +141,11 @@ export function Build(): JSX.Element {
                   onClick={() => toggleRegion(region)}
                   aria-pressed={on}
                   className={`flex w-full items-center justify-between rounded-2xl border px-5 py-4 text-left transition-colors ${
-                    on ? 'border-amber bg-amber/10' : 'border-edge bg-surface hover:border-bone-dim'
+                    on ? 'border-accent bg-accent/10' : 'border-edge bg-surface hover:border-bone-dim'
                   }`}
                 >
                   <span className="text-lg font-medium">{REGION_LABELS[region]}</span>
-                  <span className={`text-sm ${on ? 'text-amber' : 'text-bone-dim'}`}>
+                  <span className={`text-sm ${on ? 'text-accent' : 'text-bone-dim'}`}>
                     {on ? 'Selected' : `${count} positions`}
                   </span>
                 </button>
@@ -164,7 +165,7 @@ export function Build(): JSX.Element {
             }}
             className="mt-4 flex w-full items-center justify-between rounded-2xl border border-edge bg-surface px-5 py-4 text-left transition-colors hover:border-bone-dim"
           >
-            <span className="text-lg font-medium text-amber">Just my favourites</span>
+            <span className="text-lg font-medium text-accent">Just my favourites</span>
             <span className="text-sm text-bone-dim">{favourites.length} saved</span>
           </button>
         )}
@@ -175,8 +176,23 @@ export function Build(): JSX.Element {
           onClick={() => setStep('pick')}
           className="mt-6 w-full py-4 text-lg"
         >
-          {regions.size === 0 ? 'Pick at least one' : 'Choose exercises'}
+          {regions.size === 0 ? 'Pick at least one' : 'Choose exercises myself'}
         </Button>
+
+        <Button
+          disabled={regions.size === 0}
+          onClick={() =>
+            navigate(
+              `/session?seed=${randomSeed()}&minutes=${profile.defaultMinutes}&focus=${[...regions].join(',')}`,
+            )
+          }
+          className="mt-3 w-full py-4 text-lg"
+        >
+          Draw one for me
+        </Button>
+        <p className="mt-3 text-center text-xs text-bone-dim">
+          A random {profile.defaultMinutes}-minute session from just these areas.
+        </p>
       </Screen>
     );
   }
@@ -194,10 +210,10 @@ export function Build(): JSX.Element {
           type="button"
           onClick={() => setFavouritesOnly((v) => !v)}
           aria-pressed={favouritesOnly}
-          className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
+          className={`inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 py-2 text-sm transition-colors ${
             favouritesOnly
-              ? 'border-amber bg-amber text-ink'
-              : 'border-edge bg-surface-2 text-bone-dim hover:text-bone'
+              ? 'border-accent bg-accent text-ink'
+              : 'border-control bg-surface-2 text-bone-dim hover:text-bone'
           }`}
         >
           Favourites
@@ -208,10 +224,10 @@ export function Build(): JSX.Element {
             type="button"
             onClick={() => toggleRegion(region)}
             aria-pressed={regions.has(region)}
-            className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
+            className={`inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 py-2 text-sm transition-colors ${
               regions.has(region)
-                ? 'border-amber bg-amber text-ink'
-                : 'border-edge bg-surface-2 text-bone-dim hover:text-bone'
+                ? 'border-accent bg-accent text-ink'
+                : 'border-control bg-surface-2 text-bone-dim hover:text-bone'
             }`}
           >
             {REGION_LABELS[region]}
@@ -241,12 +257,12 @@ export function Build(): JSX.Element {
                 >
                   <Card
                     className={`flex items-center gap-3 py-3 transition-colors ${
-                      on ? 'border-amber bg-amber/5' : 'hover:border-bone-dim'
+                      on ? 'border-accent bg-accent/5' : 'hover:border-bone-dim'
                     }`}
                   >
                     <span
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-sm tabular-nums ${
-                        on ? 'border-amber bg-amber text-ink' : 'border-edge text-bone-dim'
+                        on ? 'border-accent bg-accent text-ink' : 'border-edge text-bone-dim'
                       }`}
                     >
                       {on ? position + 1 : ''}
@@ -279,7 +295,7 @@ export function Build(): JSX.Element {
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Name this workout"
-                className="min-w-0 flex-1 rounded-xl border border-edge bg-surface px-4 py-3 text-bone outline-none focus:border-amber"
+                className="min-w-0 flex-1 rounded-xl border border-control bg-surface px-4 py-3 text-bone focus:border-accent"
               />
               <Button variant="primary" onClick={save}>
                 Save
@@ -296,7 +312,11 @@ export function Build(): JSX.Element {
                   {selected.length > 0 && ` · about ${minutes(totalSeconds)}`}
                 </span>
                 {selected.length > 1 && (
-                  <button type="button" onClick={tidyOrder} className="text-bone-dim hover:text-bone">
+                  <button
+                    type="button"
+                    onClick={tidyOrder}
+                    className="-mr-2 min-h-11 rounded-lg px-2 text-bone-dim hover:text-bone"
+                  >
                     Order it sensibly
                   </button>
                 )}

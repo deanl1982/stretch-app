@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#12100e"/>
+  <rect width="512" height="512" rx="112" fill="#010736"/>
   <!-- A figure in a deep squat: the app in one mark. -->
-  <g fill="none" stroke="#c98a3a" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#22396f" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
     <path d="M256 196 L246 286"/>
     <path d="M246 286 L330 262 L292 356"/>
     <path d="M246 286 L166 266 L206 356"/>
   </g>
-  <circle cx="262" cy="156" r="34" fill="#e8e4de"/>
-  <path d="M120 386 H392" stroke="#e8e4de" stroke-width="18" stroke-linecap="round" opacity="0.45"/>
+  <circle cx="262" cy="156" r="34" fill="#fcf1d0"/>
+  <path d="M120 386 H392" stroke="#fcf1d0" stroke-width="18" stroke-linecap="round" opacity="0.5"/>
 </svg>

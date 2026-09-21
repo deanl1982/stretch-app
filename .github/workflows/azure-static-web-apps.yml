@@ -1,64 +1,178 @@
-name: Deploy to Azure Static Web Apps
+name: App
+
+# Builds and deploys the Groundwork Flexibility SPA to Azure Static Web Apps.
+#
+# Infrastructure (the SWA resource itself) is owned by Terraform - see
+# .github/workflows/infra.yml and infra/README.md. This workflow only uploads
+# content into an app that already exists.
+#
+# Authentication: no long-lived deployment token is stored in GitHub. The job
+# logs in to Azure with OIDC federated credentials and fetches the SWA
+# deployment token at run time. See infra/README.md "The deployment token".
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'infra/**'
+      - '**/*.md'
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches: [main]
+    paths-ignore:
+      - 'infra/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+concurrency:
+  # One deploy at a time per branch/PR; cancel superseded runs, but never
+  # cancel a close run or the preview environment leaks.
+  group: app-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event.action != 'closed' }}
 
 permissions:
   contents: read
+  # Required for azure/login OIDC. NOTE: GitHub does not issue an id-token to
+  # workflows triggered by a pull_request from a FORK, so fork PRs cannot
+  # deploy a preview. That is the same restriction that already applies to
+  # secrets, so it is not a regression - but it does mean this pattern suits a
+  # single-owner repo, which this is.
+  id-token: write
   pull-requests: write
 
-jobs:
-  verify:
-    name: Typecheck, test and build
-    runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
-      - run: npm run build
+env:
+  NODE_VERSION: '24'
 
-  deploy:
-    name: Deploy
+jobs:
+  build_and_deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
-    needs: verify
     if: github.event.action != 'closed'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - name: Deploy
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        env:
+          # Build-time overrides for the login gate in src/auth/gate.ts. Both
+          # have working defaults, so the build succeeds with neither set.
+          #
+          # WARNING: anything prefixed VITE_ is INLINED INTO THE PUBLIC BUNDLE.
+          # The password hash is readable by anyone who opens devtools, so it is
+          # a doormat and not a lock - which gate.ts says itself. If you need
+          # real protection, use Static Web Apps' built-in edge authentication
+          # via a role-gated route in staticwebapp.config.json. These are
+          # therefore repository *variables*, not secrets: calling them secrets
+          # would imply a confidentiality the build cannot provide.
+          VITE_REQUIRE_LOGIN: ${{ vars.VITE_REQUIRE_LOGIN }}
+          VITE_ADMIN_PASSWORD_HASH: ${{ vars.VITE_ADMIN_PASSWORD_HASH }}
+        run: |
+          # An unset GitHub variable expands to an EMPTY STRING, not to absent.
+          # gate.ts now treats a blank hash as absent, so this is belt and
+          # braces rather than load-bearing - but keeping it means the build
+          # behaves identically whether a variable is unset or set to "".
+          [ -n "$VITE_REQUIRE_LOGIN" ] || unset VITE_REQUIRE_LOGIN
+          [ -n "$VITE_ADMIN_PASSWORD_HASH" ] || unset VITE_ADMIN_PASSWORD_HASH
+          npm run build
+
+      - name: Verify platform config reached the build output
+        # Only `dist/` is uploaded (see the skip_app_build note below), so
+        # staticwebapp.config.json has to be inside it. It lives in public/,
+        # which Vite copies verbatim, so this needs no copy step - but if it
+        # ever moves back to the repo root the SPA silently loses
+        # navigationFallback and every deep link 404s on a hard refresh. Fail
+        # loudly here rather than discovering that in production.
+        run: test -f dist/staticwebapp.config.json
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch Static Web Apps deployment token
+        id: swa_token
+        run: |
+          token="$(az staticwebapp secrets list \
+            --name "${{ vars.SWA_NAME }}" \
+            --resource-group "${{ vars.SWA_RESOURCE_GROUP }}" \
+            --query properties.apiKey -o tsv)"
+          # Mask before it can reach any log line.
+          echo "::add-mask::$token"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.swa_token.outputs.token }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          app_location: '/'
-          output_location: 'dist'
-          # The build already ran above; do not let Oryx rebuild it.
+
+          # THE FOOTGUN: when skip_app_build is true, `app_location` is the
+          # path to the ALREADY-BUILT output and `output_location` is ignored.
+          # The common mistake - app_location '/' plus output_location 'dist'
+          # plus skip_app_build true - uploads the entire repository root
+          # (src/, node_modules/, tsconfig...) instead of dist/, and usually
+          # blows the Free tier's 250 MB per-environment storage limit.
+          app_location: 'dist'
+          output_location: ''
+          config_file_location: 'dist'
+
+          # Oryx is SWA's build system. Left to itself it re-detects the
+          # project and rebuilds it inside the deployment container with its
+          # own Node version, which will not match Node 24 and will not have
+          # run our typecheck or tests. We have already produced dist/ above,
+          # so tell it not to.
           skip_app_build: true
           skip_api_build: true
+
+          # No backend in this app - there is no api/ directory to deploy.
+          api_location: ''
+
+          # Anything not on main is treated as a preview environment. Free tier
+          # allows 3 concurrent preview environments per app.
+          production_branch: 'main'
 
   close_preview:
     name: Close pull request preview
     runs-on: ubuntu-latest
     if: github.event.action == 'closed'
     steps:
-      - name: Close
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch Static Web Apps deployment token
+        id: swa_token
+        run: |
+          token="$(az staticwebapp secrets list \
+            --name "${{ vars.SWA_NAME }}" \
+            --resource-group "${{ vars.SWA_RESOURCE_GROUP }}" \
+            --query properties.apiKey -o tsv)"
+          echo "::add-mask::$token"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+
+      - name: Tear down the preview environment
+        # Without this, closed PRs keep their preview environment and you hit
+        # the Free tier's limit of 3 after three merges.
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.swa_token.outputs.token }}
           action: close

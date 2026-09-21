@@ -5,7 +5,7 @@ import { randomSeed } from '../session/rng.ts';
 import { saveActive } from '../session/active.ts';
 import { loadHistory, loadProfile } from '../storage/store.ts';
 import { dayKey } from '../storage/stats.ts';
-import { describeDose } from '../content/types.ts';
+import { describeDose, describeRegions, parseRegions } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
 import { Button, Card, Empty, PageTitle, Pill, Screen } from '../ui.tsx';
@@ -33,6 +33,8 @@ export function Preview(): JSX.Element {
   const seed = params.get('seed') ?? randomSeed();
   const minutes = Number(params.get('minutes') ?? profile.defaultMinutes);
   const budgetSeconds = minutes * 60;
+  const focus = useMemo(() => parseRegions(params.get('focus')), [params]);
+  const focusQuery = focus.length > 0 ? `&focus=${focus.join(',')}` : '';
 
   const session = useMemo(
     () =>
@@ -43,13 +45,14 @@ export function Preview(): JSX.Element {
         availableProps: profile.availableProps ?? undefined,
         officeOnly: profile.officeOnly,
         pureChaos: profile.pureChaos,
+        regions: focus,
         recentCounts: recentCounts(),
       }),
-    [seed, budgetSeconds, profile],
+    [seed, budgetSeconds, profile, focus],
   );
 
   const reroll = (): void => {
-    navigate(`/session?seed=${randomSeed()}&minutes=${minutes}`, { replace: true });
+    navigate(`/session?seed=${randomSeed()}&minutes=${minutes}${focusQuery}`, { replace: true });
   };
 
   const begin = (): void => {
@@ -70,21 +73,36 @@ export function Preview(): JSX.Element {
       <Screen>
         <PageTitle>Nothing to draw</PageTitle>
         <Empty>
-          Everything in the library is ruled out by your current settings. Loosen a
-          restriction and try again.
+          {focus.length > 0
+            ? `Nothing available for ${describeRegions(focus)} at this length. Try a longer session or another area.`
+            : 'Everything in the library is ruled out by your current settings. Loosen a restriction and try again.'}
         </Empty>
-        <Button to="/settings" className="mt-4">
-          Open settings
-        </Button>
+        <div className="mt-4 flex gap-3">
+          {focus.length > 0 && (
+            <Button to={`/session?seed=${seed}&minutes=${minutes}`} variant="primary">
+              Draw from everything
+            </Button>
+          )}
+          <Button to="/settings">Open settings</Button>
+        </div>
       </Screen>
     );
   }
 
   return (
     <Screen>
-      <PageTitle sub={`${session.items.length} positions · about ${Math.round(session.totalSeconds / 60)} minutes`}>
-        Today’s draw
+      <PageTitle
+        sub={`${session.items.length} positions · about ${Math.round(session.totalSeconds / 60)} minutes`}
+      >
+        {focus.length > 0 ? `Random: ${describeRegions(focus)}` : 'Today’s draw'}
       </PageTitle>
+
+      {focus.length > 0 && session.totalSeconds < budgetSeconds * 0.7 && (
+        <p className="mb-4 rounded-xl border border-edge bg-surface-2/60 px-4 py-3 text-sm text-bone-dim">
+          That is everything available for {describeRegions(focus)} at this length. Add
+          another area or shorten the session for a fuller draw.
+        </p>
+      )}
 
       <ol className="space-y-2">
         {session.items.map((item, index) => {

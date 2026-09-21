@@ -82,7 +82,7 @@ export function Routines(): JSX.Element {
                           autoFocus
                           value={draftName}
                           onChange={(event) => setDraftName(event.target.value)}
-                          className="min-w-0 flex-1 rounded-xl border border-edge bg-surface-2 px-4 py-2 outline-none focus:border-amber"
+                          className="min-w-0 flex-1 min-h-11 rounded-xl border border-control bg-surface-2 px-4 py-2 focus:border-accent"
                         />
                         <Button
                           variant="primary"
@@ -134,7 +134,7 @@ export function Routines(): JSX.Element {
                     </div>
 
                     {confirmDelete === routine.id && (
-                      <div className="mt-3 rounded-xl border border-rust/40 bg-rust/5 p-3">
+                      <div className="mt-3 rounded-xl border border-negative/40 bg-negative/5 p-3">
                         <p className="text-sm text-bone-dim">
                           Delete “{routine.name}”? This cannot be undone.
                         </p>
