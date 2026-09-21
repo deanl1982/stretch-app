@@ -68,27 +68,7 @@ jobs:
         run: npm test
 
       - name: Build
-        env:
-          # Build-time overrides for the login gate in src/auth/gate.ts. Both
-          # have working defaults, so the build succeeds with neither set.
-          #
-          # WARNING: anything prefixed VITE_ is INLINED INTO THE PUBLIC BUNDLE.
-          # The password hash is readable by anyone who opens devtools, so it is
-          # a doormat and not a lock - which gate.ts says itself. If you need
-          # real protection, use Static Web Apps' built-in edge authentication
-          # via a role-gated route in staticwebapp.config.json. These are
-          # therefore repository *variables*, not secrets: calling them secrets
-          # would imply a confidentiality the build cannot provide.
-          VITE_REQUIRE_LOGIN: ${{ vars.VITE_REQUIRE_LOGIN }}
-          VITE_ADMIN_PASSWORD_HASH: ${{ vars.VITE_ADMIN_PASSWORD_HASH }}
-        run: |
-          # An unset GitHub variable expands to an EMPTY STRING, not to absent.
-          # gate.ts now treats a blank hash as absent, so this is belt and
-          # braces rather than load-bearing - but keeping it means the build
-          # behaves identically whether a variable is unset or set to "".
-          [ -n "$VITE_REQUIRE_LOGIN" ] || unset VITE_REQUIRE_LOGIN
-          [ -n "$VITE_ADMIN_PASSWORD_HASH" ] || unset VITE_ADMIN_PASSWORD_HASH
-          npm run build
+        run: npm run build
 
       - name: Verify platform config reached the build output
         # Only `dist/` is uploaded (see the skip_app_build note below), so

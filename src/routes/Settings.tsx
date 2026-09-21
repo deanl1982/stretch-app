@@ -3,7 +3,6 @@ import { FLAG_LABELS, type Flag } from '../content/types.ts';
 import { downloadBackup, loadProfile, restoreBackup, saveProfile } from '../storage/store.ts';
 import type { Profile } from '../storage/types.ts';
 import { DISCLAIMER } from '../safety.ts';
-import { GATE_ENABLED, signOut } from '../auth/gate.ts';
 import {
   HOLD_LEVELS,
   HOLD_LEVEL_HINTS,
@@ -197,27 +196,6 @@ export function Settings(): JSX.Element {
           </p>
         </Card>
       </Section>
-
-      {GATE_ENABLED && (
-        <Section title="Development">
-          <Card>
-            <p className="text-sm leading-relaxed text-bone-dim">
-              This site is behind a password while you build it. It is a browser-side
-              check, so treat it as a closed door rather than a locked one — lift it for
-              good by building with <code className="text-bone">VITE_REQUIRE_LOGIN=false</code>.
-            </p>
-            <Button
-              onClick={() => {
-                signOut();
-                window.location.reload();
-              }}
-              className="mt-4"
-            >
-              Sign out
-            </Button>
-          </Card>
-        </Section>
-      )}
 
       <p className="mt-8 text-xs leading-relaxed text-bone-dim">{DISCLAIMER}</p>
 

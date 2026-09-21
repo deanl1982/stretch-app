@@ -10,25 +10,6 @@ streak build.
 Built for people who already train but have neglected stretching, and who sit in a
 chair for work.
 
-## The development gate
-
-The site is currently behind a password (`hobbitfeet` by default). First visit asks you
-to name an admin account; after that it is a sign-in.
-
-**This is not security.** Groundwork Flexibility is a static bundle with no backend, so the check
-runs in the visitor's own browser — anyone with devtools can set the session flag by
-hand, and the password hash ships in the JavaScript. It keeps out a casual passer-by who
-finds the URL. It will not keep out anyone who is trying.
-
-For real protection, Azure Static Web Apps has **built-in authentication on the Free
-tier**: add a role-gated route rule to `public/staticwebapp.config.json` and invite yourself.
-That is enforced at the edge, before any content is served.
-
-To lift the gate when the site goes public, build with `VITE_REQUIRE_LOGIN=false`, or
-delete `src/auth/`, `src/routes/Login.tsx` and the guard block in `src/App.tsx`. To
-change the password, put a new SHA-256 in `VITE_ADMIN_PASSWORD_HASH` (see
-`.env.example`).
-
 ## Running it
 
 ```bash

@@ -1,7 +1,5 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, type JSX } from 'react';
 import { NavLink, Route, Routes, useLocation } from 'react-router';
-import { GATE_ENABLED, isSignedIn } from './auth/gate.ts';
-import { Login } from './routes/Login.tsx';
 import { Home } from './routes/Home.tsx';
 import { Preview } from './routes/Preview.tsx';
 import { Player } from './routes/Player.tsx';
@@ -71,29 +69,16 @@ const TITLES: { match: (path: string) => boolean; title: string }[] = [
   { match: (p) => p === '/figures', title: 'Figures' },
 ];
 
-function useDocumentTitle(pathname: string, locked: boolean): void {
+function useDocumentTitle(pathname: string): void {
   useEffect(() => {
-    if (locked) {
-      document.title = `Sign in · ${APP_NAME}`;
-      return;
-    }
     const found = TITLES.find((entry) => entry.match(pathname));
     document.title = found === undefined ? APP_NAME : `${found.title} · ${APP_NAME}`;
-  }, [pathname, locked]);
+  }, [pathname]);
 }
 
 export function App(): JSX.Element {
   const { pathname } = useLocation();
-  const [unlocked, setUnlocked] = useState(isSignedIn);
-
-  useDocumentTitle(pathname, GATE_ENABLED && !unlocked);
-
-  // Development gate. Set VITE_REQUIRE_LOGIN=false to lift it, or delete this
-  // block along with src/auth and the Login route. See src/auth/gate.ts — it is
-  // a doormat, not a lock.
-  if (GATE_ENABLED && !unlocked) {
-    return <Login onSuccess={() => setUnlocked(true)} />;
-  }
+  useDocumentTitle(pathname);
 
   // The player is full-bleed and must not compete with navigation while you are
   // holding a position on the floor.
