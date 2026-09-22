@@ -4,6 +4,7 @@ import { BACK } from './additions/back.ts';
 import { COSSACK } from './additions/cossack.ts';
 import { HAMSTRINGS } from './additions/hamstrings.ts';
 import { HIPS } from './additions/hips.ts';
+import { STRENGTHSIDE } from './additions/strengthside.ts';
 
 /**
  * The exercise library.
@@ -1330,7 +1331,7 @@ const CORE: Exercise[] = [
  * The whole library: the hand-written core, then the sets imported from research.
  * Order here is only the default order - every screen sorts for itself.
  */
-export const EXERCISES: Exercise[] = [...CORE, ...HIPS, ...COSSACK, ...HAMSTRINGS, ...ANKLES, ...BACK];
+export const EXERCISES: Exercise[] = [...CORE, ...HIPS, ...COSSACK, ...HAMSTRINGS, ...ANKLES, ...BACK, ...STRENGTHSIDE];
 
 /** Fast lookup by id, for history rendering and deep links. */
 export const EXERCISES_BY_ID: ReadonlyMap<string, Exercise> = new Map(

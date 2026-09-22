@@ -3,6 +3,7 @@ import { BACK_POSES } from './additions/back.ts';
 import { COSSACK_POSES } from './additions/cossack.ts';
 import { HAMSTRING_POSES } from './additions/hamstrings.ts';
 import { HIPS_POSES } from './additions/hips.ts';
+import { STRENGTHSIDE_POSES } from './additions/strengthside.ts';
 import type { Pose } from './types.ts';
 
 /**
@@ -305,6 +306,7 @@ export const POSES: Record<string, Pose> = {
   ...HIPS_POSES,
   ...HAMSTRING_POSES,
   ...ANKLE_POSES,
+  ...STRENGTHSIDE_POSES,
 };
 
 export function getPose(exerciseId: string): Pose | undefined {

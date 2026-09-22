@@ -1105,10 +1105,13 @@ export const HAMSTRINGS: Exercise[] = [
     "id": "single-leg-romanian-deadlift",
     "name": "Single-Leg Romanian Deadlift",
     "aka": [
-      "Single-leg RDL",
       "Airplane hinge",
+      "Askling Diver",
       "Kickstand RDL",
-      "Askling Diver"
+      "Single-leg RDL",
+      "Single-leg good morning",
+      "Single-leg hip hinge",
+      "Standing single-leg RDL reach"
     ],
     "regions": [
       "hamstrings",
@@ -1140,6 +1143,13 @@ export const HAMSTRINGS: Exercise[] = [
     "shouldFeel": "A stretch and working effort in the back of the standing thigh.",
     "shouldNotFeel": "Pain in the lower back, a twisting or rocking pelvis, or a wobble that makes you lose the flat back.",
     "regressions": [
+      {
+        "label": "Reach only to the knee",
+        "detail": "Slide your hand down to your knee and no further, then to mid-shin as the hinge gets steadier. Reaching the floor is the last step, not the first.",
+        "props": [
+          "none"
+        ]
+      },
       {
         "label": "Kickstand",
         "detail": "Keep the back toe on the floor for balance and put most of your weight on the front leg.",

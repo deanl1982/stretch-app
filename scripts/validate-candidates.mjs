@@ -16,6 +16,14 @@ const existingNames = new Map(EXERCISES.flatMap((e) => [[e.name.toLowerCase(), e
 
 // Entries deliberately not imported, with the reason. Decided by hand after comparing them.
 export const DROPPED = {
+  'candidates-strengthside.json:frog-tuck-l-sit':
+    'A gymnastics skill, kept as a progression on frog-crab-support-hold instead of an entry the random draw can hand someone as their daily mobility.',
+  'candidates-strengthside.json:frog-cross-leg-l-sit':
+    'An advanced L-sit whose own note says this audience has essentially no reason to train towards it. Not mobility, and a real wrist risk.',
+  'candidates-strengthside.json:frog-hover':
+    'Full bodyweight on extended wrists with both feet off the floor - its own note calls it the sharpest wrist-injury risk in the set, and aspirational rather than prescribable.',
+  'candidates-strengthside.json:finger-push-ups':
+    'Fingertip loading needs months of graded adaptation; its own note says the honest recommendation is the wall version. Not a stretch, and the wrong risk to put in a daily draw.',
   'candidates-ankles.json:varied-terrain-barefoot-walk':
     'A five-minute walk over grass and sand: no room-based timer can run it, and it exceeds the 120s single-hold cap. Off-brief for a 20-minute floor routine.',
   'candidates-back.json:suitcase-carry':
@@ -85,7 +93,7 @@ for (const file of isMain ? process.argv.slice(2) : []) {
     if (e.role === 'opener' && (e.contraindications ?? []).includes('knee') && /squat|kneel|deep/i.test(e.name)) complain(short, id, 'deep-knee-flexion item marked opener');
     // dailySafe is about load (heavy eccentrics are capped at twice a week), not intensity, so a
     // hard static stretch can legitimately be dailySafe. Only weighted work should not be.
-    if (d?.kind === 'reps' && e.dailySafe === true && /weight|loaded|goblet|kettlebell|dumbbell|nordic|carry/i.test(`${e.name} ${e.summary}`))
+    if (d?.kind === 'reps' && e.dailySafe === true && /\b(a|the|light|heavy) weight|weights|loaded|goblet|kettlebell|dumbbell|barbell|nordic|carry/i.test(`${e.name} ${e.summary}`))
       complain(short, id, 'looks like loaded work but is marked dailySafe (check)');
     if (!e.poseHint) complain(short, id, 'no poseHint - cannot draw it');
   }

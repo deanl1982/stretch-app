@@ -223,8 +223,10 @@ export const COSSACK: Exercise[] = [
     "id": "standing-side-leg-lift",
     "name": "Standing Side Leg Lift",
     "aka": [
+      "Sidekick hold",
       "Standing hip abduction",
-      "Standing side leg raise"
+      "Standing side leg raise",
+      "Standing side-leg isometric"
     ],
     "regions": [
       "hips"
@@ -280,7 +282,7 @@ export const COSSACK: Exercise[] = [
     "progressions": [
       {
         "label": "Pause at the top",
-        "detail": "Hold 2 seconds at the highest point where your hips stay level."
+        "detail": "Hold the leg out for 10 to 15 seconds instead of lowering it. Start low, and once that is steady hold it higher - as high as you can keep your hips level."
       },
       {
         "label": "Slower lowering",
