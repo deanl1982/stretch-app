@@ -1,5 +1,5 @@
 import { EXERCISES } from '../content/exercises.ts';
-import type { Exercise, Flag, Prop, Region } from '../content/types.ts';
+import type { Exercise, Flag, Prop, Region, Role } from '../content/types.ts';
 import { buildPhases, estimateSeconds, type HoldLevel } from './phases.ts';
 import { createRng, shuffle } from './rng.ts';
 
@@ -55,7 +55,7 @@ export interface Session {
   totalSeconds: number;
 }
 
-function toItem(exercise: Exercise, level: HoldLevel): SessionItem {
+export function toSessionItem(exercise: Exercise, level: HoldLevel): SessionItem {
   // The first phase's length is the prescribed hold, already scaled and capped.
   const first = buildPhases(exercise, level)[0];
   return {
@@ -119,7 +119,7 @@ function pack(
 
   for (const exercise of candidates) {
     if (used.has(exercise.id)) continue;
-    const item = toItem(exercise, level);
+    const item = toSessionItem(exercise, level);
     if (item.estimatedSeconds > left) continue;
     chosen.push(item);
     used.add(exercise.id);
@@ -148,7 +148,7 @@ export function generateSession(options: GenerateOptions): Session {
   // does not fit lets a short session lose the gentle opener that exists so nobody starts cold in a
   // deep position - which a five-minute budget did whenever the pick happened to be a long one.
   // The pool is already in seeded random order, so "first that fits" is still a random choice.
-  const cost = (exercise: Exercise): number => toItem(exercise, holdLevel).estimatedSeconds;
+  const cost = (exercise: Exercise): number => toSessionItem(exercise, holdLevel).estimatedSeconds;
   const shortestRest = Math.min(
     ...pool.filter((exercise) => exercise.role === 'rest').map(cost),
     Number.POSITIVE_INFINITY,
@@ -162,13 +162,13 @@ export function generateSession(options: GenerateOptions): Session {
 
   const head: SessionItem[] = [];
   if (opener !== undefined) {
-    head.push(toItem(opener, holdLevel));
+    head.push(toSessionItem(opener, holdLevel));
     used.add(opener.id);
   }
 
   // Reserve the closing rest position up front, so the session always ends somewhere
   // calm rather than on whatever happened to fit last.
-  const restItem = rest === undefined ? undefined : toItem(rest, holdLevel);
+  const restItem = rest === undefined ? undefined : toSessionItem(rest, holdLevel);
   const budgetAfterHead = budgetSeconds - sumSeconds(head);
   const reserved =
     restItem !== undefined && restItem.estimatedSeconds <= budgetAfterHead
@@ -194,4 +194,37 @@ export function generateSession(options: GenerateOptions): Session {
 
   const items = [...head, ...middle, ...tail];
   return { seed, budgetSeconds, items, totalSeconds: sumSeconds(items) };
+}
+
+/**
+ * Which roles a swap may draw from.
+ *
+ * An opener is replaced by another opener and a rest by another rest, so a session a user has
+ * edited keeps the shape the generator gave it: something gentle first, something calm last. In the
+ * middle `main` and `load` are interchangeable, which is exactly how the packer treats them.
+ */
+function swappableRoles(role: Role): Role[] {
+  if (role === 'opener') return ['opener'];
+  if (role === 'rest') return ['rest'];
+  return ['main', 'load'];
+}
+
+/**
+ * Everything that could stand in for one exercise, honouring the same settings the draw did.
+ *
+ * `inUse` is the rest of the session, so a swap can never hand back something already in the list.
+ * Order is the library's; the caller shuffles, because picking an alternative is a deliberate act
+ * rather than part of the reproducible draw.
+ */
+export function alternativesFor(
+  exercise: Exercise,
+  options: GenerateOptions,
+  inUse: readonly string[] = [],
+): Exercise[] {
+  const roles = new Set<Role>(swappableRoles(exercise.role));
+  const taken = new Set<string>([...inUse, exercise.id]);
+
+  return eligiblePool(options).filter(
+    (candidate) => roles.has(candidate.role) && !taken.has(candidate.id),
+  );
 }

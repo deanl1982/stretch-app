@@ -7,7 +7,12 @@ import {
   REST_BETWEEN_PHASES,
   TRANSITION_SECONDS,
 } from './phases.ts';
-import { eligiblePool, generateSession, WEEKLY_LOAD_LIMIT } from './generator.ts';
+import {
+  alternativesFor,
+  eligiblePool,
+  generateSession,
+  WEEKLY_LOAD_LIMIT,
+} from './generator.ts';
 import { createRng, shuffle } from './rng.ts';
 
 const BUDGETS = [5, 10, 15, 20].map((minutes) => minutes * 60);
@@ -389,3 +394,55 @@ describe('parseRegions', () => {
     expect(parseRegions(' hips , back ')).toEqual(['hips', 'back']);
   });
 });
+
+describe('alternativesFor', () => {
+  const options = { seed: 'swap', budgetSeconds: 20 * 60 };
+
+  it('keeps the shape of the session: an opener is replaced by an opener', () => {
+    for (const role of ['opener', 'rest'] as const) {
+      const exercise = EXERCISES.find((e) => e.role === role);
+      expect(exercise, role).toBeDefined();
+      if (exercise === undefined) continue;
+      const alts = alternativesFor(exercise, options);
+      expect(alts.length, role).toBeGreaterThan(0);
+      expect(alts.every((a) => a.role === role), role).toBe(true);
+    }
+  });
+
+  it('treats main and load as interchangeable in the middle', () => {
+    const main = EXERCISES.find((e) => e.role === 'main');
+    expect(main).toBeDefined();
+    if (main === undefined) return;
+    const roles = new Set(alternativesFor(main, options).map((a) => a.role));
+    expect([...roles].sort()).toEqual(['load', 'main']);
+  });
+
+  it('never offers the exercise itself, or anything already in the session', () => {
+    const session = generateSession({ seed: 'alpha', budgetSeconds: 20 * 60 });
+    const inUse = session.items.map((item) => item.exercise.id);
+    for (const item of session.items) {
+      const alts = alternativesFor(item.exercise, options, inUse);
+      expect(alts.some((a) => a.id === item.exercise.id), item.exercise.id).toBe(false);
+      expect(alts.some((a) => inUse.includes(a.id)), item.exercise.id).toBe(false);
+    }
+  });
+
+  it('obeys the same settings the draw obeyed', () => {
+    const knee = EXERCISES.find((e) => e.role === 'main' && !e.contraindications.includes('knee'));
+    expect(knee).toBeDefined();
+    if (knee === undefined) return;
+    const alts = alternativesFor(knee, { ...options, exclusions: ['knee'] });
+    expect(alts.some((a) => a.contraindications.includes('knee'))).toBe(false);
+
+    const hips = alternativesFor(knee, { ...options, regions: ['hips'] });
+    expect(hips.every((a) => a.regions.includes('hips'))).toBe(true);
+  });
+
+  it('comes back empty rather than repeating itself when the pool is spent', () => {
+    const only = EXERCISES.filter((e) => e.role === 'rest').slice(0, 1);
+    expect(only[0]).toBeDefined();
+    if (only[0] === undefined) return;
+    expect(alternativesFor(only[0], { ...options, library: only })).toEqual([]);
+  });
+});
+
