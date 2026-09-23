@@ -9,6 +9,7 @@ import { ExerciseDetail } from './routes/ExerciseDetail.tsx';
 import { Progress } from './routes/Progress.tsx';
 import { Settings } from './routes/Settings.tsx';
 import { Figures } from './routes/Figures.tsx';
+import { Motion } from './routes/Motion.tsx';
 import { Build } from './routes/Build.tsx';
 import { Routines } from './routes/Routines.tsx';
 import { Favourites } from './routes/Favourites.tsx';
@@ -66,6 +67,7 @@ const TITLES: { match: (path: string) => boolean; title: string }[] = [
   { match: (p) => p === '/library', title: 'Library' },
   { match: (p) => p === '/progress', title: 'My streak' },
   { match: (p) => p === '/settings', title: 'Settings' },
+  { match: (p) => p === '/figures/motion', title: 'Still or moving' },
   { match: (p) => p === '/figures', title: 'Figures' },
 ];
 
@@ -99,6 +101,7 @@ export function App(): JSX.Element {
         <Route path="/progress" element={<Progress />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/figures" element={<Figures />} />
+        <Route path="/figures/motion" element={<Motion />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!immersive && <TabBar />}
