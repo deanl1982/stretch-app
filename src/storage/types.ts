@@ -14,6 +14,11 @@ export interface Profile {
   holdLevel: HoldLevel;
   /** Whether rep work runs on a per-rep pacer or waits for a tap. */
   repPacing: RepPacing;
+  /**
+   * Whether the figures move. A system-level request to reduce motion always wins over this, so
+   * turning it on never overrides someone's accessibility setting.
+   */
+  movingFigures: boolean;
   sound: boolean;
   voice: boolean;
   /** Drop the opener/closer structure and draw sessions completely unconstrained. */
@@ -62,6 +67,7 @@ export const DEFAULT_PROFILE: Profile = {
   defaultMinutes: 20,
   holdLevel: 'standard',
   repPacing: 'paced',
+  movingFigures: true,
   sound: true,
   voice: false,
   pureChaos: false,

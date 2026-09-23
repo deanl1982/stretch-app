@@ -7,6 +7,8 @@ import { appendSession } from '../storage/store.ts';
 import { loadProfile } from '../storage/store.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
+import { AnimatedFigure } from '../figures/AnimatedFigure.tsx';
+import { getMotion } from '../figures/motions/index.ts';
 import {
   advanceChime,
   countdownTick,
@@ -244,6 +246,7 @@ export function Player(): JSX.Element {
   if (session === null || exercise === undefined) return <div />;
 
   const pose = getPose(exercise.id);
+  const motion = getMotion(exercise.id);
   const progress = total === 0 ? 0 : 1 - remaining / total;
   const minutes = Math.floor(remaining / 60);
   const seconds = remaining % 60;
@@ -293,13 +296,23 @@ export function Player(): JSX.Element {
           {describeDose(exercise, profile.holdLevel, { pace: false })}
         </p>
 
-        {pose !== undefined && (
-          <Figure
-            pose={pose}
-            label={`${exercise.name}: ${exercise.summary}`}
-            className="h-44 w-full max-w-sm text-label"
-          />
-        )}
+        {pose !== undefined &&
+          (motion === undefined || !profile.movingFigures ? (
+            <Figure
+              pose={pose}
+              label={`${exercise.name}: ${exercise.summary}`}
+              className="h-44 w-full max-w-sm text-label"
+            />
+          ) : (
+            // Held still while the session is paused: a moving figure beside a stopped clock
+            // reads as though the exercise is still running.
+            <AnimatedFigure
+              motion={motion}
+              label={`${exercise.name}: ${exercise.summary}`}
+              className="h-44 w-full max-w-sm text-label"
+              paused={paused}
+            />
+          ))}
 
         {phase?.kind === 'reps' ? (
           <div className="flex w-full max-w-sm flex-col items-center gap-3">

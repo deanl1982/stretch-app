@@ -1,4 +1,7 @@
+import { getPose } from '../poses.ts';
+import { nudge } from '../nudge.ts';
 import type { Motion } from '../motion.ts';
+import { RECIPES } from './recipes.ts';
 
 /**
  * Movements, for the positions users told us a single drawing did not explain.
@@ -10,7 +13,7 @@ import type { Motion } from '../motion.ts';
  * almost every mobility drill does. A `cycle` runs round and wraps, for travelling and for anything
  * that alternates sides.
  */
-export const MOTIONS: Record<string, Motion> = {
+const AUTHORED: Record<string, Motion> = {
   // ── Things that go out and come back ───────────────────────────────────────
 
   // Rocking the hips back over tucked toes and forward again. The whole point is the rock.
@@ -162,7 +165,35 @@ export const MOTIONS: Record<string, Motion> = {
   },
 };
 
-/** Whether this exercise has a movement authored for it. */
+/**
+ * Every movement in the app: the hand-written ones above, then one built from each recipe by
+ * turning the figure the app already draws.
+ *
+ * A hand-written movement wins, because it was authored against the exercise rather than derived
+ * from it.
+ */
+export const MOTIONS: Record<string, Motion> = (() => {
+  const all: Record<string, Motion> = { ...AUTHORED };
+
+  for (const [id, recipe] of Object.entries(RECIPES)) {
+    if (all[id] !== undefined) continue;
+    const base = getPose(id);
+    if (base === undefined) continue;
+
+    const turns = Array.isArray(recipe.turn) ? recipe.turn : [recipe.turn];
+    const frames = [base, ...turns.map((turn) => nudge(base, turn))];
+    if (frames.length < 2) continue;
+
+    all[id] = {
+      frames: frames as [typeof base, typeof base, ...(typeof base)[]],
+      ...(recipe.seconds === undefined ? {} : { seconds: recipe.seconds }),
+      ...(recipe.loop === undefined ? {} : { loop: recipe.loop }),
+    };
+  }
+  return all;
+})();
+
+/** Whether this exercise has a movement. */
 export function getMotion(exerciseId: string): Motion | undefined {
   return MOTIONS[exerciseId];
 }

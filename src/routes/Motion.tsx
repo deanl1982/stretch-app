@@ -9,10 +9,10 @@ import { usePrefersReducedMotion } from '../figures/useMotion.ts';
 import { Button, Card, PageTitle, Screen } from '../ui.tsx';
 
 /**
- * Proposal page: the still figures beside moving ones, for a decision about whether to move the
- * whole library over.
+ * Every movement in the library, beside the drawing it was built from.
  *
- * Not linked from anywhere in the app. It exists to be looked at and judged.
+ * Not linked from the app's navigation: it is a check sheet, for spotting a movement that turns
+ * the wrong way among a hundred and forty that do not.
  */
 export function Motion(): JSX.Element {
   const [paused, setPaused] = useState(false);
@@ -21,37 +21,33 @@ export function Motion(): JSX.Element {
 
   return (
     <Screen>
-      <PageTitle sub={`${ids.length} positions, each shown as it is now and as it could be.`}>
+      <PageTitle sub={`All ${ids.length} positions, each as it is drawn and as it moves.`}>
         Still or moving
       </PageTitle>
 
       <Card className="mb-5">
         <p className="text-sm leading-relaxed text-bone-dim">
-          The feedback was that some positions are hard to read as a single drawing. A figure is
-          already a table of joint angles, so it can be swung between two or more of them. Nothing
-          is redrawn: the left-hand figure is exactly what the app shows today, and thirteen of
-          these fourteen movements start from that exact position, so a figure that stops moving is
-          the drawing you already know. Cat-cow is the exception — it is one of the original
-          hand-drawn figures and had to be rebuilt to move, so its two sides differ slightly even
-          when paused.
+          Moving figures are live on each position's own page and in the player. List thumbnails
+          stay still, because a wall of moving figures is noise rather than help. This page is the
+          check: every movement beside the drawing it came from.
         </p>
         <p className="mt-3 text-sm leading-relaxed text-bone-dim">
-          Cost, measured on this page with the processor slowed to about phone speed: fourteen
-          moving figures use 2% of the main thread. Animating all 144 at once would be wasteful, so
-          the proposal is to move only where it teaches something — the position's own page and the
-          player — and leave the list thumbnails still.
+          Rep work shows the whole rep. A hold only settles a few degrees, because a hold is a hold
+          and animating a repetition nobody performs would be a lie about the exercise. Nothing was
+          redrawn: each movement turns the existing figure at its joints, so every limb keeps its
+          own length and its own proportions.
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <Button variant="primary" onClick={() => setPaused((value) => !value)}>
             {paused ? 'Play all' : 'Pause all'}
           </Button>
-          <Button to="/figures" variant="ghost">
-            All still figures
+          <Button to="/settings" variant="ghost">
+            Turn them off
           </Button>
         </div>
         <p role="status" aria-live="polite" className="mt-3 text-sm text-bone-dim">
           {reduced
-            ? 'Your system asks for reduced motion, so these are held still. That is what anyone with that setting would see.'
+            ? 'Your system asks for reduced motion, so these are held still. That is what anyone with that setting sees, whatever the app setting says.'
             : paused
               ? 'Held still.'
               : 'Moving.'}
@@ -106,10 +102,14 @@ export function Motion(): JSX.Element {
       <Card className="mt-6">
         <h2 className="label mb-2">What this cannot do</h2>
         <p className="text-sm leading-relaxed text-bone-dim">
-          The spine is drawn as one straight line, so cat-cow cannot show the back rounding and
-          arching. What moves there is the head and the tilt of the trunk, which reads as the right
-          movement without being the whole of it. Giving the spine a real curve is a separate job,
-          and worth doing if this is the direction you want.
+          The spine is one straight line, so cat-cow and the roll-down cannot show the back rounding
+          and arching section by section. What moves there is the head and the tilt of the trunk,
+          which reads as the right movement without being the whole of it. Giving the spine a real
+          curve is a separate job.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-bone-dim">
+          Travelling positions - the crawls and walks - step on the spot rather than crossing the
+          frame, so they stay the same size as everything else.
         </p>
       </Card>
     </Screen>

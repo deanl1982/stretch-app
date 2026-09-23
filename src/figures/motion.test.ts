@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { FOOT, SHIN, THIGH, TORSO, UPPER_ARM } from './build.ts';
 import { lerpAngle, poseAt, restPose, stanceAt, type Motion } from './motion.ts';
-import type { Point } from './types.ts';
+import { nudge } from './nudge.ts';
+import type { Point, Pose } from './types.ts';
 
 const dist = (a: Point, b: Point): number => Math.hypot(a[0] - b[0], a[1] - b[1]);
 
@@ -91,5 +92,59 @@ describe('poseAt', () => {
       ],
     };
     expect(poseAt(jump, 0).toe[1] - poseAt(jump, 0.5).toe[1]).toBeCloseTo(20, 0);
+  });
+});
+
+describe('moving a figure that was drawn as coordinates', () => {
+  const drawn: Pose = {
+    head: [138, 92], neck: [122, 94], pelvis: [74, 98],
+    elbow: [126, 112], hand: [130, 130],
+    knee: [70, 116], ankle: [58, 130], toe: [50, 132],
+    farKnee: [78, 114], farAnkle: [66, 128], farToe: [58, 130],
+    highlight: ['spine'],
+  };
+  const segments = (p: Pose): number[] => [
+    dist(p.pelvis, p.neck), dist(p.neck, p.head),
+    dist(p.pelvis, p.knee), dist(p.knee, p.ankle), dist(p.ankle, p.toe),
+    dist(p.neck, p.elbow), dist(p.elbow, p.hand),
+    dist(p.pelvis, p.farKnee!), dist(p.farKnee!, p.farAnkle!), dist(p.farAnkle!, p.farToe!),
+  ];
+
+  it('leaves a figure alone when nothing is turned', () => {
+    expect(nudge(drawn, {})).toEqual(drawn);
+  });
+
+  it('keeps the figure its own shape, not the standard proportions', () => {
+    // These limbs are not the canonical lengths, and turning them must not change that.
+    const turned = nudge(drawn, { spine: 12, thigh: -20, shin: 15, upperArm: 30 });
+    segments(turned).forEach((len, i) => expect(len).toBeCloseTo(segments(drawn)[i]!, 1));
+  });
+
+  it('carries the head and arms with the spine, because they hang off it', () => {
+    const turned = nudge(drawn, { spine: 20 });
+    expect(turned.head).not.toEqual(drawn.head);
+    expect(turned.elbow).not.toEqual(drawn.elbow);
+    // The near leg hangs off the pelvis, which did not turn.
+    expect(dist(turned.pelvis, turned.knee)).toBeCloseTo(dist(drawn.pelvis, drawn.knee), 1);
+  });
+
+  it('keeps it standing on the same floor', () => {
+    const floor = (p: Pose): number => Math.max(p.toe[1], p.ankle[1], p.knee[1], p.hand[1], p.farToe?.[1] ?? 0);
+    expect(floor(nudge(drawn, { thigh: -25, shin: 25 }))).toBeCloseTo(floor(drawn), 0);
+  });
+
+  it('animates between two of them without any limb changing length', () => {
+    const motion: Motion = { frames: [drawn, nudge(drawn, { spine: 15, head: 40, thigh: -12 })] };
+    for (let step = 0; step <= 20; step += 1) {
+      const p = poseAt(motion, step / 20);
+      segments(p).forEach((len, i) =>
+        expect(len, `segment ${i} at ${step}/20`).toBeCloseTo(segments(drawn)[i]!, 0),
+      );
+    }
+  });
+
+  it('rests on the untouched original', () => {
+    const motion: Motion = { frames: [drawn, nudge(drawn, { spine: 15 })] };
+    expect(restPose(motion)).toEqual(drawn);
   });
 });

@@ -1,5 +1,6 @@
 import { pose, type Stance } from './build.ts';
-import type { Pose } from './types.ts';
+import { nudge } from './nudge.ts';
+import type { Point, Pose } from './types.ts';
 
 /**
  * Movement, for the positions a single drawing cannot explain.
@@ -24,8 +25,14 @@ const ANGLES = [
 const SCALARS = ['lift', 'centreX'] as const satisfies readonly (keyof Stance)[];
 
 export interface Motion {
-  /** Two or more keyframes. The first is the position the figure rests in. */
-  frames: [Stance, Stance, ...Stance[]];
+  /**
+   * Two or more keyframes, and the first is the position the figure rests in.
+   *
+   * Bearings are built into a figure on the spot. Finished figures - which is what `nudge` returns,
+   * and the only way to move one of the original hand-drawn poses - are taken apart into bearings
+   * and lengths and put back together, so those keep their own proportions.
+   */
+  frames: [Stance, Stance, ...Stance[]] | [Pose, Pose, ...Pose[]];
   /** One full cycle, in seconds. */
   seconds?: number;
   /**
@@ -67,12 +74,45 @@ function blend(base: Stance, a: Stance, b: Stance, t: number): Stance {
   return out;
 }
 
+const isPose = (frame: Stance | Pose): frame is Pose =>
+  (frame as Pose).pelvis !== undefined;
+
+/** Turn one finished figure towards another, segment by segment, keeping every length. */
+function blendPoses(from: Pose, to: Pose, t: number): Pose {
+  const bearing = (a: Point, b: Point): number =>
+    ((Math.atan2(b[0] - a[0], b[1] - a[1]) * 180) / Math.PI + 360) % 360;
+  const delta = (a: Point, b: Point, c: Point, d: Point): number => {
+    const diff = (((bearing(c, d) - bearing(a, b)) % 360) + 540) % 360 - 180;
+    return diff * t;
+  };
+  const pair = (
+    rootFrom: Point, rootTo: Point,
+    a: Point | undefined, b: Point | undefined,
+  ): number => (a === undefined || b === undefined ? 0 : delta(rootFrom, a, rootTo, b));
+
+  return nudge(from, {
+    spine: delta(from.pelvis, from.neck, to.pelvis, to.neck),
+    head: delta(from.neck, from.head, to.neck, to.head),
+    thigh: delta(from.pelvis, from.knee, to.pelvis, to.knee),
+    shin: delta(from.knee, from.ankle, to.knee, to.ankle),
+    foot: delta(from.ankle, from.toe, to.ankle, to.toe),
+    upperArm: delta(from.neck, from.elbow, to.neck, to.elbow),
+    forearm: delta(from.elbow, from.hand, to.elbow, to.hand),
+    farThigh: pair(from.pelvis, to.pelvis, from.farKnee, to.farKnee),
+    farShin: from.farKnee && to.farKnee ? pair(from.farKnee, to.farKnee, from.farAnkle, to.farAnkle) : 0,
+    farFoot: from.farAnkle && to.farAnkle ? pair(from.farAnkle, to.farAnkle, from.farToe, to.farToe) : 0,
+    farUpperArm: pair(from.neck, to.neck, from.farElbow, to.farElbow),
+    farForearm: from.farElbow && to.farElbow ? pair(from.farElbow, to.farElbow, from.farHand, to.farHand) : 0,
+  });
+}
+
 /**
  * The stance at a point in the cycle. `progress` is 0 to 1 and wraps, so a clock can hand it
  * elapsed time without worrying where in the loop it is.
  */
 export function stanceAt(motion: Motion, progress: number): Stance {
-  const { frames, loop = 'pingPong' } = motion;
+  const { loop = 'pingPong' } = motion;
+  const frames = motion.frames as [Stance, Stance, ...Stance[]];
   const wrapped = ((progress % 1) + 1) % 1;
 
   // Where we are along the list of frames, as a fractional index.
@@ -89,12 +129,33 @@ export function stanceAt(motion: Motion, progress: number): Stance {
   return t === 0 ? { ...frames[0], ...from } : blend(frames[0], from, to, ease(t));
 }
 
+/** Where in the frame list a progress value lands, and how far between the two. */
+function position(motion: Motion, progress: number): { index: number; t: number } {
+  const { loop = 'pingPong' } = motion;
+  const count = motion.frames.length;
+  const wrapped = ((progress % 1) + 1) % 1;
+  const along =
+    loop === 'cycle'
+      ? wrapped * count
+      : (wrapped < 0.5 ? wrapped * 2 : (1 - wrapped) * 2) * (count - 1);
+  const index = Math.floor(along);
+  return { index, t: along - index };
+}
+
 /** The drawable pose at a point in the cycle. */
 export function poseAt(motion: Motion, progress: number): Pose {
-  return pose(stanceAt(motion, progress));
+  const first = motion.frames[0];
+  if (!isPose(first)) return pose(stanceAt(motion, progress));
+
+  const frames = motion.frames as Pose[];
+  const { index, t } = position(motion, progress);
+  const from = frames[Math.min(index, frames.length - 1)] ?? first;
+  const to = frames[(index + 1) % frames.length] ?? first;
+  return t === 0 ? from : blendPoses(from, to, ease(t));
 }
 
 /** The position the figure rests in: what a still frame shows, and what reduced motion gets. */
 export function restPose(motion: Motion): Pose {
-  return pose(motion.frames[0]);
+  const first = motion.frames[0];
+  return isPose(first) ? first : pose(first);
 }

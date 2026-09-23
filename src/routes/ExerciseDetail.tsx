@@ -4,6 +4,8 @@ import { getExercise } from '../content/exercises.ts';
 import { PROP_LABELS, REGION_LABELS } from '../content/types.ts';
 import { getPose } from '../figures/poses.ts';
 import { Figure } from '../figures/Figure.tsx';
+import { AnimatedFigure } from '../figures/AnimatedFigure.tsx';
+import { getMotion } from '../figures/motions/index.ts';
 import { Button, Card, EvidenceNote, FavouriteButton, PageTitle, Pill, Screen } from '../ui.tsx';
 import { describeDose } from '../session/phases.ts';
 import { loadProfile } from '../storage/store.ts';
@@ -31,6 +33,7 @@ export function ExerciseDetail(): JSX.Element {
     );
   }
 
+  const motion = getMotion(exercise.id);
   const pose = getPose(exercise.id);
 
   return (
@@ -44,11 +47,19 @@ export function ExerciseDetail(): JSX.Element {
 
       {pose !== undefined && (
         <Card className="mb-4">
-          <Figure
-            pose={pose}
-            label={`${exercise.name}: ${exercise.summary}`}
-            className="mx-auto h-48 w-full max-w-sm text-label"
-          />
+          {motion === undefined || !profile.movingFigures ? (
+            <Figure
+              pose={pose}
+              label={`${exercise.name}: ${exercise.summary}`}
+              className="mx-auto h-48 w-full max-w-sm text-label"
+            />
+          ) : (
+            <AnimatedFigure
+              motion={motion}
+              label={`${exercise.name}: ${exercise.summary}`}
+              className="mx-auto h-48 w-full max-w-sm text-label"
+            />
+          )}
         </Card>
       )}
 

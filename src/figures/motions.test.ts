@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { EXERCISES } from '../content/exercises.ts';
-import { FOOT, FOREARM, SHIN, THIGH, TORSO, UPPER_ARM } from './build.ts';
 import { MOTIONS } from './motions/index.ts';
 import { poseAt } from './motion.ts';
 import { HEAD_RADIUS, VIEW_HEIGHT, VIEW_WIDTH, type Point } from './types.ts';
@@ -15,17 +14,31 @@ describe('the movements', () => {
     expect(ids.filter((id) => !known.has(id))).toEqual([]);
   });
 
-  it('keep every limb its true length at every point in every cycle', () => {
+  it('keep every limb its own length at every point in every cycle', () => {
+    // Not the standard lengths: the figures drawn before the angle system have their own
+    // proportions, and turning one must not quietly reshape it. So each movement is measured
+    // against its own resting figure.
+    const lengths = (p: ReturnType<typeof poseAt>): Record<string, number> => ({
+      spine: dist(p.pelvis, p.neck),
+      neck: dist(p.neck, p.head),
+      thigh: dist(p.pelvis, p.knee),
+      shin: dist(p.knee, p.ankle),
+      foot: dist(p.ankle, p.toe),
+      upperArm: dist(p.neck, p.elbow),
+      forearm: dist(p.elbow, p.hand),
+      ...(p.farKnee === undefined ? {} : { farThigh: dist(p.pelvis, p.farKnee) }),
+      ...(p.farKnee === undefined || p.farAnkle === undefined ? {} : { farShin: dist(p.farKnee, p.farAnkle) }),
+      ...(p.farElbow === undefined ? {} : { farUpperArm: dist(p.neck, p.farElbow) }),
+      ...(p.farElbow === undefined || p.farHand === undefined ? {} : { farForearm: dist(p.farElbow, p.farHand) }),
+    });
+
     for (const id of ids) {
-      for (let step = 0; step < SAMPLES; step += 1) {
-        const p = poseAt(MOTIONS[id]!, step / SAMPLES);
-        const at = `${id} at ${step}/${SAMPLES}`;
-        expect(dist(p.pelvis, p.neck), at).toBeCloseTo(TORSO, 0);
-        expect(dist(p.pelvis, p.knee), at).toBeCloseTo(THIGH, 0);
-        expect(dist(p.knee, p.ankle), at).toBeCloseTo(SHIN, 0);
-        expect(dist(p.ankle, p.toe), at).toBeCloseTo(FOOT, 0);
-        expect(dist(p.neck, p.elbow), at).toBeCloseTo(UPPER_ARM, 0);
-        expect(dist(p.elbow, p.hand), at).toBeCloseTo(FOREARM, 0);
+      const rest = lengths(poseAt(MOTIONS[id]!, 0));
+      for (let step = 1; step < SAMPLES; step += 1) {
+        const now = lengths(poseAt(MOTIONS[id]!, step / SAMPLES));
+        for (const [segment, length] of Object.entries(rest)) {
+          expect(now[segment], `${id}.${segment} at ${step}/${SAMPLES}`).toBeCloseTo(length, 0);
+        }
       }
     }
   });

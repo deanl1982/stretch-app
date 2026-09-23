@@ -189,6 +189,12 @@ export function Settings(): JSX.Element {
             onChange={(value) => update({ officeOnly: value })}
           />
           <Toggle
+            label="Moving figures"
+            hint="Show the movement rather than one drawing, on a position's own page and while you are doing it."
+            checked={profile.movingFigures}
+            onChange={(value) => update({ movingFigures: value })}
+          />
+          <Toggle
             label="Sound"
             hint="Chimes for switching sides and moving on."
             checked={profile.sound}
